@@ -2,17 +2,17 @@ package es.progcipfpbatoi.modelo.repositorios;
 
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
 import es.progcipfpbatoi.exceptions.NotFoundException;
-import es.progcipfpbatoi.modelo.dao.CategoriaDAO;
-import es.progcipfpbatoi.modelo.dao.TareaDAO;
+import es.progcipfpbatoi.modelo.dao.TemporadaDAO;
+import es.progcipfpbatoi.modelo.dao.PeliculaSerieDAO;
 
 import java.util.ArrayList;
 
 public class TareaRepository {
 
-    private TareaDAO tareaDAO;
-    private CategoriaDAO categoriaDAO;
+    private PeliculaSerieDAO tareaDAO;
+    private TemporadaDAO categoriaDAO;
 
-    public TareaRepository(TareaDAO tareaDAO, CategoriaDAO categoriaDAO) {
+    public TareaRepository(PeliculaSerieDAO tareaDAO, TemporadaDAO categoriaDAO) {
         this.tareaDAO = tareaDAO;
         this.categoriaDAO = categoriaDAO;
     }
