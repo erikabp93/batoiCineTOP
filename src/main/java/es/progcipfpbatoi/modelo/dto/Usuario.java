@@ -11,13 +11,6 @@ public class Usuario {
         this.email    = email;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
 
     public String getUsername() {
         return username;
