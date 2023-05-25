@@ -10,4 +10,5 @@ public interface TemporadaDAO {
 
     ArrayList<Temporada> findAll() throws DatabaseErrorException;
     Temporada findById(int id)  throws DatabaseErrorException;
+    Temporada save(Temporada temporada) throws DatabaseErrorException;
 }

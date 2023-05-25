@@ -20,4 +20,20 @@ public class Temporada {
     public int getId() {
         return id;
     }
+
+    public int getId_serie() {
+        return id_serie;
+    }
+
+    public String getPlot() {
+        return plot;
+    }
+
+    public LocalDate getFechaLanzamiento() {
+        return fechaLanzamiento;
+    }
+
+    public int getNumCapitulos() {
+        return numCapitulos;
+    }
 }
