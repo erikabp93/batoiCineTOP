@@ -6,109 +6,109 @@ public enum Genero {
     ACTION {
         @Override
         public String toString() {
-            return "Action";
+            return "ACTION";
         }
     },
     FANTASY {
         @Override
         public String toString() {
-            return "Fantasy";
+            return "FANTASY";
         }
     },
     MUSICAL {
         @Override
         public String toString() {
-            return "Musical";
+            return "MUSICAL";
         }
     },
     HISTORY {
         @Override
         public String toString() {
-            return "History";
+            return "HISTORY";
         }
     },
     SPORT {
         @Override
         public String toString() {
-            return "Sport";
+            return "SPORT";
         }
     },
     BIOGRAPHY {
         @Override
         public String toString() {
-            return "Biography";
+            return "BIOGRAPHY";
         }
     },
     COMEDY {
         @Override
         public String toString() {
-            return "Comedy";
+            return "COMEDY";
         }
     },
     SCI_FI {
         @Override
         public String toString() {
-            return "Sci-Fi";
+            return "SCI-FI";
         }
     },
     MYSTERY {
         @Override
         public String toString() {
-            return "Mystery";
+            return "MYSTERY";
         }
     },
     WESTERN {
         @Override
         public String toString() {
-            return "Western";
+            return "WESTERN";
         }
     },
     HORROR {
         @Override
         public String toString() {
-            return "Horror";
+            return "HORROR";
         }
     },
     FAMILY {
         @Override
         public String toString() {
-            return "Family";
+            return "FAMILY";
         }
     },
     ROMANCE {
         @Override
         public String toString() {
-            return "Romance";
+            return "ROMANCE";
         }
     },
     THRILLER {
         @Override
         public String toString() {
-            return "Thriller";
+            return "THRILLER";
         }
     },
     ADVENTURE {
         @Override
         public String toString() {
-            return "Adventure";
+            return "ADVENTURE";
         }
     },
     CRIME {
         @Override
         public String toString() {
-            return "Crime";
+            return "CRIME";
         }
     },
     DRAMA {
         @Override
         public String toString() {
-            return "Drama";
+            return "DRAMA";
         }
     },
     ANIMATION {
         @Override
         public String toString() {
-            return "Animation";
+            return "ANIMATION";
         }
     };
 
