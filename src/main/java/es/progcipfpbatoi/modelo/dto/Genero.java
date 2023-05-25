@@ -1,113 +1,125 @@
 package es.progcipfpbatoi.modelo.dto;
 
-public enum Genero {
+import es.progcipfpbatoi.exceptions.CategoryTypeErrorException;
 
+public enum Genero {
     ACTION {
         @Override
         public String toString() {
-            return "ACTION";
+            return "Action";
         }
     },
     FANTASY {
         @Override
         public String toString() {
-            return "FANTASY";
+            return "Fantasy";
         }
     },
     MUSICAL {
         @Override
         public String toString() {
-            return "MUSICAL";
+            return "Musical";
         }
     },
     HISTORY {
         @Override
         public String toString() {
-            return "HISTORY";
+            return "History";
         }
     },
     SPORT {
         @Override
         public String toString() {
-            return "SPORT";
+            return "Sport";
         }
     },
     BIOGRAPHY {
         @Override
         public String toString() {
-            return "BIOGRAPHY";
+            return "Biography";
         }
     },
     COMEDY {
         @Override
         public String toString() {
-            return "COMEDY";
+            return "Comedy";
         }
     },
     SCI_FI {
         @Override
         public String toString() {
-            return "SCI-FI";
+            return "Sci-Fi";
         }
     },
     MYSTERY {
         @Override
         public String toString() {
-            return "MYSTERY";
+            return "Mystery";
         }
     },
     WESTERN {
         @Override
         public String toString() {
-            return "WESTERN";
+            return "Western";
         }
     },
     HORROR {
         @Override
         public String toString() {
-            return "HORROR";
+            return "Horror";
         }
     },
     FAMILY {
         @Override
         public String toString() {
-            return "FAMILY";
+            return "Family";
         }
     },
     ROMANCE {
         @Override
         public String toString() {
-            return "ROMANCE";
+            return "Romance";
         }
     },
     THRILLER {
         @Override
         public String toString() {
-            return "THRILLER";
+            return "Thriller";
         }
     },
     ADVENTURE {
         @Override
         public String toString() {
-            return "ADVENTURE";
+            return "Adventure";
         }
     },
     CRIME {
         @Override
         public String toString() {
-            return "CRIME";
+            return "Crime";
         }
     },
     DRAMA {
         @Override
         public String toString() {
-            return "DRAMA";
+            return "Drama";
         }
     },
     ANIMATION {
         @Override
         public String toString() {
-            return "ANIMATION";
+            return "Animation";
         }
+    };
+
+    public static Genero parse(String categoriaStr) throws CategoryTypeErrorException {
+
+        for ( Genero genero : Genero.values() ) {
+            if ( genero.toString().equals( categoriaStr ) ) {
+                return genero;
+            }
+        }
+
+        throw new CategoryTypeErrorException( "Tipo de categoría desconocida: " + categoriaStr );
     }
 }
