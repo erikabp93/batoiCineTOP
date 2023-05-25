@@ -1,5 +1,7 @@
 package es.progcipfpbatoi.modelo.dto;
 
+import es.progcipfpbatoi.exceptions.CategoryTypeErrorException;
+
 public enum Calificacion {
 
     G {
@@ -31,5 +33,16 @@ public enum Calificacion {
         public String toString() {
             return "X";
         }
+    };
+    public static Calificacion parse(String calificacionStr) throws CategoryTypeErrorException {
+
+        for ( Calificacion calificacion : Calificacion.values() ) {
+            if ( calificacion.toString().equals( calificacionStr ) ) {
+                return calificacion;
+            }
+        }
+
+        throw new CategoryTypeErrorException( "Tipo de categoría desconocida: " + calificacionStr );
+
     }
-}
+    }

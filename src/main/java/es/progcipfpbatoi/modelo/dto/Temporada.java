@@ -36,4 +36,15 @@ public class Temporada {
     public int getNumCapitulos() {
         return numCapitulos;
     }
+
+    @Override
+    public String toString() {
+        return "Temporada{" +
+                "id=" + id +
+                ", id_serie='" + id_serie + '\'' +
+                ", plot='" + plot + '\'' +
+                ", fechaLanzamiento=" + fechaLanzamiento +
+                ", numCapitulos=" + numCapitulos +
+                '}';
+    }
 }

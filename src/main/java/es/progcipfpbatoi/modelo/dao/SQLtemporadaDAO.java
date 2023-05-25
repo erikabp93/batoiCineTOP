@@ -15,10 +15,10 @@ public class SQLtemporadaDAO implements TemporadaDAO {
 
     private Connection connection;
     private static final String TABLE_NAME = "temporadas";
-    private static final String IP = "172.16.226.88";
-    private static final String DATABASE = "batoiCine_bd";
-    private static final String USERNAME = "admin";
-    private static final String PASSWORD = "1234";
+    public static final String IP = "172.16.226.88";
+    public static final String DATABASE = "batoiCine_bd";
+    public static final String USERNAME = "admin";
+    public static final String PASSWORD = "1234";
 
     @Override
     public ArrayList<Temporada> findAll() throws DatabaseErrorException {
