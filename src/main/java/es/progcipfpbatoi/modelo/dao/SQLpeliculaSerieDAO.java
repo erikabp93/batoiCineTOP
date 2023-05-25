@@ -8,6 +8,8 @@ import es.progcipfpbatoi.modelo.dto.Genero;
 import es.progcipfpbatoi.modelo.dto.Produccion;
 import es.progcipfpbatoi.modelo.dto.Tipo;
 import es.progcipfpbatoi.services.MySqlConnection;
+import es.progcipfpbatoi.util.CsvToProducciones;
+import es.progcipfpbatoi.util.CsvToTemporadas;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -189,7 +191,8 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
         int             duracion         = rs.getInt( "duracion" );
         String          actores          = rs.getString( "actores" );
         String          nombre           = rs.getString( "titulo" );
-        HashSet<Genero> genero           = ((HashSet<Genero>)rs.getObject( "genero" ));
+        String[]        genero           = rs.getString( "genero" ).split( "," );
+        HashSet<Genero> generoHashSet    = CsvToProducciones.parseGeneros( genero );
         String          director         = rs.getString( "director" );
         String          urlTrailer       = rs.getString( "urlTrailer" );
         String          productor        = rs.getString( "productor" );
@@ -200,6 +203,8 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
         String          plataforma       = rs.getString( "plataforma" );
         LocalDate       fechaLanzamiento = LocalDate.from( rs.getTimestamp( "fechaLanzamiento" ).toLocalDateTime() );
         int             visualizaciones  = rs.getInt( "visualizaciones" );
-        return new Produccion( id, duracion, actores, nombre, genero, director, urlTrailer, productor, tipo, calificacion, poster, guion, plataforma, fechaLanzamiento, visualizaciones );
+
+
+        return new Produccion( id, duracion, actores, nombre, generoHashSet, director, urlTrailer, productor, tipo, calificacion, poster, guion, plataforma, fechaLanzamiento, visualizaciones );
     }
 }

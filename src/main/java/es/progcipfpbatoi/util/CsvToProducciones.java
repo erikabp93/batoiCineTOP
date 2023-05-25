@@ -64,7 +64,7 @@ public class CsvToProducciones {
         return generStr.replaceAll( " ", "" );
     }
 
-    private static HashSet<Genero> parseGeneros(String[] fields) throws CategoryTypeErrorException {
+    public static HashSet<Genero> parseGeneros(String[] fields) throws CategoryTypeErrorException {
         HashSet<Genero> generoHashSet = new HashSet<>();
         for ( String generoItem :
                 fields[ GENERO ].split( "," ) ) {
