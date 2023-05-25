@@ -137,18 +137,27 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
     }
 
     private Produccion update(Produccion produccion) throws DatabaseErrorException{
-        String sql = String.format("UPDATE %s SET descripcion = ?, fechaAlta = ?, finalizada = ?, categoria = ? WHERE id = ?",
-                TABLE_NAME);
+        String sql = String.format("UPDATE %s SET duracion = ?, actores = ?, titulo = ?, genero = ?, director = ?, urlTrailer = ?, productor = ?, tipo = ?, calificacion = ?, poster = ?, guion = ?, plataforma = ?, fechaLanzamiento = ?, visualizaciones = ? WHERE id = ?", TABLE_NAME);
         connection =  new MySqlConnection(IP, DATABASE, USERNAME, PASSWORD).getConnection();
 
         try (
                 PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
-            statement.setString(1, produccion.getDescripcion());
-            statement.setTimestamp(2, Timestamp.valueOf(produccion.getFechaAlta()));
-            statement.setInt(3, produccion.isFinalizada()?1:0);
-            statement.setInt(4, produccion.getCategoria().getId());
-            statement.setInt(5, produccion.getId());
+            statement.setInt(1, produccion.getVisualizaciones());
+            statement.setInt(2, produccion.getDuracion());
+            statement.setString(3, produccion.getActores());
+            statement.setString(4, produccion.getTitulo());
+            statement.setString(5, produccion.getGenero().toString());
+            statement.setString(6, produccion.getDirector());
+            statement.setString(7, produccion.getUrlTrailer());
+            statement.setString(8, produccion.getProductor());
+            statement.setString(9, produccion.getTipo().toString());
+            statement.setString(10, produccion.getCalificacion().toString());
+            statement.setString(11, produccion.getPoster());
+            statement.setString(12, produccion.getGuion());
+            statement.setString(13, produccion.getPlataforma());
+            statement.setDate(14, Date.valueOf(produccion.getFechaLanzamiento()));
+            statement.setInt(15, produccion.getId());
             statement.executeUpdate();
 
         } catch (SQLException e) {

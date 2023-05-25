@@ -113,4 +113,8 @@ public class Produccion {
     public Tipo getTipo() {
         return tipo;
     }
+
+    public boolean empiezaPor(String text) {
+        return this.titulo.startsWith(text);
+    }
 }
