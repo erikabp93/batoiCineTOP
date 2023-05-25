@@ -1,6 +1,5 @@
 package es.progcipfpbatoi.controlador;
 
-import es.progcipfpbatoi.modelo.dto.Tarea;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;

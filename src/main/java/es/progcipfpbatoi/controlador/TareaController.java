@@ -2,10 +2,6 @@ package es.progcipfpbatoi.controlador;
 
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
 import es.progcipfpbatoi.exceptions.NotFoundException;
-import es.progcipfpbatoi.modelo.dto.Categoria;
-import es.progcipfpbatoi.modelo.dto.Prioridad;
-import es.progcipfpbatoi.modelo.dto.Tarea;
-import es.progcipfpbatoi.modelo.dto.Tipo;
 import es.progcipfpbatoi.modelo.repositorios.TareaRepository;
 import es.progcipfpbatoi.util.AlertMessages;
 import javafx.collections.FXCollections;
