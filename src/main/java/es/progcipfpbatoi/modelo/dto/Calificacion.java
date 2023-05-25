@@ -1,6 +1,6 @@
 package es.progcipfpbatoi.modelo.dto;
 
-public enum Clasificacion {
+public enum Calificacion {
 
     G,
     PG,
