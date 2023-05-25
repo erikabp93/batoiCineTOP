@@ -36,7 +36,7 @@ public class Produccion {
 
     public Produccion(int id, int duracion, String actores, String titulo, Genero genero, String director,
                       String urlTrailer, String productor, Tipo tipo, Calificacion calificacion, String poster,
-                      String guion, String plataforma, LocalDate fechaLanzamiento) {
+                      String guion, String plataforma, LocalDate fechaLanzamiento, int visualizaciones) {
         this.id = id;
         this.duracion = duracion;
         this.actores = actores;
@@ -51,6 +51,6 @@ public class Produccion {
         this.guion = guion;
         this.plataforma = plataforma;
         this.fechaLanzamiento = fechaLanzamiento;
-        this.visualizaciones = 0;
+        this.visualizaciones = visualizaciones;
     }
 }
