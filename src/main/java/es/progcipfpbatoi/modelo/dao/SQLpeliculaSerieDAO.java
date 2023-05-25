@@ -106,25 +106,28 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
     }
 
     private Produccion insert(Produccion produccion) throws DatabaseErrorException {
-        String sql = String.format( "INSERT INTO %s (id, descripcion, fechaAlta, finalizada, categoria) VALUES (?,?,?,?,?)",
-                TABLE_NAME );
+        String sql = String.format( "INSERT INTO %s (id, duracion, actores, titulo, genero, director, urlTrailer, productor, tipo, calificacion, poster, guion, plataforma, fechaLanzamiento, visualizaciones) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", TABLE_NAME );
         connection = new MySqlConnection( IP, DATABASE, USERNAME, PASSWORD ).getConnection();
 
         try (
                 PreparedStatement preparedStatement = connection.prepareStatement( sql, PreparedStatement.RETURN_GENERATED_KEYS )
         ) {
             preparedStatement.setInt( 1, produccion.getId() );
-            preparedStatement.setString( 2, produccion.getDescripcion() );
-            preparedStatement.setTimestamp( 3, Timestamp.valueOf( produccion.getFechaAlta() ) );
-            preparedStatement.setInt( 4, produccion.isFinalizada() ? 1 : 0 );
-            preparedStatement.setInt( 5, produccion.getCategoria().getId() );
+            preparedStatement.setInt( 2, produccion.getDuracion() );
+            preparedStatement.setString( 3, produccion.getActores() );
+            preparedStatement.setString( 4, produccion.getTitulo() );
+            preparedStatement.setString( 5, produccion.getGenero().toString() );
+            preparedStatement.setString( 6, produccion.getDirector() );
+            preparedStatement.setString( 7, produccion.getUrlTrailer() );
+            preparedStatement.setString( 8, produccion.getProductor() );
+            preparedStatement.setString( 9, produccion.getTipo().toString() );
+            preparedStatement.setString( 10, produccion.getCalificacion().toString() );
+            preparedStatement.setString( 11, produccion.getPoster() );
+            preparedStatement.setString( 12, produccion.getGuion() );
+            preparedStatement.setString( 13, produccion.getPlataforma() );
+            preparedStatement.setDate( 14, Date.valueOf( produccion.getFechaLanzamiento() ) );
+            preparedStatement.setInt( 15, produccion.getVisualizaciones() );
             preparedStatement.executeUpdate();
-
-            ResultSet resultSet = preparedStatement.getGeneratedKeys();
-            if ( resultSet.next() ) {
-                produccion.setId( resultSet.getInt( 1 ) );
-            }
-
             return produccion;
 
         } catch ( SQLException e ) {
@@ -134,18 +137,27 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
     }
 
     private Produccion update(Produccion produccion) throws DatabaseErrorException {
-        String sql = String.format( "UPDATE %s SET descripcion = ?, fechaAlta = ?, finalizada = ?, categoria = ? WHERE id = ?",
-                TABLE_NAME );
+        String sql = String.format( "UPDATE %s SET duracion = ?, actores = ?, titulo = ?, genero = ?, director = ?, urlTrailer = ?, productor = ?, tipo = ?, calificacion = ?, poster = ?, guion = ?, plataforma = ?, fechaLanzamiento = ?, visualizaciones = ? WHERE id = ?", TABLE_NAME );
         connection = new MySqlConnection( IP, DATABASE, USERNAME, PASSWORD ).getConnection();
 
         try (
                 PreparedStatement statement = connection.prepareStatement( sql, PreparedStatement.RETURN_GENERATED_KEYS )
         ) {
-            statement.setString( 1, produccion.getDescripcion() );
-            statement.setTimestamp( 2, Timestamp.valueOf( produccion.getFechaAlta() ) );
-            statement.setInt( 3, produccion.isFinalizada() ? 1 : 0 );
-            statement.setInt( 4, produccion.getCategoria().getId() );
-            statement.setInt( 5, produccion.getId() );
+            statement.setInt( 1, produccion.getVisualizaciones() );
+            statement.setInt( 2, produccion.getDuracion() );
+            statement.setString( 3, produccion.getActores() );
+            statement.setString( 4, produccion.getTitulo() );
+            statement.setString( 5, produccion.getGenero().toString() );
+            statement.setString( 6, produccion.getDirector() );
+            statement.setString( 7, produccion.getUrlTrailer() );
+            statement.setString( 8, produccion.getProductor() );
+            statement.setString( 9, produccion.getTipo().toString() );
+            statement.setString( 10, produccion.getCalificacion().toString() );
+            statement.setString( 11, produccion.getPoster() );
+            statement.setString( 12, produccion.getGuion() );
+            statement.setString( 13, produccion.getPlataforma() );
+            statement.setDate( 14, Date.valueOf( produccion.getFechaLanzamiento() ) );
+            statement.setInt( 15, produccion.getId() );
             statement.executeUpdate();
 
         } catch ( SQLException e ) {
@@ -173,21 +185,21 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
     }
 
     private Produccion getProduccionFromResultset(ResultSet rs) throws SQLException {
-        int     id               = rs.getInt( "id" );
-        int     duracion         = rs.getInt( "duracion" );
-        String  actores          = rs.getString( "actores" );
-        String  nombre           = rs.getString( "titulo" );
-        HashSet<Genero> genero = (HashSet<Genero>) rs.getObject( "genero" );
-        String       director         = rs.getString( "director" );
-        String       urlTrailer       = rs.getString( "urlTrailer" );
-        String       productor        = rs.getString( "productor" );
-        Tipo         tipo             = (Tipo) rs.getObject( "tipo" );
-        Calificacion calificacion     = (Calificacion) rs.getObject( "calificacion" );
-        String       poster           = rs.getString( "poster" );
-        String       guion            = rs.getString( "guion" );
-        String       plataforma       = rs.getString( "plataforma" );
-        LocalDate    fechaLanzamiento = LocalDate.from( rs.getTimestamp( "fechaLanzamiento" ).toLocalDateTime() );
-        int          visualizaciones  = rs.getInt( "visualizaciones" );
+        int             id               = rs.getInt( "id" );
+        int             duracion         = rs.getInt( "duracion" );
+        String          actores          = rs.getString( "actores" );
+        String          nombre           = rs.getString( "titulo" );
+        HashSet<Genero> genero           = ((HashSet<Genero>)rs.getObject( "genero" ));
+        String          director         = rs.getString( "director" );
+        String          urlTrailer       = rs.getString( "urlTrailer" );
+        String          productor        = rs.getString( "productor" );
+        Tipo            tipo             = (Tipo) rs.getObject( "tipo" );
+        Calificacion    calificacion     = (Calificacion) rs.getObject( "calificacion" );
+        String          poster           = rs.getString( "poster" );
+        String          guion            = rs.getString( "guion" );
+        String          plataforma       = rs.getString( "plataforma" );
+        LocalDate       fechaLanzamiento = LocalDate.from( rs.getTimestamp( "fechaLanzamiento" ).toLocalDateTime() );
+        int             visualizaciones  = rs.getInt( "visualizaciones" );
         return new Produccion( id, duracion, actores, nombre, genero, director, urlTrailer, productor, tipo, calificacion, poster, guion, plataforma, fechaLanzamiento, visualizaciones );
     }
 }

@@ -1,11 +1,22 @@
 package es.progcipfpbatoi.modelo.dto;
 
+import es.progcipfpbatoi.exceptions.CategoryTypeErrorException;
+
 public enum Tipo {
+    PELICULA {
+        @Override
+        public String toString() {
+            return "PELICULA";
+        }
+    },
+    SERIE {
+        @Override
+        public String toString() {
+            return "SERIE";
+        }
+    };
 
-    PELICULA,
-    SERIE;
-
-    public static Tipo parse(String tipoStr) throws CategoryGeneroErrorException {
+    public static Tipo parse(String tipoStr) throws CategoryTypeErrorException {
 
         for ( Tipo genero : Tipo.values() ) {
             if ( genero.toString().equals( tipoStr ) ) {
@@ -13,6 +24,7 @@ public enum Tipo {
             }
         }
 
-        throw new CategoryGeneroErrorException( "Tipo de categoría desconocida: " + tipoStr );
+        throw new CategoryTypeErrorException( "Tipo de categoría desconocida: " + tipoStr );
     }
+
 }

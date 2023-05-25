@@ -155,4 +155,8 @@ public class Produccion {
                 ", visualizaciones=" + visualizaciones +
                 '}';
     }
+
+    public boolean empiezaPor(String text) {
+        return this.titulo.startsWith(text);
+    }
 }
