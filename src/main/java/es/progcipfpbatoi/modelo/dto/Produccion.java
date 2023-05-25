@@ -37,7 +37,7 @@ public class Produccion {
 
     public Produccion(int id, String duracion, String actores, String titulo, HashSet<Genero> genero, String director,
                       String urlTrailer, String productor, Tipo tipo, Calificacion calificacion, String poster,
-                      String guion, String plataforma, LocalDate fechaLanzamiento) {
+                      String guion, String plataforma, LocalDate fechaLanzamiento, int visualizaciones) {
         this.id = id;
         this.duracion = duracion;
         this.actores = actores;
@@ -52,7 +52,67 @@ public class Produccion {
         this.guion = guion;
         this.plataforma = plataforma;
         this.fechaLanzamiento = fechaLanzamiento;
-        this.visualizaciones = 0;
+        this.visualizaciones = visualizaciones;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getDuracion() {
+        return duracion;
+    }
+
+    public String getActores() {
+        return actores;
+    }
+
+    public Calificacion getCalificacion() {
+        return calificacion;
+    }
+
+    public Genero getGenero() {
+        return genero;
+    }
+
+    public int getVisualizaciones() {
+        return visualizaciones;
+    }
+
+    public LocalDate getFechaLanzamiento() {
+        return fechaLanzamiento;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public String getGuion() {
+        return guion;
+    }
+
+    public String getPlataforma() {
+        return plataforma;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public String getProductor() {
+        return productor;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getUrlTrailer() {
+        return urlTrailer;
+    }
+
+    public Tipo getTipo() {
+        return tipo;
     }
 
     public int getId() {

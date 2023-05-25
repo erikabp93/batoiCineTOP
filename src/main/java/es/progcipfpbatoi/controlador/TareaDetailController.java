@@ -2,7 +2,7 @@ package es.progcipfpbatoi.controlador;
 
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
 import es.progcipfpbatoi.exceptions.NotFoundException;
-import es.progcipfpbatoi.modelo.repositorios.TareaRepository;
+import es.progcipfpbatoi.modelo.repositorios.PeliculaSerieRepository;
 import es.progcipfpbatoi.util.AlertMessages;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,18 +27,18 @@ public class TareaDetailController implements Initializable {
     private CheckBox checkBoxFinalizada;
 
     private Tarea tarea;
-    private TareaRepository tareaRepository;
+    private PeliculaSerieRepository peliculaSerieRepository;
 
     private Initializable controladorPadre;
     private String vistaPadre;
 
     public TareaDetailController(
             Tarea tarea,
-            TareaRepository tareaRepository,
+            PeliculaSerieRepository peliculaSerieRepository,
             Initializable controladorPadre,
             String vistaPadre) {
         this.tarea = tarea;
-        this.tareaRepository = tareaRepository;
+        this.peliculaSerieRepository = peliculaSerieRepository;
         this.controladorPadre = controladorPadre;
         this.vistaPadre = vistaPadre;
     }
@@ -63,7 +63,7 @@ public class TareaDetailController implements Initializable {
     private void handleChangeInFinalizada() {
         try {
             this.tarea.cambiarEstado();
-            this.tareaRepository.save(tarea);
+            this.peliculaSerieRepository.save(tarea);
         } catch (DatabaseErrorException ex) {
             AlertMessages.mostrarAlertError("No se ha podido guardar la tarea. Error en el acceso a la base de datos.");
         }
@@ -81,7 +81,7 @@ public class TareaDetailController implements Initializable {
     @FXML
     private void removeTask(ActionEvent event) {
         try {
-            this.tareaRepository.remove(tarea);
+            this.peliculaSerieRepository.remove(tarea);
             ChangeScene.change(event, controladorPadre, vistaPadre);
         } catch (NotFoundException | DatabaseErrorException ex) {
             ex.printStackTrace();

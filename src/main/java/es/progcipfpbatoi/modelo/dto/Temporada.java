@@ -4,12 +4,12 @@ import java.time.LocalDate;
 
 public class Temporada {
     private int       id;
-    private String    id_serie;
+    private int       id_serie;
     private String    plot;
     private LocalDate fechaLanzamiento;
     private int       numCapitulos;
 
-    public Temporada(int id, String id_serie, String plot, LocalDate fechaLanzamiento, int numCapitulos) {
+    public Temporada(int id, int id_serie, String plot, LocalDate fechaLanzamiento, int numCapitulos) {
         this.id               = id;
         this.id_serie         = id_serie;
         this.plot             = plot;
@@ -21,7 +21,7 @@ public class Temporada {
         return id;
     }
 
-    public String getId_serie() {
+    public int getId_serie() {
         return id_serie;
     }
 
