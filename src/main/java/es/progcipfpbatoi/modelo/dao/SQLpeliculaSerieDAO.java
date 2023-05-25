@@ -105,24 +105,28 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
     }
 
     private Produccion insert(Produccion produccion) throws DatabaseErrorException {
-        String sql = String.format("INSERT INTO %s (id, descripcion, fechaAlta, finalizada, categoria) VALUES (?,?,?,?,?)",
-                TABLE_NAME);
+        String sql = String.format("INSERT INTO %s (id, duracion, actores, titulo, genero, director, urlTrailer, productor, tipo, calificacion, poster, guion, plataforma, fechaLanzamiento, visualizaciones) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", TABLE_NAME);
         connection =  new MySqlConnection(IP, DATABASE, USERNAME, PASSWORD).getConnection();
 
         try (
                 PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             preparedStatement.setInt(1, produccion.getId());
-            preparedStatement.setString(2, produccion.getDescripcion());
-            preparedStatement.setTimestamp(3, Timestamp.valueOf(produccion.getFechaAlta()));
-            preparedStatement.setInt(4, produccion.isFinalizada()?1:0);
-            preparedStatement.setInt(5, produccion.getCategoria().getId());
+            preparedStatement.setInt(2, produccion.getDuracion());
+            preparedStatement.setString(3, produccion.getActores());
+            preparedStatement.setString(4, produccion.getTitulo());
+            preparedStatement.setString(5, produccion.getGenero().toString());
+            preparedStatement.setString(6, produccion.getDirector());
+            preparedStatement.setString(7, produccion.getUrlTrailer());
+            preparedStatement.setString(8, produccion.getProductor());
+            preparedStatement.setString(9, produccion.getTipo().toString());
+            preparedStatement.setString(10, produccion.getCalificacion().toString());
+            preparedStatement.setString(11, produccion.getPoster());
+            preparedStatement.setString(12, produccion.getGuion());
+            preparedStatement.setString(13, produccion.getPlataforma());
+            preparedStatement.setDate(14, Date.valueOf(produccion.getFechaLanzamiento()));
+            preparedStatement.setInt(15, produccion.getVisualizaciones());
             preparedStatement.executeUpdate();
-
-            ResultSet resultSet = preparedStatement.getGeneratedKeys();
-            if (resultSet.next()) {
-                produccion.setId(resultSet.getInt(1));
-            }
 
             return produccion;
 
