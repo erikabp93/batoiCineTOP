@@ -33,7 +33,7 @@ public class CsvToTemporadas {
     private Temporada getTemporadaFromRegister(String register) {
         String[]  fields           = register.split( FIELD_SEPARATOR );
         int       idPelicula       = Integer.parseInt( fields[ ID_PELICULA ] );
-        String    idTemporada      = fields[ ID_TEMPORADA ];
+        int       idTemporada      = Integer.parseInt( fields[ ID_TEMPORADA ] );
         String    guion            = fields[ GUION ];
         LocalDate fechaLanzamiento = LocalDate.parse( fields[ FECHA_LANZAMIENTO ], DateTimeFormatter.ofPattern( "yyyy" ) );
         int       capitulos        = Integer.parseInt( fields[ CAPITULOS ] );
