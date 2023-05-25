@@ -1,5 +1,6 @@
 package es.progcipfpbatoi.util;
 
+import es.progcipfpbatoi.exceptions.CategoryTypeErrorException;
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
 import es.progcipfpbatoi.exceptions.NotFoundException;
 import es.progcipfpbatoi.modelo.dto.*;
@@ -63,7 +64,7 @@ public class CsvToProducciones {
         return generStr.replaceAll( " ", "" );
     }
 
-    private static HashSet<Genero> parseGeneros(String[] fields) throws CategoryGeneroErrorException {
+    private static HashSet<Genero> parseGeneros(String[] fields) throws CategoryTypeErrorException {
         HashSet<Genero> generoHashSet = new HashSet<>();
         for ( String generoItem :
                 fields[ GENERO ].split( "," ) ) {
