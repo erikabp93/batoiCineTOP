@@ -44,7 +44,7 @@ public class CsvToProducciones {
     private Produccion getProduccionFromRegister(String register) {
         String[]        fields           = register.split( FIELD_SEPARATOR );
         int             id               = Integer.parseInt( fields[ ID ] );
-        String          duracion         = fields[ DURACION ];
+        int             duracion         = Integer.parseInt( fields[ DURACION ].replaceAll( "[^0-9]", "" ) );
         String          actores          = fields[ ACTORES ];
         String          titulo           = fields[ TITULO ];
         HashSet<Genero> generos          = parseGeneros( fields );
