@@ -2,22 +2,24 @@ package es.progcipfpbatoi.modelo.dao;
 
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
 import es.progcipfpbatoi.exceptions.NotFoundException;
+import es.progcipfpbatoi.modelo.dto.Produccion;
 import es.progcipfpbatoi.services.MySqlConnection;
 
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class SQLTareaDAO implements TareaDAO{
+public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
 
+    public static final ArrayList<Produccion> producciones = new ArrayList<>();
     private Connection connection;
-    private static final String TABLE_NAME = "tareas";
+    private static final String TABLE_NAME = "produccion";
 
     @Override
-    public ArrayList<Tarea> findAll() throws DatabaseErrorException {
+    public ArrayList<Produccion> findAll() throws DatabaseErrorException {
         String sql = String.format("SELECT * FROM %s", TABLE_NAME);
 
-        ArrayList<Tarea>tareas = new ArrayList<>();
+        ArrayList<Produccion> producciones = new ArrayList<>();
         connection =  new MySqlConnection("192.168.18.27", "tasks_db", "batoi", "1234").getConnection();
 
         try (
@@ -26,8 +28,8 @@ public class SQLTareaDAO implements TareaDAO{
         ) {
 
             while(resultSet.next()) {
-                Tarea tarea = getTaskFromResultset(resultSet);
-                tareas.add(tarea);
+                Produccion tarea = getTaskFromResultset(resultSet);
+                producciones.add(tarea);
             }
 
         } catch (SQLException e) {
@@ -35,7 +37,7 @@ public class SQLTareaDAO implements TareaDAO{
             throw new DatabaseErrorException("Ha ocurrido un error en la conexión o acceso a la base de datos (select)");
         }
 
-        return tareas;
+        return producciones;
     }
 
     @Override
@@ -161,7 +163,7 @@ public class SQLTareaDAO implements TareaDAO{
         }
     }
 
-    private Tarea getTaskFromResultset(ResultSet rs) throws SQLException {
+    private Produccion getProduccionFromResultset(ResultSet rs) throws SQLException {
         int id = rs.getInt("id");
         String descripcion = rs.getString("descripcion");
         LocalDateTime fecha = rs.getTimestamp("fechaAlta").toLocalDateTime();
