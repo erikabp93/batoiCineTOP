@@ -10,4 +10,8 @@ public class Usuario {
         this.password = password;
         this.email    = email;
     }
+
+    public String getUsername() {
+        return username;
+    }
 }
