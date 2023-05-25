@@ -16,4 +16,24 @@ public class Temporada {
         this.fechaLanzamiento = fechaLanzamiento;
         this.numCapitulos     = numCapitulos;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getId_serie() {
+        return id_serie;
+    }
+
+    public String getPlot() {
+        return plot;
+    }
+
+    public LocalDate getFechaLanzamiento() {
+        return fechaLanzamiento;
+    }
+
+    public int getNumCapitulos() {
+        return numCapitulos;
+    }
 }
