@@ -72,7 +72,7 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
             ResultSet resultSet = statement.executeQuery();
 
             while(resultSet.next()) {
-                Produccion produccion = getTaskFromResultset(resultSet);
+                Produccion produccion = getProduccionFromResultset(resultSet);
                 if (produccion.getId() == id) {
                     return produccion;
                 }

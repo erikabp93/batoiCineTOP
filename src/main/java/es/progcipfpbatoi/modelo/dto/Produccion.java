@@ -53,4 +53,64 @@ public class Produccion {
         this.fechaLanzamiento = fechaLanzamiento;
         this.visualizaciones = visualizaciones;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getDuracion() {
+        return duracion;
+    }
+
+    public String getActores() {
+        return actores;
+    }
+
+    public Calificacion getCalificacion() {
+        return calificacion;
+    }
+
+    public Genero getGenero() {
+        return genero;
+    }
+
+    public int getVisualizaciones() {
+        return visualizaciones;
+    }
+
+    public LocalDate getFechaLanzamiento() {
+        return fechaLanzamiento;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public String getGuion() {
+        return guion;
+    }
+
+    public String getPlataforma() {
+        return plataforma;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public String getProductor() {
+        return productor;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getUrlTrailer() {
+        return urlTrailer;
+    }
+
+    public Tipo getTipo() {
+        return tipo;
+    }
 }

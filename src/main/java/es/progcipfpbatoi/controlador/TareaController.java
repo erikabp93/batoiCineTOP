@@ -2,7 +2,7 @@ package es.progcipfpbatoi.controlador;
 
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
 import es.progcipfpbatoi.exceptions.NotFoundException;
-import es.progcipfpbatoi.modelo.repositorios.TareaRepository;
+import es.progcipfpbatoi.modelo.repositorios.PeliculaSerieRepository;
 import es.progcipfpbatoi.util.AlertMessages;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,15 +34,15 @@ public class TareaController implements Initializable {
     @FXML
     private TextField searchBar;
 
-    private TareaRepository tareaRepository;
+    private PeliculaSerieRepository peliculaSerieRepository;
 
-    public TareaController(TareaRepository tareaRepository) {
-        this.tareaRepository = tareaRepository;
+    public TareaController(PeliculaSerieRepository peliculaSerieRepository) {
+        this.peliculaSerieRepository = peliculaSerieRepository;
     }
 
     private ObservableList<Tarea> getData() {
         try {
-            return FXCollections.observableArrayList(tareaRepository.findAllWithCategories());
+            return FXCollections.observableArrayList(peliculaSerieRepository.findAllWithCategories());
         }catch (DatabaseErrorException ex) {
             AlertMessages.mostrarAlertError(ex.getMessage());
             return null;
@@ -60,9 +60,9 @@ public class TareaController implements Initializable {
             } else if (descripcion.equals("")) {
                 AlertMessages.mostrarAlertError("Debe introducir una descripción");
             } else {
-                Categoria categoria = tareaRepository.getCategoryByTypeAndPriority(tipo, prioridad);
+                Categoria categoria = peliculaSerieRepository.getCategoryByTypeAndPriority(tipo, prioridad);
                 Tarea tarea = new Tarea(getNewTaskIndex(), nuevaTareaTextField.getText(), categoria);
-                tareaRepository.save(tarea);
+                peliculaSerieRepository.save(tarea);
                 tareaListView.getItems().add(tarea);
                 nuevaTareaTextField.setText("");
                 typeSelector.getSelectionModel().clearSelection();
@@ -90,7 +90,7 @@ public class TareaController implements Initializable {
         try {
             tareaListView.getItems().clear();
             String texto = searchBar.getText();
-            ArrayList<Tarea> tareas = tareaRepository.findAll(texto);
+            ArrayList<Tarea> tareas = peliculaSerieRepository.findAll(texto);
             tareaListView.getItems().addAll(tareas);
         } catch (DatabaseErrorException ex) {
             System.out.println(ex.getMessage());
@@ -102,7 +102,7 @@ public class TareaController implements Initializable {
         try {
             Tarea tarea = tareaListView.getSelectionModel().getSelectedItem();
             TareaDetailController tareaDetailController = new TareaDetailController(
-                    tarea, tareaRepository, this, "/vistas/tarea_list.fxml");
+                    tarea, peliculaSerieRepository, this, "/vistas/tarea_list.fxml");
             ChangeScene.change(event, tareaDetailController, "/vistas/tarea_detail.fxml");
         } catch (IOException ex) {
             ex.printStackTrace();

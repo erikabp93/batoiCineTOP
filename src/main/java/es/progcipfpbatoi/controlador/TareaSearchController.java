@@ -2,7 +2,7 @@ package es.progcipfpbatoi.controlador;
 
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
 import es.progcipfpbatoi.exceptions.NotFoundException;
-import es.progcipfpbatoi.modelo.repositorios.TareaRepository;
+import es.progcipfpbatoi.modelo.repositorios.PeliculaSerieRepository;
 import es.progcipfpbatoi.util.AlertMessages;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,17 +16,17 @@ import java.util.ResourceBundle;
 public class TareaSearchController implements Initializable {
     @FXML
     private TextField searchBar;
-    private TareaRepository tareaRepository;
+    private PeliculaSerieRepository peliculaSerieRepository;
 
-    public TareaSearchController (TareaRepository tareaRepository) {
-        this.tareaRepository = tareaRepository;
+    public TareaSearchController (PeliculaSerieRepository peliculaSerieRepository) {
+        this.peliculaSerieRepository = peliculaSerieRepository;
     }
     @FXML
     private void searchTask(ActionEvent event) {
         try {
             int id = Integer.parseInt(searchBar.getText());
-            Tarea tarea = this.tareaRepository.getById(id);
-            TareaDetailController tareaDetailController = new TareaDetailController(tarea, tareaRepository, this, "/vistas/tarea_search.fxml");
+            Tarea tarea = this.peliculaSerieRepository.getById(id);
+            TareaDetailController tareaDetailController = new TareaDetailController(tarea, peliculaSerieRepository, this, "/vistas/tarea_search.fxml");
             ChangeScene.change(event, tareaDetailController, "/vistas/tarea_detail.fxml");
         } catch (NumberFormatException ex) {
             AlertMessages.mostrarAlertWarning("Sólo se deben introducir números");
