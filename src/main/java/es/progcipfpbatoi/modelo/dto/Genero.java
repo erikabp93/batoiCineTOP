@@ -19,5 +19,18 @@ public enum Genero {
     ADVENTURE,
     CRIME,
     DRAMA,
-    ANIMATION
+    ANIMATION;
+
+
+
+    public static Genero parse(String categoriaStr) throws CategoryGeneroErrorException {
+
+        for ( Genero genero : Genero.values() ) {
+            if ( genero.toString().equals( categoriaStr ) ) {
+                return genero;
+            }
+        }
+
+        throw new CategoryGeneroErrorException( "Tipo de categoría desconocida: " + categoriaStr );
+    }
 }
