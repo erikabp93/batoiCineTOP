@@ -2,7 +2,6 @@ package es.progcipfpbatoi.modelo.dao;
 
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
 import es.progcipfpbatoi.exceptions.NotFoundException;
-import es.progcipfpbatoi.modelo.dto.Tarea;
 
 import java.util.ArrayList;
 
