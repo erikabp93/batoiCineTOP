@@ -28,16 +28,11 @@ public class LoginController implements Initializable {
     private PeliculaSerieRepository peliculaSerieRepository;
     private TemporadaRepository temporadaRepository;
     private UsuarioRepository usuarioRepository;
-    private Initializable controladorPadre;
-    private String vistaPadre;
 
-    public LoginController(TextField usuario, PeliculaSerieRepository peliculaSerieRepository, TemporadaRepository temporadaRepository, UsuarioRepository usuarioRepository, Initializable controladorPadre, String vistaPadre) {
-        this.usuario = usuario;
+    public LoginController(PeliculaSerieRepository peliculaSerieRepository, TemporadaRepository temporadaRepository, UsuarioRepository usuarioRepository) {
         this.peliculaSerieRepository = peliculaSerieRepository;
         this.temporadaRepository = temporadaRepository;
         this.usuarioRepository = usuarioRepository;
-        this.controladorPadre = controladorPadre;
-        this.vistaPadre = vistaPadre;
     }
 
     @FXML
