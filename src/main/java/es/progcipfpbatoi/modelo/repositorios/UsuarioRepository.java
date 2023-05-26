@@ -17,4 +17,8 @@ public class UsuarioRepository {
     private Usuario save(Usuario usuario) throws DatabaseErrorException {
         return usuarioDAO.save(usuario);
     }
+
+    public boolean existeUsuario(Usuario usuario) throws DatabaseErrorException {
+        return usuarioDAO.existeUsuario(usuario);
+    }
 }

@@ -35,6 +35,7 @@ public class SQLUsuarioDAO implements UsuarioDAO {
         }
     }
 
+    @Override
     public boolean existeUsuario(Usuario usuario) throws DatabaseErrorException {
         String sql = String.format("SELECT * FROM %s WHERE username = ?, password = ?", TABLE_NAME);
         connection =  new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
