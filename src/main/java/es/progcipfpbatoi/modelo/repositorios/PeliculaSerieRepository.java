@@ -20,6 +20,30 @@ public class PeliculaSerieRepository {
         return peliculaSerieDAO.findAll(text);
     }
 
+    public ArrayList<Produccion> findAll() throws DatabaseErrorException {
+        return peliculaSerieDAO.findAll();
+    }
+
+    public ArrayList<Produccion> findAllPeliculas() throws DatabaseErrorException {
+        ArrayList<Produccion> peliculas = new ArrayList<>();
+        for (Produccion produccion : findAll()) {
+            if (produccion.getTipo().toString().equals("PELICULA")) {
+                peliculas.add(produccion);
+            }
+        }
+        return peliculas;
+    }
+
+    public ArrayList<Produccion> findAllSeries() throws DatabaseErrorException {
+        ArrayList<Produccion> series = new ArrayList<>();
+        for (Produccion produccion : findAll()) {
+            if (produccion.getTipo().toString().equals("SERIE")) {
+                series.add(produccion);
+            }
+        }
+        return series;
+    }
+
     public Produccion getById(int id) throws DatabaseErrorException, NotFoundException {
         return peliculaSerieDAO.getById(id);
     }

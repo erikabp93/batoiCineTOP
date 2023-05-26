@@ -15,10 +15,10 @@ public class SQLvalorarDAO implements ValorarDAO {
     private Connection connection;
     private static final String TABLE_NAME = "valorar";
     @Override
-    public ArrayList<Produccion> findAll(Produccion produccion) throws DatabaseErrorException { //ordenado por mejor valoradas
+    public ArrayList<Produccion> findAll() throws DatabaseErrorException { //ordenado por mejor valoradas
         String sql = String.format("SELECT P.tipo, P.titulo, P.actores, P.genero, P.calificacion, P.plataforma, " +
                 "ROUND(AVG(V.valoracion), 2) AS Valoración_Media FROM produccion P INNER JOIN %s V ON " +
-                "(P.id = V.id_produccion) WHERE P.id LIKE %d ORDER BY V.valoracion DESC;", TABLE_NAME, produccion.getId());
+                "(P.id = V.id_produccion) ORDER BY V.valoracion DESC;", TABLE_NAME);
 
         ArrayList<Produccion> producciones = new ArrayList<>();
         connection =  new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
