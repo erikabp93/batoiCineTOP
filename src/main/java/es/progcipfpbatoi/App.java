@@ -5,6 +5,7 @@ import es.progcipfpbatoi.modelo.dao.SQLtemporadaDAO;
 import es.progcipfpbatoi.modelo.repositorios.PeliculaSerieRepository;
 import es.progcipfpbatoi.modelo.repositorios.TemporadaRepository;
 import es.progcipfpbatoi.services.MySqlConnection;
+import es.progcipfpbatoi.util.DatosBD;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -33,7 +34,7 @@ public class App extends Application {
 
         stage.setOnCloseRequest( event -> {
             System.out.println( "App closed" );
-            new MySqlConnection( SQLtemporadaDAO.IP, SQLtemporadaDAO.DATABASE, SQLtemporadaDAO.USERNAME, SQLtemporadaDAO.PASSWORD ).closeConnection();
+            new MySqlConnection( DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD ).closeConnection();
         } );
 
     }
