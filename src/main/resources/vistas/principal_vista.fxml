@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -14,8 +15,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Separator layoutX="98.0" layoutY="93.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0" />
       <HBox prefHeight="90.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -81,5 +81,22 @@
             </MenuBar>
          </children>
       </HBox>
+      <Label layoutX="81.0" layoutY="101.0" prefHeight="21.0" text="Más recomendadas" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="100.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="91.0" layoutY="111.0" prefHeight="21.0" text="Peliculas" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="150.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ListView fx:id="peliculasListView" layoutX="50.0" layoutY="179.0" orientation="HORIZONTAL" prefHeight="250.0" prefWidth="200.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="180.0" />
+      <Label layoutX="91.0" layoutY="379.0" prefHeight="21.0" text="Series" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="450.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ListView fx:id="seriesListView" layoutX="50.0" layoutY="447.0" orientation="HORIZONTAL" prefHeight="250.0" prefWidth="200.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="480.0" />
    </children>
 </AnchorPane>

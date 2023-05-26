@@ -7,12 +7,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class RegistroController implements Initializable {
 
+
+    private Stage stage;
     @FXML
     private TextField email;
     @FXML
@@ -25,7 +28,8 @@ public class RegistroController implements Initializable {
     private Initializable controladorPadre;
     private String vistaPadre;
 
-    public RegistroController(UsuarioRepository usuarioRepository, Initializable controladorPadre, String vistaPadre) {
+    public RegistroController(Stage stage, UsuarioRepository usuarioRepository, Initializable controladorPadre, String vistaPadre) {
+        this.stage = stage;
         this.usuarioRepository = usuarioRepository;
         this.controladorPadre = controladorPadre;
         this.vistaPadre = vistaPadre;

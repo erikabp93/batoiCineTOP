@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public interface ValorarDAO {
 
-    ArrayList<Produccion> findAll(Produccion produccion) throws DatabaseErrorException;
+    ArrayList<Produccion> findAll() throws DatabaseErrorException;
     boolean save(Produccion produccion, Usuario usuario, int valoracion, String comentario) throws DatabaseErrorException;
 
 }
