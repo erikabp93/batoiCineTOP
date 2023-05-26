@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Separator layoutX="98.0" layoutY="93.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0" />
+      <HBox prefHeight="90.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="90.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/logo.png" />
+               </image>
+            </ImageView>
+            <Label prefHeight="90.0" text="BatoiCine TOP">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </Label>
+            <Label prefHeight="90.0" text="Peliculas">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="60.0" />
+               </HBox.margin>
+            </Label>
+            <Label prefHeight="90.0" text="Series">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </Label>
+            <TextField prefHeight="30.0" prefWidth="150.0" promptText="Buscar">
+               <HBox.margin>
+                  <Insets left="60.0" top="30.0" />
+               </HBox.margin>
+            </TextField>
+            <ComboBox prefHeight="30.0" prefWidth="150.0" promptText="Seleccionar">
+               <HBox.margin>
+                  <Insets left="30.0" top="30.0" />
+               </HBox.margin>
+            </ComboBox>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Cerrar" />
+                        <MenuItem mnemonicParsing="false" text="Cambiar usuario" />
+                  </items>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/menu.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                </Menu>
+              </menus>
+               <HBox.margin>
+                  <Insets left="20.0" top="25.0" />
+               </HBox.margin>
+            </MenuBar>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
