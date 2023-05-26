@@ -32,7 +32,7 @@ public class RegistroController implements Initializable {
     }
 
     @FXML
-    private void iniciarSesion(ActionEvent event) {
+    private void registro(ActionEvent event) {
         try {
             String correo = email.getText();
             String user = usuario.getText();

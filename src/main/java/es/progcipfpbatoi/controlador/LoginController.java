@@ -2,9 +2,6 @@ package es.progcipfpbatoi.controlador;
 
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
 import es.progcipfpbatoi.modelo.dao.FavoritoDAO;
-import es.progcipfpbatoi.modelo.dao.PeliculaSerieDAO;
-import es.progcipfpbatoi.modelo.dao.TemporadaDAO;
-import es.progcipfpbatoi.modelo.dao.ValorarDAO;
 import es.progcipfpbatoi.modelo.dto.Usuario;
 import es.progcipfpbatoi.modelo.repositorios.PeliculaSerieRepository;
 import es.progcipfpbatoi.modelo.repositorios.TemporadaRepository;
