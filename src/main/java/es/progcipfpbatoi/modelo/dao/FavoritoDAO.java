@@ -10,4 +10,6 @@ public interface FavoritoDAO {
 
     ArrayList<Produccion> findAll(Usuario usuario) throws DatabaseErrorException;
     boolean save(Produccion produccion, Usuario usuario) throws DatabaseErrorException;
+
+    boolean delete(Produccion produccion, Usuario usuario) throws DatabaseErrorException;
 }
