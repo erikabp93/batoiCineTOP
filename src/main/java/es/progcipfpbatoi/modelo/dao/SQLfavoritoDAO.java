@@ -3,6 +3,7 @@ package es.progcipfpbatoi.modelo.dao;
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
 import es.progcipfpbatoi.modelo.dto.*;
 import es.progcipfpbatoi.services.MySqlConnection;
+import es.progcipfpbatoi.util.DatosBD;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -13,17 +14,13 @@ public class SQLfavoritoDAO implements FavoritoDAO{
 
     private Connection connection;
     private static final String TABLE_NAME = "favoritos";
-    private static final String IP = "192.168.18.27";
-    private static final String DATABASE = "batoiCine_bd";
-    private static final String USERNAME = "batoi";
-    private static final String PASSWORD = "1234";
 
     @Override
     public ArrayList<Produccion> findAll(Usuario usuario) throws DatabaseErrorException {
         String sql = String.format("SELECT * FROM %s WHERE username LIKE %s", TABLE_NAME, usuario.getUsername());
 
         ArrayList<Produccion> producciones = new ArrayList<>();
-        connection =  new MySqlConnection(IP, DATABASE, USERNAME, PASSWORD).getConnection();
+        connection =  new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
 
         try (
                 Statement statement = connection.createStatement();
@@ -46,7 +43,7 @@ public class SQLfavoritoDAO implements FavoritoDAO{
     @Override
     public boolean save(Produccion produccion, Usuario usuario) throws DatabaseErrorException {
         String sql = String.format("INSERT INTO %s (id_produccion, username) VALUES (?,?)", TABLE_NAME);
-        connection =  new MySqlConnection(IP, DATABASE, USERNAME, PASSWORD).getConnection();
+        connection =  new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
 
         try (
                 PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)
@@ -75,8 +72,8 @@ public class SQLfavoritoDAO implements FavoritoDAO{
         String director = rs.getString("director");
         String urlTrailer = rs.getString("urlTrailer");
         String productor = rs.getString("productor");
-        Tipo tipo = (Tipo) rs.getObject("tipo");
-        Calificacion calificacion = (Calificacion) rs.getObject("calificacion");
+        Tipo tipo = Tipo.valueOf(rs.getString("tipo"));
+        Calificacion calificacion = Calificacion.valueOf(rs.getString("calificacion"));
         String poster = rs.getString("poster");
         String guion = rs.getString("guion");
         String plataforma = rs.getString("plataforma");

@@ -8,6 +8,7 @@ import es.progcipfpbatoi.modelo.dto.Genero;
 import es.progcipfpbatoi.modelo.dto.Produccion;
 import es.progcipfpbatoi.modelo.dto.Tipo;
 import es.progcipfpbatoi.services.MySqlConnection;
+import es.progcipfpbatoi.util.DatosBD;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -19,17 +20,13 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
 
     private              Connection connection;
     private static final String     TABLE_NAME = "produccion";
-    private static final String     IP         = "192.168.18.27";
-    private static final String     DATABASE   = "batoiCine_bd";
-    private static final String     USERNAME   = "batoi";
-    private static final String     PASSWORD   = "1234";
 
     @Override
     public ArrayList<Produccion> findAll() throws DatabaseErrorException {
         String sql = String.format( "SELECT * FROM %s", TABLE_NAME );
 
         ArrayList<Produccion> producciones = new ArrayList<>();
-        connection = new MySqlConnection( IP, DATABASE, USERNAME, PASSWORD ).getConnection();
+        connection = new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
 
         try (
                 Statement statement = connection.createStatement();
@@ -64,7 +61,7 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
     @Override
     public Produccion getById(int id) throws NotFoundException, DatabaseErrorException {
         String sql = String.format( "SELECT * FROM %s WHERE id = ?", TABLE_NAME );
-        connection = new MySqlConnection( IP, DATABASE, USERNAME, PASSWORD ).getConnection();
+        connection = new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
 
         try (
                 PreparedStatement statement = connection.prepareStatement( sql, PreparedStatement.RETURN_GENERATED_KEYS );
@@ -107,7 +104,7 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
 
     private Produccion insert(Produccion produccion) throws DatabaseErrorException {
         String sql = String.format( "INSERT INTO %s (id, duracion, actores, titulo, genero, director, urlTrailer, productor, tipo, calificacion, poster, guion, plataforma, fechaLanzamiento, visualizaciones) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", TABLE_NAME );
-        connection = new MySqlConnection( IP, DATABASE, USERNAME, PASSWORD ).getConnection();
+        connection = new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
 
         try (
                 PreparedStatement preparedStatement = connection.prepareStatement( sql, PreparedStatement.RETURN_GENERATED_KEYS )
@@ -138,7 +135,7 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
 
     private Produccion update(Produccion produccion) throws DatabaseErrorException {
         String sql = String.format( "UPDATE %s SET duracion = ?, actores = ?, titulo = ?, genero = ?, director = ?, urlTrailer = ?, productor = ?, tipo = ?, calificacion = ?, poster = ?, guion = ?, plataforma = ?, fechaLanzamiento = ?, visualizaciones = ? WHERE id = ?", TABLE_NAME );
-        connection = new MySqlConnection( IP, DATABASE, USERNAME, PASSWORD ).getConnection();
+        connection = new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
 
         try (
                 PreparedStatement statement = connection.prepareStatement( sql, PreparedStatement.RETURN_GENERATED_KEYS )
@@ -171,7 +168,7 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
     @Override
     public void remove(Produccion produccion) throws DatabaseErrorException, NotFoundException {
         String sql = String.format( "DELETE FROM %s WHERE id = ?", TABLE_NAME );
-        connection = new MySqlConnection( IP, DATABASE, USERNAME, PASSWORD ).getConnection();
+        connection = new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
         try (
                 PreparedStatement statement = connection.prepareStatement( sql, PreparedStatement.RETURN_GENERATED_KEYS )
         ) {
@@ -189,12 +186,16 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
         int             duracion         = rs.getInt( "duracion" );
         String          actores          = rs.getString( "actores" );
         String          nombre           = rs.getString( "titulo" );
-        HashSet<Genero> genero           = ((HashSet<Genero>)rs.getObject( "genero" ));
+        String[] generos = rs.getString("genero").split(",");
+        HashSet<Genero> genero = new HashSet<>();
+        for (String actual : generos) {
+            genero.add(Genero.valueOf(actual.toUpperCase()));
+        }
         String          director         = rs.getString( "director" );
         String          urlTrailer       = rs.getString( "urlTrailer" );
         String          productor        = rs.getString( "productor" );
-        Tipo            tipo             = (Tipo) rs.getObject( "tipo" );
-        Calificacion    calificacion     = (Calificacion) rs.getObject( "calificacion" );
+        Tipo            tipo             = Tipo.valueOf(rs.getString("tipo"));
+        Calificacion    calificacion     = Calificacion.valueOf(rs.getString("calificacion"));
         String          poster           = rs.getString( "poster" );
         String          guion            = rs.getString( "guion" );
         String          plataforma       = rs.getString( "plataforma" );
