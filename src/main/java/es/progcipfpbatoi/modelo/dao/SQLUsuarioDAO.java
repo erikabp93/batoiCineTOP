@@ -47,11 +47,7 @@ public class SQLUsuarioDAO implements UsuarioDAO {
             statement.setString(2, usuario.getPassword());
             ResultSet resultSet = statement.executeQuery();
 
-            while ( resultSet.next() ) {
-                return true;
-            }
-
-            return false;
+            return resultSet.next();
 
         } catch (SQLException e) {
             e.printStackTrace();
