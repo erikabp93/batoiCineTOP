@@ -2,12 +2,8 @@ package es.progcipfpbatoi;
 
 import es.progcipfpbatoi.controlador.ChangeScene;
 import es.progcipfpbatoi.controlador.LoginController;
-import es.progcipfpbatoi.modelo.dao.SQLUsuarioDAO;
-import es.progcipfpbatoi.modelo.dao.SQLpeliculaSerieDAO;
-import es.progcipfpbatoi.modelo.dao.SQLtemporadaDAO;
-import es.progcipfpbatoi.modelo.repositorios.PeliculaSerieRepository;
-import es.progcipfpbatoi.modelo.repositorios.TemporadaRepository;
-import es.progcipfpbatoi.modelo.repositorios.UsuarioRepository;
+import es.progcipfpbatoi.modelo.dao.*;
+import es.progcipfpbatoi.modelo.repositorios.*;
 import es.progcipfpbatoi.services.MySqlConnection;
 import es.progcipfpbatoi.util.DatosBD;
 import javafx.application.Application;
@@ -28,16 +24,18 @@ public class App extends Application {
         SQLtemporadaDAO     sqLtemporadaDAO     = new SQLtemporadaDAO();
         SQLpeliculaSerieDAO sqLpeliculaSerieDAO = new SQLpeliculaSerieDAO();
         SQLUsuarioDAO sqLusuarioDAO  = new SQLUsuarioDAO();
+        SQLvalorarDAO sqLvalorarDAO = new SQLvalorarDAO();
+        SQLfavoritoDAO sqLfavoritoDAO = new SQLfavoritoDAO();
 
         // Creación del repositorio que será el que interactuará con el controlador.
         PeliculaSerieRepository peliculaSerieRepository = new PeliculaSerieRepository( sqLpeliculaSerieDAO, sqLtemporadaDAO );
-
         TemporadaRepository temporadaRepository = new TemporadaRepository( sqLtemporadaDAO );
-
         UsuarioRepository usuarioRepository = new UsuarioRepository(sqLusuarioDAO);
+        ValoracionesRepository valoracionesRepository = new ValoracionesRepository(sqLvalorarDAO);
+        FavoritosRepository favoritosRepository = new FavoritosRepository(sqLfavoritoDAO);
         // Se crea al controlador proporcionando el/los repositorio/s que necesita
         //TareaController tareaController = new TareaController( peliculaSerieRepository );
-        LoginController loginController = new LoginController(stage, peliculaSerieRepository, temporadaRepository, usuarioRepository);
+        LoginController loginController = new LoginController(stage, peliculaSerieRepository, temporadaRepository, usuarioRepository, favoritosRepository, valoracionesRepository);
         ChangeScene.change(stage, loginController, "/vistas/login_vista.fxml");
 
         stage.setOnCloseRequest( event -> {

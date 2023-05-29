@@ -2,10 +2,7 @@ package es.progcipfpbatoi.controlador;
 
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
 import es.progcipfpbatoi.modelo.dto.Produccion;
-import es.progcipfpbatoi.modelo.repositorios.FavoritosRepository;
-import es.progcipfpbatoi.modelo.repositorios.PeliculaSerieRepository;
-import es.progcipfpbatoi.modelo.repositorios.UsuarioRepository;
-import es.progcipfpbatoi.modelo.repositorios.ValoracionesRepository;
+import es.progcipfpbatoi.modelo.repositorios.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,8 +17,11 @@ import java.util.ResourceBundle;
 public class PrincipalController implements Initializable {
 
     private Stage stage;
+    private Initializable controladorPadre;
+    private String vistaPadre;
     private UsuarioRepository usuarioRepository;
     private PeliculaSerieRepository peliculaSerieRepository;
+    private TemporadaRepository temporadaRepository;
     private FavoritosRepository favoritosRepository;
     private ValoracionesRepository valoracionesRepository;
 
@@ -31,10 +31,13 @@ public class PrincipalController implements Initializable {
     @FXML
     private ListView<Produccion> seriesListView;
 
-    public PrincipalController(Stage stage, UsuarioRepository usuarioRepository, PeliculaSerieRepository peliculaSerieRepository, FavoritosRepository favoritosRepository, ValoracionesRepository valoracionesRepository) {
+    public PrincipalController(Stage stage, UsuarioRepository usuarioRepository, PeliculaSerieRepository peliculaSerieRepository, TemporadaRepository temporadaRepository, FavoritosRepository favoritosRepository, ValoracionesRepository valoracionesRepository, Initializable controladorPadre, String vistaPadre) {
         this.stage = stage;
+        this.controladorPadre = controladorPadre;
+        this.vistaPadre = vistaPadre;
         this.usuarioRepository = usuarioRepository;
         this.peliculaSerieRepository = peliculaSerieRepository;
+        this.temporadaRepository = temporadaRepository;
         this.favoritosRepository = favoritosRepository;
         this.valoracionesRepository = valoracionesRepository;
     }
