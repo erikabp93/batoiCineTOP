@@ -16,7 +16,8 @@ public class SQLvalorarDAO implements ValorarDAO {
     private static final String TABLE_NAME = "valorar";
     @Override
     public ArrayList<Produccion> findAll() throws DatabaseErrorException { //ordenado por mejor valoradas
-        String sql = String.format("SELECT P.tipo, P.titulo, P.actores, P.genero, P.calificacion, P.plataforma, " +
+        String sql = String.format("SELECT V.id_produccion, P.duracion, P.director, P.urlTrailer, P.tipo, P.titulo," +
+                "P.productor, P.tipo, P.calificacion, P.poster, P.guion, P.actores, P.genero, P.fechaLanzamiento, P.visualizaciones, P.plataforma, " +
                 "ROUND(AVG(V.valoracion), 2) AS Valoración_Media FROM produccion P INNER JOIN %s V ON " +
                 "(P.id = V.id_produccion) ORDER BY V.valoracion DESC;", TABLE_NAME);
 
@@ -99,7 +100,7 @@ public class SQLvalorarDAO implements ValorarDAO {
     }
 
     private Produccion getProduccionFromResultset(ResultSet rs) throws SQLException {
-        int id = rs.getInt("id");
+        int id = rs.getInt("id_produccion");
         int duracion = rs.getInt("duracion");
         String actores = rs.getString("actores");
         String nombre = rs.getString("titulo");
@@ -120,5 +121,45 @@ public class SQLvalorarDAO implements ValorarDAO {
         LocalDate fechaLanzamiento = LocalDate.from(rs.getTimestamp("fechaLanzamiento").toLocalDateTime());
         int visualizaciones = rs.getInt("visualizaciones");
         return new Produccion(id, duracion, actores, nombre, genero, director, urlTrailer, productor, tipo, calificacion, poster, guion, plataforma, fechaLanzamiento, visualizaciones);
+    }
+
+    public int getValoracion(int id) throws DatabaseErrorException {
+        String sql = String.format("SELECT ROUND(AVG(valoracion), 2) AS Valoracion_Media FROM %s WHERE id_produccion LIKE %d GROUP BY id_produccion", TABLE_NAME, id);
+        connection =  new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
+
+        try (
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(sql);
+        ) {
+
+            if (resultSet.next()) {
+                return resultSet.getInt("Valoracion_Media");
+            }
+            return 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DatabaseErrorException("Ha ocurrido un error en la conexión o acceso a la base de datos (select)");
+        }
+    }
+
+    public String getPoster(int id) throws DatabaseErrorException {
+        String sql = String.format("SELECT poster FROM %s INNER JOIN produccion ON (id_produccion = id) WHERE id_produccion LIKE %d GROUP BY id_produccion ", TABLE_NAME, id);
+        connection =  new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
+
+        try (
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(sql);
+        ) {
+
+            if (resultSet.next()) {
+                return resultSet.getString("poster");
+            }
+            return null;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DatabaseErrorException("Ha ocurrido un error en la conexión o acceso a la base de datos (select)");
+        }
     }
 }

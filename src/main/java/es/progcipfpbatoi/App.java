@@ -2,12 +2,9 @@ package es.progcipfpbatoi;
 
 import es.progcipfpbatoi.controlador.ChangeScene;
 import es.progcipfpbatoi.controlador.LoginController;
-import es.progcipfpbatoi.modelo.dao.SQLUsuarioDAO;
-import es.progcipfpbatoi.modelo.dao.SQLpeliculaSerieDAO;
-import es.progcipfpbatoi.modelo.dao.SQLtemporadaDAO;
-import es.progcipfpbatoi.modelo.repositorios.PeliculaSerieRepository;
-import es.progcipfpbatoi.modelo.repositorios.TemporadaRepository;
-import es.progcipfpbatoi.modelo.repositorios.UsuarioRepository;
+import es.progcipfpbatoi.controlador.PrincipalController;
+import es.progcipfpbatoi.modelo.dao.*;
+import es.progcipfpbatoi.modelo.repositorios.*;
 import es.progcipfpbatoi.services.MySqlConnection;
 import es.progcipfpbatoi.util.DatosBD;
 import javafx.application.Application;
@@ -36,7 +33,6 @@ public class App extends Application {
 
         UsuarioRepository usuarioRepository = new UsuarioRepository(sqLusuarioDAO);
         // Se crea al controlador proporcionando el/los repositorio/s que necesita
-        //TareaController tareaController = new TareaController( peliculaSerieRepository );
         LoginController loginController = new LoginController(stage, peliculaSerieRepository, temporadaRepository, usuarioRepository);
         ChangeScene.change(stage, loginController, "/vistas/login_vista.fxml");
 

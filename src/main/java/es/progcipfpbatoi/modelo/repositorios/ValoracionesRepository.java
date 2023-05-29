@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class ValoracionesRepository {
 
-    private SQLvalorarDAO sqlValorarDAO;
+    private static SQLvalorarDAO sqlValorarDAO;
 
     public ValoracionesRepository(SQLvalorarDAO sqlValorarDAO) {
         this.sqlValorarDAO = sqlValorarDAO;
@@ -43,4 +43,19 @@ public class ValoracionesRepository {
         return series;
     }
 
+    public static int getValoracion(int id) {
+        try {
+            return sqlValorarDAO.getValoracion(id);
+        } catch (DatabaseErrorException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String getPoster(int id) {
+        try {
+            return sqlValorarDAO.getPoster(id);
+        } catch (DatabaseErrorException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

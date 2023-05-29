@@ -1,7 +1,6 @@
 package es.progcipfpbatoi.controlador;
 
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
-import es.progcipfpbatoi.modelo.dao.FavoritoDAO;
 import es.progcipfpbatoi.modelo.dao.SQLfavoritoDAO;
 import es.progcipfpbatoi.modelo.dao.SQLvalorarDAO;
 import es.progcipfpbatoi.modelo.dto.Usuario;
@@ -42,7 +41,8 @@ public class LoginController implements Initializable {
             Usuario usuarioNuevo = new Usuario(user, contrasenya);
             boolean usuarioExiste = usuarioRepository.existeUsuario(usuarioNuevo);
             if (usuarioExiste) {
-                //A la vista principal
+                PrincipalController principalController = new PrincipalController(stage, usuarioRepository, peliculaSerieRepository, new FavoritosRepository(new SQLfavoritoDAO()), new ValoracionesRepository(new SQLvalorarDAO()));
+                ChangeScene.change(stage, principalController, "/vistas/principal_vista.fxml");
             } else {
                 RegistroController registroController = new RegistroController(stage, usuarioRepository, this, "/vistas/login_vista.fxml");
                 ChangeScene.change(stage, registroController, "/vistas/registro_vista.fxml");
