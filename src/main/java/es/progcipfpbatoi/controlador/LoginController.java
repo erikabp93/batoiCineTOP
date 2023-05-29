@@ -9,11 +9,16 @@ import es.progcipfpbatoi.modelo.repositorios.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -26,12 +31,16 @@ public class LoginController implements Initializable {
     private PeliculaSerieRepository peliculaSerieRepository;
     private TemporadaRepository temporadaRepository;
     private UsuarioRepository usuarioRepository;
+    private FavoritosRepository favoritosRepository;
+    private ValoracionesRepository valoracionesRepository;
 
-    public LoginController(Stage stage, PeliculaSerieRepository peliculaSerieRepository, TemporadaRepository temporadaRepository, UsuarioRepository usuarioRepository) {
+    public LoginController(Stage stage, PeliculaSerieRepository peliculaSerieRepository, TemporadaRepository temporadaRepository, UsuarioRepository usuarioRepository, FavoritosRepository favoritosRepository, ValoracionesRepository valoracionesRepository) {
         this.stage = stage;
         this.peliculaSerieRepository = peliculaSerieRepository;
         this.temporadaRepository = temporadaRepository;
         this.usuarioRepository = usuarioRepository;
+        this.favoritosRepository = favoritosRepository;
+        this.valoracionesRepository = valoracionesRepository;
     }
 
     @FXML
@@ -42,12 +51,30 @@ public class LoginController implements Initializable {
             Usuario usuarioNuevo = new Usuario(user, contrasenya);
             boolean usuarioExiste = usuarioRepository.existeUsuario(usuarioNuevo);
             if (usuarioExiste) {
-                //A la vista principal
+                PrincipalController principalController = new PrincipalController(stage, usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, this, "/vistas/login_vista.fxml");
+                ChangeScene.change(event, principalController, "/vistas/principal_vista.fxml");
             } else {
-                RegistroController registroController = new RegistroController(stage, usuarioRepository, this, "/vistas/login_vista.fxml");
-                ChangeScene.change(stage, registroController, "/vistas/registro_vista.fxml");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Usuario no encontrado");
+                alert.setHeaderText("Este usuario con esta contraseña no existe");
+                alert.setContentText("Quieres crear un usuario nuevo?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK){
+                    RegistroController registroController = new RegistroController(stage, usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, this, "/vistas/login_vista.fxml");
+                    ChangeScene.change(event, registroController, "/vistas/registro_vista.fxml");
+                }
             }
         } catch (DatabaseErrorException | IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    private void registrarNuevoUsuario(MouseEvent event) {
+        try {
+            RegistroController registroController = new RegistroController(stage, usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, this, "/vistas/login_vista.fxml");
+            ChangeScene.change(stage, registroController, "/vistas/registro_vista.fxml");
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
