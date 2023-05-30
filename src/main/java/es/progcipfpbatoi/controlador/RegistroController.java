@@ -16,8 +16,6 @@ import java.util.ResourceBundle;
 
 public class RegistroController implements Initializable {
 
-
-    private Stage stage;
     @FXML
     private TextField email;
     @FXML
@@ -34,8 +32,7 @@ public class RegistroController implements Initializable {
     private Initializable controladorPadre;
     private String vistaPadre;
 
-    public RegistroController(Stage stage, UsuarioRepository usuarioRepository, PeliculaSerieRepository peliculaSerieRepository, TemporadaRepository temporadaRepository, FavoritosRepository favoritosRepository, ValoracionesRepository valoracionesRepository, Initializable controladorPadre, String vistaPadre) {
-        this.stage = stage;
+    public RegistroController(UsuarioRepository usuarioRepository, PeliculaSerieRepository peliculaSerieRepository, TemporadaRepository temporadaRepository, FavoritosRepository favoritosRepository, ValoracionesRepository valoracionesRepository, Initializable controladorPadre, String vistaPadre) {
         this.usuarioRepository = usuarioRepository;
         this.peliculaSerieRepository = peliculaSerieRepository;
         this.temporadaRepository = temporadaRepository;
@@ -57,7 +54,7 @@ public class RegistroController implements Initializable {
             if (contrasenya.equals(contrasenya2)) {
                 if (!usuarioExiste) {
                     usuarioRepository.save(usuarioNuevo);
-                    PrincipalController principalController = new PrincipalController(stage, usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, controladorPadre, vistaPadre, usuarioNuevo);
+                    PrincipalController principalController = new PrincipalController(usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, controladorPadre, vistaPadre);
                     ChangeScene.change(event, principalController, "/vistas/principal_vista.fxml");
                 }
             } else {

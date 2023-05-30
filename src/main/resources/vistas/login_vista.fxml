@@ -59,7 +59,7 @@
       <TextField fx:id="usuario" layoutX="387.0" layoutY="224.0" prefHeight="25.0" prefWidth="240.0" promptText="Nombre" AnchorPane.leftAnchor="387.0" />
       <TextField fx:id="password" layoutX="387.0" layoutY="273.0" prefHeight="25.0" prefWidth="240.0" promptText="Password" AnchorPane.leftAnchor="387.0" />
       <Button layoutX="478.0" layoutY="318.0" mnemonicParsing="false" onAction="#iniciarSesion" text="Login" />
-      <Text fill="#3c00ff" layoutX="439.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No tienes cuenta? Hazte una ahora" underline="true">
+      <Text fill="#3c00ff" layoutX="439.0" layoutY="361.0" onMouseClicked="#registrarNuevoUsuario" strokeType="OUTSIDE" strokeWidth="0.0" text="No tienes cuenta? Hazte una ahora" underline="true">
          <font>
             <Font size="8.0" />
          </font>
