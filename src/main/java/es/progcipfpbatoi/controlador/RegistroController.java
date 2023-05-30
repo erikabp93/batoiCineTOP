@@ -1,6 +1,10 @@
 package es.progcipfpbatoi.controlador;
 
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
+import es.progcipfpbatoi.modelo.dao.SQLfavoritoDAO;
+import es.progcipfpbatoi.modelo.dao.SQLpeliculaSerieDAO;
+import es.progcipfpbatoi.modelo.dao.SQLtemporadaDAO;
+import es.progcipfpbatoi.modelo.dao.SQLvalorarDAO;
 import es.progcipfpbatoi.modelo.dto.Usuario;
 import es.progcipfpbatoi.modelo.repositorios.*;
 import javafx.event.ActionEvent;
@@ -67,6 +71,8 @@ public class RegistroController implements Initializable {
                 alert.showAndWait();
             }
         } catch (DatabaseErrorException | IOException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

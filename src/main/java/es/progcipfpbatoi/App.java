@@ -2,6 +2,7 @@ package es.progcipfpbatoi;
 
 import es.progcipfpbatoi.controlador.ChangeScene;
 import es.progcipfpbatoi.controlador.LoginController;
+import es.progcipfpbatoi.controlador.PrincipalController;
 import es.progcipfpbatoi.modelo.dao.*;
 import es.progcipfpbatoi.modelo.repositorios.*;
 import es.progcipfpbatoi.services.MySqlConnection;
@@ -34,8 +35,7 @@ public class App extends Application {
         ValoracionesRepository valoracionesRepository = new ValoracionesRepository(sqLvalorarDAO);
         FavoritosRepository favoritosRepository = new FavoritosRepository(sqLfavoritoDAO);
         // Se crea al controlador proporcionando el/los repositorio/s que necesita
-        //TareaController tareaController = new TareaController( peliculaSerieRepository );
-        LoginController loginController = new LoginController(stage, peliculaSerieRepository, temporadaRepository, usuarioRepository, favoritosRepository, valoracionesRepository);
+        LoginController loginController = new LoginController(stage, peliculaSerieRepository, temporadaRepository, usuarioRepository);
         ChangeScene.change(stage, loginController, "/vistas/login_vista.fxml");
 
         stage.setOnCloseRequest( event -> {
