@@ -75,6 +75,10 @@ public class Produccion {
         this.visualizaciones  = 0;
     }
 
+    public Produccion(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }
