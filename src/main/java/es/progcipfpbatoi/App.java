@@ -35,7 +35,7 @@ public class App extends Application {
         ValoracionesRepository valoracionesRepository = new ValoracionesRepository(sqLvalorarDAO);
         FavoritosRepository favoritosRepository = new FavoritosRepository(sqLfavoritoDAO);
         // Se crea al controlador proporcionando el/los repositorio/s que necesita
-        LoginController loginController = new LoginController(stage, peliculaSerieRepository, temporadaRepository, usuarioRepository);
+        LoginController loginController = new LoginController(stage, peliculaSerieRepository, temporadaRepository, usuarioRepository, favoritosRepository, valoracionesRepository);
         ChangeScene.change(stage, loginController, "/vistas/login_vista.fxml");
 
         stage.setOnCloseRequest( event -> {

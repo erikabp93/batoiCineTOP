@@ -1,6 +1,9 @@
 package es.progcipfpbatoi.controlador;
 
+import es.progcipfpbatoi.exceptions.DatabaseErrorException;
 import es.progcipfpbatoi.modelo.dto.Produccion;
+import es.progcipfpbatoi.modelo.dto.Usuario;
+import es.progcipfpbatoi.modelo.repositorios.FavoritosRepository;
 import es.progcipfpbatoi.modelo.repositorios.ValoracionesRepository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,7 +29,14 @@ public class ProduccionListCellController extends ListCell<Produccion> {
     @FXML
     private ImageView favorito;
 
-    public ProduccionListCellController( ) {
+    private FavoritosRepository favoritosRepository;
+    private Usuario usuario;
+    private Produccion produccion;
+
+    public ProduccionListCellController(FavoritosRepository favoritosRepository, Usuario usuario) {
+        this.favoritosRepository = favoritosRepository;
+        this.usuario = usuario;
+
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/vistas/prduccion_listCell.fxml"));
         fxmlLoader.setController(this);
@@ -41,8 +51,10 @@ public class ProduccionListCellController extends ListCell<Produccion> {
     @FXML
     private void cambiaColorHover() {
         try {
-            favorito.setImage(new Image(getPathImage("/images/add-favourite-hover.png")));
-        } catch (URISyntaxException e) {
+            if (!favoritosRepository.yaFavorito(usuario, produccion)) {
+                favorito.setImage(new Image(getPathImage("/images/add-favourite-hover.png")));
+            }
+        } catch (URISyntaxException | DatabaseErrorException e) {
             throw new RuntimeException(e);
         }
     }
@@ -50,8 +62,25 @@ public class ProduccionListCellController extends ListCell<Produccion> {
     @FXML
     private void cambiaColorDefault() {
         try {
-            favorito.setImage(new Image(getPathImage("/images/add-favourite.png")));
-        } catch (URISyntaxException e) {
+            if (!favoritosRepository.yaFavorito(usuario, produccion)) {
+                favorito.setImage(new Image(getPathImage("/images/add-favourite.png")));
+            }
+        } catch (URISyntaxException | DatabaseErrorException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    private void gestionFavorito() {
+        try {
+            if (favoritosRepository.yaFavorito(usuario, produccion)) {
+                favoritosRepository.delete(produccion, usuario);
+                favorito.setImage(new Image(getPathImage("/images/add-favourite.png")));
+            } else {
+                favoritosRepository.save(produccion, usuario);
+                favorito.setImage(new Image(getPathImage("/images/favourite.png")));
+            }
+        } catch (DatabaseErrorException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
     }
@@ -64,6 +93,15 @@ public class ProduccionListCellController extends ListCell<Produccion> {
         if (empty) {
             setGraphic(null);
         } else {
+            this.produccion = produccion;
+            try {
+                if (favoritosRepository.yaFavorito(this.usuario, produccion)) {
+                    favorito.setImage(new Image(getPathImage("/images/favourite.png")));
+                }
+            } catch (DatabaseErrorException | URISyntaxException e) {
+                throw new RuntimeException(e);
+            }
+
             Image image = new Image(ValoracionesRepository.getPoster(produccion.getId()));
             imagen.setImage(image);
             int valoracionInt = ValoracionesRepository.getValoracion(produccion.getId());
