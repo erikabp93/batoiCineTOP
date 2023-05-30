@@ -13,6 +13,10 @@ public class FavoritosRepository {
         this.sqlFavoritoDAO = sqlFavoritoDAO;
     }
 
+    public boolean yaFavorito(Usuario usuario, Produccion produccion) throws DatabaseErrorException {
+        return sqlFavoritoDAO.yaFavorito(usuario, produccion);
+    }
+
     public boolean save(Produccion produccion, Usuario usuario) throws DatabaseErrorException {
         return sqlFavoritoDAO.save(produccion, usuario);
     }

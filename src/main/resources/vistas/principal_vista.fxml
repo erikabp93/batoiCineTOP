@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -12,54 +11,41 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Separator layoutX="98.0" layoutY="93.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0" />
-      <HBox prefHeight="90.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane prefHeight="30.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="90.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="90.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="5.0">
                <image>
                   <Image url="@../images/logo.png" />
                </image>
             </ImageView>
-            <Label prefHeight="90.0" text="BatoiCine TOP">
+            <Label prefHeight="90.0" text="BatoiCine TOP" AnchorPane.leftAnchor="100.0">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
-               <HBox.margin>
-                  <Insets left="5.0" />
-               </HBox.margin>
             </Label>
-            <Label prefHeight="90.0" text="Peliculas">
+            <Label prefHeight="90.0" text="Peliculas" AnchorPane.leftAnchor="300.0">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
-               <HBox.margin>
-                  <Insets left="60.0" />
-               </HBox.margin>
             </Label>
-            <Label prefHeight="90.0" text="Series">
+            <Label prefHeight="90.0" text="Series" AnchorPane.leftAnchor="420.0">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
-               <HBox.margin>
-                  <Insets left="30.0" />
-               </HBox.margin>
             </Label>
-            <TextField prefHeight="30.0" prefWidth="150.0" promptText="Buscar">
-               <HBox.margin>
-                  <Insets left="60.0" top="30.0" />
-               </HBox.margin>
-            </TextField>
-            <ComboBox prefHeight="30.0" prefWidth="150.0" promptText="Seleccionar">
-               <HBox.margin>
-                  <Insets left="30.0" top="30.0" />
-               </HBox.margin>
-            </ComboBox>
-            <MenuBar>
+            <TextField prefHeight="30.0" prefWidth="150.0" promptText="Buscar" AnchorPane.leftAnchor="550.0" AnchorPane.topAnchor="30.0" />
+            <ComboBox prefHeight="30.0" prefWidth="150.0" promptText="Seleccionar" AnchorPane.leftAnchor="720.0" AnchorPane.topAnchor="30.0" />
+            <Label fx:id="usuarioLabel" prefHeight="30.0" prefWidth="234.0" text="Bienvenido Usuario" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="30.0">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <MenuBar AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
               <menus>
                 <Menu mnemonicParsing="false">
                   <items>
@@ -75,12 +61,9 @@
                      </graphic>
                 </Menu>
               </menus>
-               <HBox.margin>
-                  <Insets left="20.0" top="25.0" />
-               </HBox.margin>
             </MenuBar>
          </children>
-      </HBox>
+      </AnchorPane>
       <Label layoutX="81.0" layoutY="101.0" prefHeight="21.0" text="Más recomendadas" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="100.0">
          <font>
             <Font size="24.0" />

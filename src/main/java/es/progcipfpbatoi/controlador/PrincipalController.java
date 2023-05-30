@@ -2,11 +2,13 @@ package es.progcipfpbatoi.controlador;
 
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
 import es.progcipfpbatoi.modelo.dto.Produccion;
+import es.progcipfpbatoi.modelo.dto.Usuario;
 import es.progcipfpbatoi.modelo.repositorios.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.stage.Stage;
@@ -23,6 +25,7 @@ public class PrincipalController implements Initializable {
     private TemporadaRepository temporadaRepository;
     private FavoritosRepository favoritosRepository;
     private ValoracionesRepository valoracionesRepository;
+    private Usuario usuario;
 
     @FXML
     private ListView<Produccion> peliculasListView;
@@ -30,7 +33,10 @@ public class PrincipalController implements Initializable {
     @FXML
     private ListView<Produccion> seriesListView;
 
-    public PrincipalController(UsuarioRepository usuarioRepository, PeliculaSerieRepository peliculaSerieRepository, TemporadaRepository temporadaRepository, FavoritosRepository favoritosRepository, ValoracionesRepository valoracionesRepository, Initializable controladorPadre, String vistaPadre) {
+    @FXML
+    private Label usuarioLabel;
+  
+    public PrincipalController(UsuarioRepository usuarioRepository, PeliculaSerieRepository peliculaSerieRepository, TemporadaRepository temporadaRepository, FavoritosRepository favoritosRepository, ValoracionesRepository valoracionesRepository, Initializable controladorPadre, String vistaPadre, Usuario usuario) {
         this.controladorPadre = controladorPadre;
         this.vistaPadre = vistaPadre;
         this.usuarioRepository = usuarioRepository;
@@ -38,17 +44,20 @@ public class PrincipalController implements Initializable {
         this.temporadaRepository = temporadaRepository;
         this.favoritosRepository = favoritosRepository;
         this.valoracionesRepository = valoracionesRepository;
+        this.usuario = usuario;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        usuarioLabel.setText("Bienvenido " + usuario.getUsername());
+
         peliculasListView.setItems(getDataPeliculas());
         peliculasListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        peliculasListView.setCellFactory((ListView<Produccion> l) -> new ProduccionListCellController());
+        peliculasListView.setCellFactory((ListView<Produccion> l) -> new ProduccionListCellController(favoritosRepository, usuario));
 
         seriesListView.setItems(getDataSeries());
         seriesListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        seriesListView.setCellFactory((ListView<Produccion> l) -> new ProduccionListCellController());
+        seriesListView.setCellFactory((ListView<Produccion> l) -> new ProduccionListCellController(favoritosRepository, usuario));
     }
 
     private ObservableList<Produccion> getDataPeliculas() {

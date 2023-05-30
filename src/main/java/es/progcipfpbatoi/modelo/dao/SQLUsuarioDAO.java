@@ -55,4 +55,28 @@ public class SQLUsuarioDAO implements UsuarioDAO {
             throw new DatabaseErrorException("Ha ocurrido un error en el acceso o conexión a la base de datos (insert)");
         }
     }
+
+    @Override
+    public Usuario findByUsername(String username) {
+        String sql = String.format("SELECT * FROM %s WHERE username LIKE ?", TABLE_NAME);
+        connection =  new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
+
+        try (
+                PreparedStatement statement = connection.prepareStatement( sql, PreparedStatement.RETURN_GENERATED_KEYS );
+        ) {
+
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                return new Usuario(resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("email"));
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

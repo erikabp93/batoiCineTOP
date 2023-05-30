@@ -1,10 +1,6 @@
 package es.progcipfpbatoi.controlador;
 
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
-import es.progcipfpbatoi.modelo.dao.SQLfavoritoDAO;
-import es.progcipfpbatoi.modelo.dao.SQLpeliculaSerieDAO;
-import es.progcipfpbatoi.modelo.dao.SQLtemporadaDAO;
-import es.progcipfpbatoi.modelo.dao.SQLvalorarDAO;
 import es.progcipfpbatoi.modelo.dto.Usuario;
 import es.progcipfpbatoi.modelo.repositorios.*;
 import javafx.event.ActionEvent;
@@ -57,6 +53,7 @@ public class RegistroController implements Initializable {
             boolean usuarioExiste = usuarioRepository.existeUsuario(usuarioNuevo);
             if (contrasenya.equals(contrasenya2)) {
                 if (!usuarioExiste) {
+                    usuarioRepository.save(usuarioNuevo);
                     PrincipalController principalController = new PrincipalController(usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, controladorPadre, vistaPadre);
                     ChangeScene.change(event, principalController, "/vistas/principal_vista.fxml");
                 }

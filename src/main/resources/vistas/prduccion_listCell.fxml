@@ -15,7 +15,7 @@
          </image>
       </ImageView>
       <Label fx:id="titulo" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="11.0" layoutY="141.0" prefHeight="52.0" prefWidth="221.0" text="Título" wrapText="true" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="9.0" />
-      <ImageView fx:id="favorito" fitHeight="39.0" fitWidth="39.0" layoutX="6.0" layoutY="8.0" onMouseEntered="#cambiaColorHover" onMouseExited="#cambiaColorDefault" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="194.0" AnchorPane.leftAnchor="6.0">
+      <ImageView fx:id="favorito" fitHeight="39.0" fitWidth="39.0" layoutX="6.0" layoutY="8.0" onMouseClicked="#gestionFavorito" onMouseEntered="#cambiaColorHover" onMouseExited="#cambiaColorDefault" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="194.0" AnchorPane.leftAnchor="6.0">
          <image>
             <Image url="@../images/add-favourite.png" />
          </image>
