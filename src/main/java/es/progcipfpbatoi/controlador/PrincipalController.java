@@ -16,7 +16,6 @@ import java.util.ResourceBundle;
 
 public class PrincipalController implements Initializable {
 
-    private Stage stage;
     private Initializable controladorPadre;
     private String vistaPadre;
     private UsuarioRepository usuarioRepository;
@@ -31,8 +30,7 @@ public class PrincipalController implements Initializable {
     @FXML
     private ListView<Produccion> seriesListView;
 
-    public PrincipalController(Stage stage, UsuarioRepository usuarioRepository, PeliculaSerieRepository peliculaSerieRepository, TemporadaRepository temporadaRepository, FavoritosRepository favoritosRepository, ValoracionesRepository valoracionesRepository, Initializable controladorPadre, String vistaPadre) {
-        this.stage = stage;
+    public PrincipalController(UsuarioRepository usuarioRepository, PeliculaSerieRepository peliculaSerieRepository, TemporadaRepository temporadaRepository, FavoritosRepository favoritosRepository, ValoracionesRepository valoracionesRepository, Initializable controladorPadre, String vistaPadre) {
         this.controladorPadre = controladorPadre;
         this.vistaPadre = vistaPadre;
         this.usuarioRepository = usuarioRepository;
