@@ -48,8 +48,8 @@ public class LoginController implements Initializable {
             Usuario usuarioNuevo = new Usuario(user, contrasenya);
             boolean usuarioExiste = usuarioRepository.existeUsuario(usuarioNuevo);
             if (usuarioExiste) {
-
-                PrincipalController principalController = new PrincipalController(usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, this, "/vistas/login_vista.fxml");
+                Usuario usuario1 = usuarioRepository.findByUsername(user);
+                PrincipalController principalController = new PrincipalController(usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, this, "/vistas/login_vista.fxml", usuario1);
                 ChangeScene.change(event, principalController, "/vistas/principal_vista.fxml");
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
