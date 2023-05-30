@@ -48,7 +48,6 @@ public class LoginController implements Initializable {
             Usuario usuarioNuevo = new Usuario(user, contrasenya);
             boolean usuarioExiste = usuarioRepository.existeUsuario(usuarioNuevo);
             if (usuarioExiste) {
-
                 PrincipalController principalController = new PrincipalController(usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, this, "/vistas/login_vista.fxml");
                 ChangeScene.change(event, principalController, "/vistas/principal_vista.fxml");
             } else {
@@ -79,6 +78,11 @@ public class LoginController implements Initializable {
     @FXML
     private void registrarNuevoUsuario(ActionEvent event) {
         try {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Usuario nuevo");
+            alert.setHeaderText(null);
+            alert.setContentText("Va a ser redirigido para poder crearse una cuenta");
+            alert.showAndWait();
             RegistroController registroController = new RegistroController(usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, this, "/vistas/login_vista.fxml");
             ChangeScene.change(event, registroController, "/vistas/registro_vista.fxml");
         } catch (IOException ex) {
