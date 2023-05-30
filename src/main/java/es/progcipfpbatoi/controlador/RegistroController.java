@@ -54,7 +54,7 @@ public class RegistroController implements Initializable {
             if (contrasenya.equals(contrasenya2)) {
                 if (!usuarioExiste) {
                     usuarioRepository.save(usuarioNuevo);
-                    PrincipalController principalController = new PrincipalController(usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, controladorPadre, vistaPadre);
+                    PrincipalController principalController = new PrincipalController(usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, controladorPadre, vistaPadre, usuarioNuevo);
                     ChangeScene.change(event, principalController, "/vistas/principal_vista.fxml");
                 }
             } else {
