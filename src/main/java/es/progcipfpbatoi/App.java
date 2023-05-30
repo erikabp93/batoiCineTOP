@@ -2,7 +2,6 @@ package es.progcipfpbatoi;
 
 import es.progcipfpbatoi.controlador.ChangeScene;
 import es.progcipfpbatoi.controlador.LoginController;
-import es.progcipfpbatoi.controlador.PrincipalController;
 import es.progcipfpbatoi.modelo.dao.*;
 import es.progcipfpbatoi.modelo.repositorios.*;
 import es.progcipfpbatoi.services.MySqlConnection;
@@ -25,15 +24,18 @@ public class App extends Application {
         SQLtemporadaDAO     sqLtemporadaDAO     = new SQLtemporadaDAO();
         SQLpeliculaSerieDAO sqLpeliculaSerieDAO = new SQLpeliculaSerieDAO();
         SQLUsuarioDAO sqLusuarioDAO  = new SQLUsuarioDAO();
+        SQLvalorarDAO sqLvalorarDAO = new SQLvalorarDAO();
+        SQLfavoritoDAO sqLfavoritoDAO = new SQLfavoritoDAO();
 
         // Creación del repositorio que será el que interactuará con el controlador.
         PeliculaSerieRepository peliculaSerieRepository = new PeliculaSerieRepository( sqLpeliculaSerieDAO, sqLtemporadaDAO );
-
         TemporadaRepository temporadaRepository = new TemporadaRepository( sqLtemporadaDAO );
-
         UsuarioRepository usuarioRepository = new UsuarioRepository(sqLusuarioDAO);
+        ValoracionesRepository valoracionesRepository = new ValoracionesRepository(sqLvalorarDAO);
+        FavoritosRepository favoritosRepository = new FavoritosRepository(sqLfavoritoDAO);
         // Se crea al controlador proporcionando el/los repositorio/s que necesita
-        LoginController loginController = new LoginController(stage, peliculaSerieRepository, temporadaRepository, usuarioRepository);
+        //TareaController tareaController = new TareaController( peliculaSerieRepository );
+        LoginController loginController = new LoginController(stage, peliculaSerieRepository, temporadaRepository, usuarioRepository, favoritosRepository, valoracionesRepository);
         ChangeScene.change(stage, loginController, "/vistas/login_vista.fxml");
 
         stage.setOnCloseRequest( event -> {
