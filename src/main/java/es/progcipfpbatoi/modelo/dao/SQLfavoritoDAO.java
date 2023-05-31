@@ -13,7 +13,7 @@ public class SQLfavoritoDAO implements FavoritoDAO{
 
     private Connection connection;
     private static final String TABLE_NAME = "favoritos";
-    private static final String IP = "192.168.18.27";
+    private static final String IP = "172.16.226.93";
     private static final String DATABASE = "batoiCine_bd";
     private static final String USERNAME = "batoi";
     private static final String PASSWORD = "1234";

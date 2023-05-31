@@ -1,7 +1,6 @@
 package es.progcipfpbatoi.modelo.dao;
 
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
-import es.progcipfpbatoi.modelo.dto.Produccion;
 import es.progcipfpbatoi.modelo.dto.Temporada;
 import es.progcipfpbatoi.services.MySqlConnection;
 
@@ -15,7 +14,7 @@ public class SQLtemporadaDAO implements TemporadaDAO {
 
     private Connection connection;
     private static final String TABLE_NAME = "temporadas";
-    public static final String IP = "172.16.226.88";
+    public static final String IP = "172.16.226.108";
     public static final String DATABASE = "batoiCine_bd";
     public static final String USERNAME = "admin";
     public static final String PASSWORD = "1234";
