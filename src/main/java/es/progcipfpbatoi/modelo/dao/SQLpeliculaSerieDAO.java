@@ -21,7 +21,7 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
 
     private              Connection connection;
     private static final String     TABLE_NAME = "produccion";
-    private static final String     IP         = "172.16.226.108";
+    private static final String     IP         = "172.16.226.96";
     private static final String     DATABASE   = "batoiCine_bd";
     private static final String     USERNAME   = "batoi";
     private static final String     PASSWORD   = "1234";
@@ -35,7 +35,6 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
                     arrayList ) {
                 sqLpeliculaSerieDAO.insert( produccionItem );
             }
-
         } catch ( DatabaseErrorException e ) {
             throw new RuntimeException( e );
         }

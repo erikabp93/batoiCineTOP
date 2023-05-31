@@ -63,18 +63,10 @@ public class CsvToProducciones {
         String          guion        = fields[ GUION ];
         String          plataforma   = fields[ PLATAFORMA ];
         fields[ FECHA_LANZAMIENTO ] = fields[ FECHA_LANZAMIENTO ].replaceAll( " ", "-" );
-        String[]          fechaDesmenuzada  = fields[ FECHA_LANZAMIENTO ].split( "-" );
-        DateTimeFormatter dateTimeFormatter = handleFormatterPerYear( fechaDesmenuzada[ ANYO ] );
-        LocalDate         fechaLanzamiento  = LocalDate.parse( fechaDesmenuzada[ DIA ] + "-" + fechaDesmenuzada[ MES ].toLowerCase() + "-" + fechaDesmenuzada[ ANYO ], dateTimeFormatter );
+        String[]  fechaDesmenuzada = fields[ FECHA_LANZAMIENTO ].split( "-" );
+        LocalDate fechaLanzamiento = LocalDate.of( Integer.parseInt( fechaDesmenuzada[ ANYO ] ), Month.getMonthByThreeInitials( fechaDesmenuzada[ MES ] ), Integer.parseInt( fechaDesmenuzada[ DIA ] ) );
+        //orden del .of creo que primeor va el año
         return new Produccion( id, duracion, actores, titulo, generos, director, urlTrailer, productor, tipo, calificacion, poster, guion, plataforma, fechaLanzamiento );
-    }
-
-
-    public static DateTimeFormatter handleFormatterPerYear(String year) {
-        if ( year.length() == 2 ) {
-            return DateTimeFormatter.ofPattern( "dd-MMM-yy", new Locale( "es", "ES" ) );
-        }
-        return DateTimeFormatter.ofPattern( "dd-MMM-yyyy", new Locale( "en", "EN" ) );
     }
 
     public static String cleanWhiteSpaces(String generStr) {
