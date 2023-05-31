@@ -38,7 +38,7 @@
                <menus>
                   <Menu mnemonicParsing="false">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Cerrar" />
+                        <MenuItem mnemonicParsing="false" onAction="#cerrar" text="Cerrar" />
                      </items>
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
