@@ -55,11 +55,11 @@ public class PrincipalController implements Initializable {
 
         peliculasListView.setItems(getDataPeliculas());
         peliculasListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        peliculasListView.setCellFactory((ListView<Produccion> l) -> new ProduccionListCellController(favoritosRepository, usuario));
+        peliculasListView.setCellFactory((ListView<Produccion> l) -> new ProduccionListCellController(favoritosRepository,  valoracionesRepository, usuario, this));
 
         seriesListView.setItems(getDataSeries());
         seriesListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        seriesListView.setCellFactory((ListView<Produccion> l) -> new ProduccionListCellController(favoritosRepository, usuario));
+        seriesListView.setCellFactory((ListView<Produccion> l) -> new ProduccionListCellController(favoritosRepository, valoracionesRepository, usuario, this));
     }
 
     private ObservableList<Produccion> getDataPeliculas() {

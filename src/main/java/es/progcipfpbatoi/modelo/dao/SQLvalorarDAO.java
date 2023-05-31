@@ -42,13 +42,13 @@ public class SQLvalorarDAO implements ValorarDAO {
         return producciones;
     }
 
-    private ArrayList<Produccion> valoradasPorUsuario(Usuario usuario) throws DatabaseErrorException {
+    private ArrayList<Produccion> valoradasPorUsuario(Usuario usuario) throws DatabaseErrorException, SQLException {
         String sql = String.format("SELECT * FROM produccion P INNER JOIN %s V ON (P.id = V.id_produccion) WHERE V.username LIKE %s ORDER BY V.valoracion DESC;", TABLE_NAME, usuario.getUsername());
         ArrayList<Produccion> producciones = new ArrayList<>();
         connection =  new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
+        Statement statement = connection.createStatement();
 
         try (
-                Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(sql);
         ) {
 
@@ -66,7 +66,7 @@ public class SQLvalorarDAO implements ValorarDAO {
     }
 
     @Override
-    public boolean save(Produccion produccion, Usuario usuario, int valoracion, String comentario) throws DatabaseErrorException {
+    public boolean save(Produccion produccion, Usuario usuario, int valoracion, String comentario) throws DatabaseErrorException, SQLException {
         String sql = String.format("INSERT INTO %s (id_produccion, username, valoracion, comentario) VALUES (?,?,?,?)", TABLE_NAME);
         connection =  new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
 
@@ -90,7 +90,7 @@ public class SQLvalorarDAO implements ValorarDAO {
         }
     }
 
-    private boolean yaValorado(Produccion produccion, Usuario usuario) throws DatabaseErrorException {
+    private boolean yaValorado(Produccion produccion, Usuario usuario) throws DatabaseErrorException, SQLException {
         for (Produccion production : valoradasPorUsuario(usuario)) {
             if (production.equals(produccion)) {
                 return true;

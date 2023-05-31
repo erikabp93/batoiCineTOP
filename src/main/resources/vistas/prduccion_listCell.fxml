@@ -20,7 +20,7 @@
             <Image url="@../images/add-favourite.png" />
          </image>
       </ImageView>
-      <Button fx:id="detalles" alignment="CENTER" contentDisplay="CENTER" layoutX="143.0" layoutY="353.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="110.0" style="-fx-background-radius: 20;" text="Ver detalles" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="143.0" layoutY="353.0" mnemonicParsing="false" onAction="#verDetalles" prefHeight="26.0" prefWidth="110.0" style="-fx-background-radius: 20;" text="Ver detalles" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
       <Label fx:id="valoracion" alignment="CENTER" layoutX="6.0" layoutY="211.0" text="Valoración: 0" textAlignment="CENTER">
          <font>
             <Font size="10.0" />
