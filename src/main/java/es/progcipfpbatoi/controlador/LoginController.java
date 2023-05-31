@@ -76,7 +76,7 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    private void registrarNuevoUsuario(MouseEvent event) {
+    private void registrarNuevoUsuario(ActionEvent event) {
         try {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Usuario nuevo");
@@ -84,7 +84,7 @@ public class LoginController implements Initializable {
             alert.setContentText("Va a ser redirigido para poder crearse una cuenta");
             alert.showAndWait();
             RegistroController registroController = new RegistroController(usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, this, "/vistas/login_vista.fxml");
-            ChangeScene.change((Stage) event, registroController, "/vistas/registro_vista.fxml");
+            ChangeScene.change(event, registroController, "/vistas/registro_vista.fxml");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
