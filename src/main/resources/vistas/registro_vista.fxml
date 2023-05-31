@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -55,15 +56,15 @@
          </children>
       </HBox>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="271.0" layoutX="373.0" layoutY="151.0" stroke="BLACK" strokeType="INSIDE" width="272.0" />
-      <TextField fx:id="usuario" layoutX="395.0" layoutY="247.0" prefHeight="25.0" prefWidth="240.0" promptText="Usuario" AnchorPane.leftAnchor="388.0" />
-      <TextField fx:id="password" layoutX="398.0" layoutY="294.0" prefHeight="25.0" prefWidth="240.0" promptText="Password" AnchorPane.leftAnchor="388.0" />
-      <Button layoutX="474.0" layoutY="384.0" mnemonicParsing="false" onAction="#registro" text="Registrate" />
       <Label layoutX="468.0" layoutY="162.0" text="Registro">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
       <TextField fx:id="email" layoutX="398.0" layoutY="199.0" prefHeight="25.0" prefWidth="240.0" promptText="Email" AnchorPane.leftAnchor="388.0" />
-      <TextField fx:id="passwordRepeat" layoutX="398.0" layoutY="342.0" prefHeight="25.0" prefWidth="240.0" promptText="Repite password" AnchorPane.leftAnchor="388.0" />
+      <TextField fx:id="usuario" layoutX="395.0" layoutY="247.0" prefHeight="25.0" prefWidth="240.0" promptText="Usuario" AnchorPane.leftAnchor="388.0" />
+      <PasswordField fx:id="password" layoutX="389.0" layoutY="294.0" prefHeight="25.0" prefWidth="240.0" promptText="Password" />
+      <PasswordField fx:id="passwordRepeat" layoutX="389.0" layoutY="342.0" prefHeight="25.0" prefWidth="240.0" promptText="Repeat password" />
+      <Button layoutX="474.0" layoutY="384.0" mnemonicParsing="false" onAction="#registro" text="Registrate" />
    </children>
 </AnchorPane>

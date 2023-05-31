@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -25,7 +26,7 @@ public class LoginController implements Initializable {
     @FXML
     private TextField usuario;
     @FXML
-    private TextField password;
+    private PasswordField password;
     private PeliculaSerieRepository peliculaSerieRepository;
     private TemporadaRepository temporadaRepository;
     private UsuarioRepository usuarioRepository;
@@ -48,7 +49,7 @@ public class LoginController implements Initializable {
             Usuario usuarioNuevo = new Usuario(user, contrasenya);
             boolean usuarioExiste = usuarioRepository.existeUsuario(usuarioNuevo);
             if (usuarioExiste) {
-                PrincipalController principalController = new PrincipalController(usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, this, "/vistas/login_vista.fxml");
+                PrincipalController principalController = new PrincipalController(usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, this, "/vistas/login_vista.fxml", usuarioNuevo);
                 ChangeScene.change(event, principalController, "/vistas/principal_vista.fxml");
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
