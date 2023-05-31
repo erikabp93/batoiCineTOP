@@ -43,4 +43,6 @@ public interface PeliculaSerieDAO {
     Produccion save(Produccion produccion) throws DatabaseErrorException;
 
     void remove(Produccion produccion) throws DatabaseErrorException, NotFoundException;
+
+    String getPoster(int id) throws DatabaseErrorException;
 }
