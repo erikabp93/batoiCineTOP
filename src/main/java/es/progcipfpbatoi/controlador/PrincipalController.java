@@ -74,6 +74,11 @@ public class PrincipalController implements Initializable {
         }
     }
 
+    @FXML
+    private void irBuscar() {
+        System.out.println("hello world");
+    }
+
     private ObservableList<Produccion> getDataSeries() {
         try {
             ArrayList<Produccion> temp = valoracionesRepository.findAllSeries();
