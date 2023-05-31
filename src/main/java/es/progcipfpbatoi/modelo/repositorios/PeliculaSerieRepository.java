@@ -55,4 +55,8 @@ public class PeliculaSerieRepository {
     public void remove(Produccion produccion) throws NotFoundException, DatabaseErrorException {
         peliculaSerieDAO.remove(produccion);
     }
+
+    public String getPoster(int id) throws DatabaseErrorException {
+        return peliculaSerieDAO.getPoster(id);
+    }
 }

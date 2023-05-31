@@ -10,8 +10,10 @@ import java.util.ArrayList;
 public class ValoracionesRepository {
 
     private static SQLvalorarDAO sqlValorarDAO;
+    private static PeliculaSerieRepository peliculaSerieRepository;
 
-    public ValoracionesRepository(SQLvalorarDAO sqlValorarDAO) {
+    public ValoracionesRepository(SQLvalorarDAO sqlValorarDAO, PeliculaSerieRepository peliculaSerieRepository) {
+        this.peliculaSerieRepository = peliculaSerieRepository;
         this.sqlValorarDAO = sqlValorarDAO;
     }
 
@@ -53,7 +55,11 @@ public class ValoracionesRepository {
 
     public static String getPoster(int id) {
         try {
-            return sqlValorarDAO.getPoster(id);
+            String url = sqlValorarDAO.getPoster(id);
+            if (url == null) {
+                return peliculaSerieRepository.getPoster(id);
+            }
+            return url;
         } catch (DatabaseErrorException e) {
             throw new RuntimeException(e);
         }
