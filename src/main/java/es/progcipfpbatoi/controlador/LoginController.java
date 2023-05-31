@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -25,7 +26,7 @@ public class LoginController implements Initializable {
     @FXML
     private TextField usuario;
     @FXML
-    private TextField password;
+    private PasswordField password;
     private PeliculaSerieRepository peliculaSerieRepository;
     private TemporadaRepository temporadaRepository;
     private UsuarioRepository usuarioRepository;
@@ -79,6 +80,11 @@ public class LoginController implements Initializable {
     @FXML
     private void registrarNuevoUsuario(ActionEvent event) {
         try {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Usuario nuevo");
+            alert.setHeaderText(null);
+            alert.setContentText("Va a ser redirigido para poder crearse una cuenta");
+            alert.showAndWait();
             RegistroController registroController = new RegistroController(usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, this, "/vistas/login_vista.fxml");
             ChangeScene.change(event, registroController, "/vistas/registro_vista.fxml");
         } catch (IOException ex) {

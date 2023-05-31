@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -21,9 +22,9 @@ public class RegistroController implements Initializable {
     @FXML
     private TextField usuario;
     @FXML
-    private TextField password;
+    private PasswordField password;
     @FXML
-    private TextField passwordRepeat;
+    private PasswordField passwordRepeat;
     private UsuarioRepository usuarioRepository;
     private PeliculaSerieRepository peliculaSerieRepository;
     private TemporadaRepository temporadaRepository;
