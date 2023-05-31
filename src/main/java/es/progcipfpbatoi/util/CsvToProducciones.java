@@ -3,13 +3,17 @@ package es.progcipfpbatoi.util;
 import es.progcipfpbatoi.exceptions.CategoryTypeErrorException;
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
 import es.progcipfpbatoi.exceptions.NotFoundException;
-import es.progcipfpbatoi.modelo.dto.*;
+import es.progcipfpbatoi.modelo.dto.Calificacion;
+import es.progcipfpbatoi.modelo.dto.Genero;
+import es.progcipfpbatoi.modelo.dto.Produccion;
+import es.progcipfpbatoi.modelo.dto.Tipo;
 
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Locale;
 
 public class CsvToProducciones {
 
@@ -28,8 +32,10 @@ public class CsvToProducciones {
     private static final int    PRODUCTORA        = 11;
     private static final int    WEB               = 12;
     private static final int    PLATAFORMA        = 13;
-
-    private static final String FIELD_SEPARATOR = ";";
+    private static final int    DIA               = 0;
+    private static final int    MES               = 1;
+    private static final int    ANYO              = 2;
+    private static final String FIELD_SEPARATOR   = ";";
 
     private File file;
 
@@ -42,25 +48,28 @@ public class CsvToProducciones {
     }
 
     private Produccion getProduccionFromRegister(String register) {
-        String[]        fields           = register.split( FIELD_SEPARATOR );
-        int             id               = Integer.parseInt( fields[ ID ] );
-        int             duracion         = Integer.parseInt( fields[ DURACION ].replaceAll( "[^0-9]", "" ) );
-        String          actores          = fields[ ACTORES ];
-        String          titulo           = fields[ TITULO ];
-        HashSet<Genero> generos          = parseGeneros( fields );
-        String          director         = fields[ DIRECTOR ];
-        String          urlTrailer       = fields[ WEB ];
-        String          productor        = fields[ PRODUCTORA ];
-        Tipo            tipo             = Tipo.parse( fields[ TIPO ] );
-        Calificacion    calificacion     = Calificacion.parse( fields[ CALIFICACION ] );
-        String          poster           = fields[ PORTADA ];
-        String          guion            = fields[ GUION ];
-        String          plataforma       = fields[ PLATAFORMA ];
-        LocalDate       fechaLanzamiento = LocalDate.parse( fields[ CALIFICACION ], DateTimeFormatter.ofPattern( "yyyy" ) );
+        String[]        fields       = register.split( FIELD_SEPARATOR );
+        int             id           = Integer.parseInt( fields[ ID ] );
+        int             duracion     = Integer.parseInt( fields[ DURACION ].replaceAll( "[^0-9]", "" ) );
+        String          actores      = fields[ ACTORES ];
+        String          titulo       = fields[ TITULO ];
+        HashSet<Genero> generos      = parseGeneros( fields );
+        String          director     = fields[ DIRECTOR ];
+        String          urlTrailer   = fields[ WEB ];
+        String          productor    = fields[ PRODUCTORA ];
+        Tipo            tipo         = Tipo.parse( fields[ TIPO ] );
+        Calificacion    calificacion = Calificacion.parse( fields[ CALIFICACION ] );
+        String          poster       = fields[ PORTADA ];
+        String          guion        = fields[ GUION ];
+        String          plataforma   = fields[ PLATAFORMA ];
+        fields[ FECHA_LANZAMIENTO ] = fields[ FECHA_LANZAMIENTO ].replaceAll( " ", "-" );
+        String[]  fechaDesmenuzada = fields[ FECHA_LANZAMIENTO ].split( "-" );
+        LocalDate fechaLanzamiento = LocalDate.of( Integer.parseInt( fechaDesmenuzada[ ANYO ] ), Month.getMonthByThreeInitials( fechaDesmenuzada[ MES ] ), Integer.parseInt( fechaDesmenuzada[ DIA ] ) );
+        //orden del .of creo que primeor va el año
         return new Produccion( id, duracion, actores, titulo, generos, director, urlTrailer, productor, tipo, calificacion, poster, guion, plataforma, fechaLanzamiento );
     }
 
-    public static String cleanFormat(String generStr) {
+    public static String cleanWhiteSpaces(String generStr) {
         return generStr.replaceAll( " ", "" );
     }
 
@@ -68,7 +77,7 @@ public class CsvToProducciones {
         HashSet<Genero> generoHashSet = new HashSet<>();
         for ( String generoItem :
                 fields[ GENERO ].split( "," ) ) {
-            generoItem = cleanFormat( generoItem );
+            generoItem = cleanWhiteSpaces( generoItem );
             generoHashSet.add( Genero.parse( generoItem ) );
         }
         return generoHashSet;
@@ -97,6 +106,7 @@ public class CsvToProducciones {
         try {
             ArrayList<Produccion> produccionArrayList = new ArrayList<>();
             try ( BufferedReader bufferedReader = getReader() ) {
+                bufferedReader.readLine();
                 do {
                     String register = bufferedReader.readLine();
                     if ( register == null ) {

@@ -21,10 +21,24 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
 
     private              Connection connection;
     private static final String     TABLE_NAME = "produccion";
-    private static final String     IP         = "192.168.18.27";
+    private static final String     IP         = "172.16.226.96";
     private static final String     DATABASE   = "batoiCine_bd";
     private static final String     USERNAME   = "batoi";
     private static final String     PASSWORD   = "1234";
+
+    public static void main(String[] args) {
+        CsvToProducciones csvToProducciones = new CsvToProducciones();
+        try {
+            ArrayList<Produccion> arrayList           = csvToProducciones.findAll();
+            SQLpeliculaSerieDAO   sqLpeliculaSerieDAO = new SQLpeliculaSerieDAO();
+            for ( Produccion produccionItem :
+                    arrayList ) {
+                sqLpeliculaSerieDAO.insert( produccionItem );
+            }
+        } catch ( DatabaseErrorException e ) {
+            throw new RuntimeException( e );
+        }
+    }
 
     @Override
     public ArrayList<Produccion> findAll() throws DatabaseErrorException {

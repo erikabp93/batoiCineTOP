@@ -7,12 +7,13 @@ import es.progcipfpbatoi.services.MySqlConnection;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class SQLfavoritoDAO implements FavoritoDAO{
 
     private Connection connection;
     private static final String TABLE_NAME = "favoritos";
-    private static final String IP = "192.168.18.27";
+    private static final String IP = "172.16.226.93";
     private static final String DATABASE = "batoiCine_bd";
     private static final String USERNAME = "batoi";
     private static final String PASSWORD = "1234";
@@ -65,7 +66,12 @@ public class SQLfavoritoDAO implements FavoritoDAO{
         int duracion = rs.getInt("duracion");
         String actores = rs.getString("actores");
         String nombre = rs.getString("titulo");
-        Genero genero = (Genero) rs.getObject("genero");
+        String[] generos = rs.getString("genero").split(",");
+        HashSet<Genero> genero = new HashSet<>();
+        for (String actual : generos) {
+            genero.add(Genero.valueOf(actual.toUpperCase()));
+        }
+
         String director = rs.getString("director");
         String urlTrailer = rs.getString("urlTrailer");
         String productor = rs.getString("productor");

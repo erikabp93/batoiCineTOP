@@ -33,7 +33,20 @@ public enum Calificacion {
         public String toString() {
             return "X";
         }
+    },
+    UNRATED {
+        @Override
+        public String toString() {
+            return "UNRATED";
+        }
+    },
+    APPROVED {
+        @Override
+        public String toString() {
+            return "APPROVED";
+        }
     };
+
     public static Calificacion parse(String calificacionStr) throws CategoryTypeErrorException {
 
         for ( Calificacion calificacion : Calificacion.values() ) {
@@ -45,4 +58,4 @@ public enum Calificacion {
         throw new CategoryTypeErrorException( "Tipo de categoría desconocida: " + calificacionStr );
 
     }
-    }
+}
