@@ -96,7 +96,7 @@ public class ProduccionListCellController extends ListCell<Produccion> {
     @FXML
     private void verDetalles(ActionEvent event) {
         try {
-            DetallesController detallesController = new DetallesController(usuario, produccion, valoracionesRepository, controladorPadre, "/vistas/login_vista.fxml");
+            DetallesController detallesController = new DetallesController(usuario, produccion, valoracionesRepository, controladorPadre, "/vistas/principal_vista.fxml");
             ChangeScene.change(event, detallesController, "/vistas/detalles_produccion_vista.fxml");
         } catch (IOException e) {
             throw new RuntimeException(e);
