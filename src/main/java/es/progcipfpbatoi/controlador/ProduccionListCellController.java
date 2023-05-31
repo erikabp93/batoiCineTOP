@@ -25,6 +25,8 @@ public class ProduccionListCellController extends ListCell<Produccion> {
     @FXML
     private Label valoracion;
     @FXML
+    private Label desc;
+    @FXML
     private ImageView imagen;
     @FXML
     private ImageView favorito;
@@ -107,6 +109,7 @@ public class ProduccionListCellController extends ListCell<Produccion> {
             int valoracionInt = ValoracionesRepository.getValoracion(produccion.getId());
             valoracion.setText("Valoración: " + valoracionInt);
             titulo.setText(produccion.getTitulo());
+            desc.setText(produccion.getGuion());
             setGraphic(root);
         }
     }
