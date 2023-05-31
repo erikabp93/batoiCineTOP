@@ -7,23 +7,23 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="240.0" prefWidth="241.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="root" prefHeight="240.0" prefWidth="440.0" style="-fx-border-width: 1px; -fx-border-color: black;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="imagen" fitHeight="136.0" fitWidth="132.0" layoutX="74.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/logo.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="titulo" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="11.0" layoutY="141.0" prefHeight="52.0" prefWidth="221.0" text="Título" wrapText="true" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="9.0" />
-      <ImageView fx:id="favorito" fitHeight="39.0" fitWidth="39.0" layoutX="6.0" layoutY="8.0" onMouseClicked="#gestionFavorito" onMouseEntered="#cambiaColorHover" onMouseExited="#cambiaColorDefault" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="194.0" AnchorPane.leftAnchor="6.0">
+      <ImageView fx:id="imagen" fitHeight="240.0" fitWidth="170.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Label fx:id="titulo" contentDisplay="CENTER" layoutX="182.0" layoutY="68.0" prefHeight="50.0" prefWidth="249.0" text="Título" wrapText="true" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Label>
+      <ImageView fx:id="favorito" fitHeight="39.0" fitWidth="39.0" layoutX="181.0" layoutY="199.0" onMouseClicked="#gestionFavorito" onMouseEntered="#cambiaColorHover" onMouseExited="#cambiaColorDefault" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="181.0">
          <image>
             <Image url="@../images/add-favourite.png" />
          </image>
       </ImageView>
-      <Button fx:id="detalles" alignment="CENTER" contentDisplay="CENTER" layoutX="143.0" layoutY="353.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="110.0" style="-fx-background-radius: 20;" text="Ver detalles" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-      <Label fx:id="valoracion" alignment="CENTER" layoutX="6.0" layoutY="211.0" text="Valoración: 0" textAlignment="CENTER">
+      <Button fx:id="detalles" alignment="CENTER" contentDisplay="CENTER" layoutX="143.0" layoutY="353.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" style="-fx-background-radius: 20;" text="Ver detalles" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+      <Label fx:id="valoracion" alignment="CENTER" layoutX="221.0" layoutY="206.0" prefHeight="25.0" text="Valoración: 0" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="225.0" />
+      <Label fx:id="desc" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="192.0" layoutY="78.0" prefHeight="105.0" prefWidth="249.0" text="Descripción" wrapText="true" AnchorPane.rightAnchor="12.0">
          <font>
-            <Font size="10.0" />
+            <Font size="15.0" />
          </font>
       </Label>
    </children>
