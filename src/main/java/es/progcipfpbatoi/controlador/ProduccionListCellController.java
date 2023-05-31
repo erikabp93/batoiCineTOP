@@ -5,8 +5,10 @@ import es.progcipfpbatoi.modelo.dto.Produccion;
 import es.progcipfpbatoi.modelo.dto.Usuario;
 import es.progcipfpbatoi.modelo.repositorios.FavoritosRepository;
 import es.progcipfpbatoi.modelo.repositorios.ValoracionesRepository;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
@@ -31,13 +33,17 @@ public class ProduccionListCellController extends ListCell<Produccion> {
     @FXML
     private ImageView favorito;
 
+    private ValoracionesRepository valoracionesRepository;
     private FavoritosRepository favoritosRepository;
     private Usuario usuario;
     private Produccion produccion;
+    private Initializable controladorPadre;
 
-    public ProduccionListCellController(FavoritosRepository favoritosRepository, Usuario usuario) {
+    public ProduccionListCellController(FavoritosRepository favoritosRepository, ValoracionesRepository valoracionesRepository, Usuario usuario, Initializable controladorPadre) {
         this.favoritosRepository = favoritosRepository;
+        this.valoracionesRepository = valoracionesRepository;
         this.usuario = usuario;
+        this.controladorPadre = controladorPadre;
 
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/vistas/prduccion_listCell.fxml"));
@@ -83,6 +89,16 @@ public class ProduccionListCellController extends ListCell<Produccion> {
                 favorito.setImage(new Image(getPathImage("/images/favourite.png")));
             }
         } catch (DatabaseErrorException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    private void verDetalles(ActionEvent event) {
+        try {
+            DetallesController detallesController = new DetallesController(usuario, produccion, valoracionesRepository, controladorPadre, "/vistas/login_vista.fxml");
+            ChangeScene.change(event, detallesController, "/vistas/detalles_produccion_vista.fxml");
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

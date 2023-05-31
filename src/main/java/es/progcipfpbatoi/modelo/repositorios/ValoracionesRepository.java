@@ -5,6 +5,7 @@ import es.progcipfpbatoi.modelo.dao.SQLvalorarDAO;
 import es.progcipfpbatoi.modelo.dto.Produccion;
 import es.progcipfpbatoi.modelo.dto.Usuario;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ValoracionesRepository {
@@ -21,7 +22,7 @@ public class ValoracionesRepository {
         return sqlValorarDAO.findAll();
     }
 
-    public boolean save(Produccion produccion, Usuario usuario, int valoracion, String comentario) throws DatabaseErrorException {
+    public boolean save(Produccion produccion, Usuario usuario, int valoracion, String comentario) throws DatabaseErrorException, SQLException {
         return sqlValorarDAO.save(produccion, usuario, valoracion, comentario);
     }
 

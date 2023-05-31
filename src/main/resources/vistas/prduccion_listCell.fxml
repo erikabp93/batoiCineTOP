@@ -22,6 +22,7 @@
       <Button fx:id="detalles" alignment="CENTER" contentDisplay="CENTER" layoutX="143.0" layoutY="353.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" style="-fx-background-radius: 20;" text="Ver detalles" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
       <Label fx:id="valoracion" alignment="CENTER" layoutX="221.0" layoutY="206.0" prefHeight="25.0" text="Valoración: 0" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="225.0" />
       <Label fx:id="desc" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="192.0" layoutY="78.0" prefHeight="105.0" prefWidth="249.0" text="Descripción" wrapText="true" AnchorPane.rightAnchor="12.0">
+
          <font>
             <Font size="15.0" />
          </font>
