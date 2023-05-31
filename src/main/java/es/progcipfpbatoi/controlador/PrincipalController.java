@@ -6,14 +6,15 @@ import es.progcipfpbatoi.modelo.dto.Usuario;
 import es.progcipfpbatoi.modelo.repositorios.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class PrincipalController implements Initializable {
@@ -74,5 +75,34 @@ public class PrincipalController implements Initializable {
         } catch (DatabaseErrorException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @FXML
+    public void cerrar(ActionEvent event) {
+        Alert alert = new Alert( Alert.AlertType.CONFIRMATION);
+        alert.setTitle( "Salir" );
+        alert.setHeaderText( "" );
+        alert.setContentText( "¿Estás seguro que quieres cerrar de la aplicación?" );
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK ) {
+            System.exit(0);
+        }
+        alert.close();
+    }
+
+    @FXML
+    public void cambiarUsuario(ActionEvent event) throws IOException {
+        Alert alert = new Alert( Alert.AlertType.CONFIRMATION);
+        alert.setTitle( "Cambiar de usuario" );
+        alert.setHeaderText( "" );
+        alert.setContentText( "¿Estás seguro que quieres cambiar a otro usuario?" );
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK ) {
+            LoginController loginController = new LoginController(peliculaSerieRepository, temporadaRepository, usuarioRepository, favoritosRepository, valoracionesRepository);
+            ChangeScene.change(event, loginController, "/vistas/login_vista.fxml");
+        }
+        alert.close();
     }
 }

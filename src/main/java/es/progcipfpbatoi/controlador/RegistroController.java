@@ -7,12 +7,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class RegistroController implements Initializable {
@@ -68,6 +70,20 @@ public class RegistroController implements Initializable {
         } catch (DatabaseErrorException | IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @FXML
+    public void cerrar(ActionEvent event) {
+        Alert alert = new Alert( Alert.AlertType.CONFIRMATION);
+        alert.setTitle( "Salir" );
+        alert.setHeaderText( "" );
+        alert.setContentText( "¿Estás seguro que quieres cerrar de la aplicación?" );
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK ) {
+            System.exit(0);
+        }
+        alert.close();
     }
 
     @Override

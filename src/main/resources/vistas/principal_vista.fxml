@@ -45,12 +45,12 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <MenuBar AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+            <MenuBar AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="25.0">
               <menus>
                 <Menu mnemonicParsing="false">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Cerrar" />
-                        <MenuItem mnemonicParsing="false" text="Cambiar usuario" />
+                    <MenuItem mnemonicParsing="false" onAction="#cerrar" text="Cerrar" />
+                        <MenuItem mnemonicParsing="false" onAction="#cambiarUsuario" text="Cambiar usuario" />
                   </items>
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">

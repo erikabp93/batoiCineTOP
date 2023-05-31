@@ -8,11 +8,9 @@ import es.progcipfpbatoi.modelo.repositorios.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
+import javafx.scene.Node;
 import javafx.stage.Stage;
 import org.w3c.dom.events.MouseEvent;
 
@@ -78,7 +76,7 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    private void registrarNuevoUsuario(ActionEvent event) {
+    private void registrarNuevoUsuario(MouseEvent event) {
         try {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Usuario nuevo");
@@ -86,10 +84,24 @@ public class LoginController implements Initializable {
             alert.setContentText("Va a ser redirigido para poder crearse una cuenta");
             alert.showAndWait();
             RegistroController registroController = new RegistroController(usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, this, "/vistas/login_vista.fxml");
-            ChangeScene.change(event, registroController, "/vistas/registro_vista.fxml");
+            ChangeScene.change((Stage) event, registroController, "/vistas/registro_vista.fxml");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    @FXML
+    public void cerrar(ActionEvent event) {
+        Alert alert = new Alert( Alert.AlertType.CONFIRMATION );
+        alert.setTitle( "Salir" );
+        alert.setHeaderText( "" );
+        alert.setContentText( "¿Estás seguro que quieres cerrar de la aplicación?" );
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK ) {
+            System.exit(0);
+        }
+        alert.close();
     }
 
     @Override
