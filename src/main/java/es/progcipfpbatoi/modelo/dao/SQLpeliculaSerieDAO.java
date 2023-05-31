@@ -165,6 +165,27 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
         return produccion;
     }
 
+    public String getPoster(int id) throws DatabaseErrorException {
+        String sql = String.format("SELECT poster FROM %s WHERE id LIKE %d", TABLE_NAME, id);
+        connection =  new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
+
+        try (
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(sql);
+        ) {
+
+            if (resultSet.next()) {
+                return resultSet.getString("poster");
+            }
+            return null;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DatabaseErrorException("Ha ocurrido un error en la conexión o acceso a la base de datos (select)");
+        }
+    }
+
+
     @Override
     public void remove(Produccion produccion) throws DatabaseErrorException, NotFoundException {
         String sql = String.format( "DELETE FROM %s WHERE id = ?", TABLE_NAME );

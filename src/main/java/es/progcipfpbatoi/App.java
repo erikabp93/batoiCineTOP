@@ -32,7 +32,7 @@ public class App extends Application {
         PeliculaSerieRepository peliculaSerieRepository = new PeliculaSerieRepository( sqLpeliculaSerieDAO, sqLtemporadaDAO );
         TemporadaRepository temporadaRepository = new TemporadaRepository( sqLtemporadaDAO );
         UsuarioRepository usuarioRepository = new UsuarioRepository(sqLusuarioDAO);
-        ValoracionesRepository valoracionesRepository = new ValoracionesRepository(sqLvalorarDAO);
+        ValoracionesRepository valoracionesRepository = new ValoracionesRepository(sqLvalorarDAO, peliculaSerieRepository);
         FavoritosRepository favoritosRepository = new FavoritosRepository(sqLfavoritoDAO);
         // Se crea al controlador proporcionando el/los repositorio/s que necesita
         LoginController loginController = new LoginController(peliculaSerieRepository, temporadaRepository, usuarioRepository, favoritosRepository, valoracionesRepository);

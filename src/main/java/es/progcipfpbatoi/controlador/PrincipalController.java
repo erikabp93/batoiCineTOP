@@ -11,9 +11,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
-import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class PrincipalController implements Initializable {
@@ -62,7 +62,11 @@ public class PrincipalController implements Initializable {
 
     private ObservableList<Produccion> getDataPeliculas() {
         try {
-            return FXCollections.observableArrayList(valoracionesRepository.findAllPeliculas());
+            ArrayList<Produccion> temp = valoracionesRepository.findAllPeliculas();
+            if (temp.size() == 0) {
+                return FXCollections.observableArrayList(peliculaSerieRepository.findAllPeliculas());
+            } else
+                return FXCollections.observableArrayList(temp);
         } catch (DatabaseErrorException e) {
             throw new RuntimeException(e);
         }
@@ -70,7 +74,11 @@ public class PrincipalController implements Initializable {
 
     private ObservableList<Produccion> getDataSeries() {
         try {
-            return FXCollections.observableArrayList(valoracionesRepository.findAllSeries());
+            ArrayList<Produccion> temp = valoracionesRepository.findAllSeries();
+            if (temp.size() == 0) {
+                return FXCollections.observableArrayList(peliculaSerieRepository.findAllSeries());
+            } else
+                return FXCollections.observableArrayList(temp);
         } catch (DatabaseErrorException e) {
             throw new RuntimeException(e);
         }
