@@ -4,6 +4,7 @@ import es.progcipfpbatoi.exceptions.DatabaseErrorException;
 import es.progcipfpbatoi.exceptions.NotFoundException;
 import es.progcipfpbatoi.modelo.dao.TemporadaDAO;
 import es.progcipfpbatoi.modelo.dao.PeliculaSerieDAO;
+import es.progcipfpbatoi.modelo.dto.Genero;
 import es.progcipfpbatoi.modelo.dto.Produccion;
 
 import java.util.ArrayList;
@@ -18,6 +19,14 @@ public class PeliculaSerieRepository {
 
     public ArrayList<Produccion> findAll(String text) throws DatabaseErrorException{
         return peliculaSerieDAO.findAll(text);
+    }
+
+    public ArrayList<Produccion> findAll(Genero genero) throws DatabaseErrorException {
+        return peliculaSerieDAO.findAll(genero);
+    }
+
+    public ArrayList<Produccion> findAll(String text, Genero genero) throws DatabaseErrorException {
+        return peliculaSerieDAO.findAll(text, genero);
     }
 
     public ArrayList<Produccion> findAll() throws DatabaseErrorException {

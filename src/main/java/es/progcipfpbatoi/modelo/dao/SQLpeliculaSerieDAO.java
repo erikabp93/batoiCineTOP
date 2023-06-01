@@ -47,14 +47,77 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
     }
 
     @Override
-    public ArrayList<Produccion> findAll(String text) throws DatabaseErrorException {
+    public ArrayList<Produccion> findAll(String texto) throws DatabaseErrorException {
+        String sql = String.format( "SELECT * FROM %s WHERE INSTR(titulo, ?)", TABLE_NAME );
+
         ArrayList<Produccion> producciones = new ArrayList<>();
+        connection = new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
+
+        try {
+            PreparedStatement preparedStatementStatement = connection.prepareStatement( sql, PreparedStatement.RETURN_GENERATED_KEYS );
+            preparedStatementStatement.setString(1, texto);
+            ResultSet resultSet = preparedStatementStatement.executeQuery();
+            while ( resultSet.next() ) {
+                Produccion produccion = getProduccionFromResultset(resultSet);
+                producciones.add(produccion);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DatabaseErrorException( "Ha ocurrido un error en el acceso o conexión a la base de datos (select)" );
+        }
+        return producciones;
+        /*ArrayList<Produccion> producciones = new ArrayList<>();
         for ( Produccion produccion : findAll() ) {
             if ( produccion.empiezaPor( text ) ) {
                 producciones.add( produccion );
             }
         }
 
+        return producciones;*/
+    }
+
+    @Override
+    public ArrayList<Produccion> findAll(Genero genero) throws DatabaseErrorException {
+        String sql = String.format( "SELECT * FROM %s WHERE FIND_IN_SET(?,genero) > 0", TABLE_NAME );
+
+        ArrayList<Produccion> producciones = new ArrayList<>();
+        connection = new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
+
+        try {
+            PreparedStatement preparedStatementStatement = connection.prepareStatement( sql, PreparedStatement.RETURN_GENERATED_KEYS );
+            preparedStatementStatement.setString(1, genero.toString());
+            ResultSet resultSet = preparedStatementStatement.executeQuery();
+            while ( resultSet.next() ) {
+                Produccion produccion = getProduccionFromResultset(resultSet);
+                producciones.add(produccion);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DatabaseErrorException( "Ha ocurrido un error en el acceso o conexión a la base de datos (select)" );
+        }
+        return producciones;
+    }
+
+    @Override
+    public ArrayList<Produccion> findAll(String texto, Genero genero) throws DatabaseErrorException {
+        String sql = String.format( "SELECT * FROM %s WHERE FIND_IN_SET(?,genero) > 0 AND INSTR(titulo, ?)", TABLE_NAME );
+
+        ArrayList<Produccion> producciones = new ArrayList<>();
+        connection = new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
+
+        try {
+            PreparedStatement preparedStatementStatement = connection.prepareStatement( sql, PreparedStatement.RETURN_GENERATED_KEYS );
+            preparedStatementStatement.setString(1, genero.toString());
+            preparedStatementStatement.setString(2, texto);
+            ResultSet resultSet = preparedStatementStatement.executeQuery();
+            while ( resultSet.next() ) {
+                Produccion produccion = getProduccionFromResultset(resultSet);
+                producciones.add(produccion);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DatabaseErrorException( "Ha ocurrido un error en el acceso o conexión a la base de datos (select)" );
+        }
         return producciones;
     }
 

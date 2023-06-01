@@ -11,15 +11,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class PrincipalController implements Initializable {
+public class BusquedaController implements Initializable {
 
     private Initializable controladorPadre;
     private String vistaPadre;
@@ -29,13 +27,11 @@ public class PrincipalController implements Initializable {
     private FavoritosRepository favoritosRepository;
     private ValoracionesRepository valoracionesRepository;
     private Usuario usuario;
+    private Genero genero;
+    private String filtroTexto;
 
     @FXML
-    private ListView<Produccion> peliculasListView;
-
-    @FXML
-    private ListView<Produccion> seriesListView;
-
+    private ListView<Produccion> resultadosListView;
     @FXML
     private Label usuarioLabel;
 
@@ -44,8 +40,8 @@ public class PrincipalController implements Initializable {
 
     @FXML
     private TextField filtroBusqueda;
-  
-    public PrincipalController(UsuarioRepository usuarioRepository, PeliculaSerieRepository peliculaSerieRepository, TemporadaRepository temporadaRepository, FavoritosRepository favoritosRepository, ValoracionesRepository valoracionesRepository, Initializable controladorPadre, String vistaPadre, Usuario usuario) {
+
+    public BusquedaController(Initializable controladorPadre, String vistaPadre, UsuarioRepository usuarioRepository, PeliculaSerieRepository peliculaSerieRepository, TemporadaRepository temporadaRepository, FavoritosRepository favoritosRepository, ValoracionesRepository valoracionesRepository, Usuario usuario, Genero genero, String filtroTexto) {
         this.controladorPadre = controladorPadre;
         this.vistaPadre = vistaPadre;
         this.usuarioRepository = usuarioRepository;
@@ -54,6 +50,8 @@ public class PrincipalController implements Initializable {
         this.favoritosRepository = favoritosRepository;
         this.valoracionesRepository = valoracionesRepository;
         this.usuario = usuario;
+        this.genero = genero;
+        this.filtroTexto = filtroTexto;
     }
 
     @Override
@@ -62,46 +60,34 @@ public class PrincipalController implements Initializable {
 
         generoDesplegable.setItems(FXCollections.observableArrayList(Genero.values()));
 
-        peliculasListView.setItems(getDataPeliculas());
-        peliculasListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        peliculasListView.setCellFactory((ListView<Produccion> l) -> new ProduccionListCellController(favoritosRepository,  valoracionesRepository, usuario, this));
-
-        seriesListView.setItems(getDataSeries());
-        seriesListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        seriesListView.setCellFactory((ListView<Produccion> l) -> new ProduccionListCellController(favoritosRepository, valoracionesRepository, usuario, this));
+        resultadosListView.setItems(getData());
+        resultadosListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        resultadosListView.setCellFactory((ListView<Produccion> l) -> new ProduccionListCellController(favoritosRepository, usuario));
     }
 
-    private ObservableList<Produccion> getDataPeliculas() {
+    private ObservableList<Produccion> getData() {
         try {
-            ArrayList<Produccion> temp = valoracionesRepository.findAllPeliculas();
-            if (temp.size() == 0) {
-                return FXCollections.observableArrayList(peliculaSerieRepository.findAllPeliculas());
-            } else
-                return FXCollections.observableArrayList(temp);
+            if (genero == null) {
+                System.out.println(filtroTexto);
+                return FXCollections.observableArrayList(peliculaSerieRepository.findAll(filtroTexto));
+            } else if (filtroTexto.equals("")) {
+                System.out.println(genero);
+                return FXCollections.observableArrayList(peliculaSerieRepository.findAll(genero));
+            } else {
+                System.out.println(filtroTexto + " " + genero);
+                return FXCollections.observableArrayList(peliculaSerieRepository.findAll(filtroTexto, genero));
+            }
         } catch (DatabaseErrorException e) {
             throw new RuntimeException(e);
         }
     }
 
     @FXML
-    private void irBuscar(ActionEvent event) throws IOException {
-        Genero genero = generoDesplegable.getValue();
-        String textoFiltro = filtroBusqueda.getText();
-        BusquedaController busquedaController = new BusquedaController(this, "/vistas/principal_vista.fxml", usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, usuario, genero, textoFiltro);
-        ChangeScene.change(event, busquedaController, "/vistas/busqueda_vista.fxml");
+    private void buscar(ActionEvent event) throws IOException {
+        this.genero = generoDesplegable.getValue();
+        this.filtroTexto = filtroBusqueda.getText();
+        ChangeScene.change(event, this, "/vistas/busqueda_vista.fxml");
         System.out.println("hello world");
-    }
-
-    private ObservableList<Produccion> getDataSeries() {
-        try {
-            ArrayList<Produccion> temp = valoracionesRepository.findAllSeries();
-            if (temp.size() == 0) {
-                return FXCollections.observableArrayList(peliculaSerieRepository.findAllSeries());
-            } else
-                return FXCollections.observableArrayList(temp);
-        } catch (DatabaseErrorException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @FXML
