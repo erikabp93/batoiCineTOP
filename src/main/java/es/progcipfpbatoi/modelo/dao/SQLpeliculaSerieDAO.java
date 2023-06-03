@@ -2,18 +2,16 @@ package es.progcipfpbatoi.modelo.dao;
 
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
 import es.progcipfpbatoi.exceptions.NotFoundException;
-import es.progcipfpbatoi.modelo.dao.PeliculaSerieDAO;
 import es.progcipfpbatoi.modelo.dto.Calificacion;
 import es.progcipfpbatoi.modelo.dto.Genero;
 import es.progcipfpbatoi.modelo.dto.Produccion;
 import es.progcipfpbatoi.modelo.dto.Tipo;
 import es.progcipfpbatoi.services.MySqlConnection;
 import es.progcipfpbatoi.util.CsvToProducciones;
-import es.progcipfpbatoi.util.CsvToTemporadas;
+import es.progcipfpbatoi.util.DatosBD;
 
 import java.sql.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -45,7 +43,7 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
         String sql = String.format( "SELECT * FROM %s", TABLE_NAME );
 
         ArrayList<Produccion> producciones = new ArrayList<>();
-        connection = new MySqlConnection( IP, DATABASE, USERNAME, PASSWORD ).getConnection();
+        connection = new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
 
         try (
                 Statement statement = connection.createStatement();
@@ -66,21 +64,84 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
     }
 
     @Override
-    public ArrayList<Produccion> findAll(String text) throws DatabaseErrorException {
+    public ArrayList<Produccion> findAll(String texto) throws DatabaseErrorException {
+        String sql = String.format( "SELECT * FROM %s WHERE INSTR(titulo, ?)", TABLE_NAME );
+
         ArrayList<Produccion> producciones = new ArrayList<>();
+        connection = new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
+
+        try {
+            PreparedStatement preparedStatementStatement = connection.prepareStatement( sql, PreparedStatement.RETURN_GENERATED_KEYS );
+            preparedStatementStatement.setString(1, texto);
+            ResultSet resultSet = preparedStatementStatement.executeQuery();
+            while ( resultSet.next() ) {
+                Produccion produccion = getProduccionFromResultset(resultSet);
+                producciones.add(produccion);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DatabaseErrorException( "Ha ocurrido un error en el acceso o conexión a la base de datos (select)" );
+        }
+        return producciones;
+        /*ArrayList<Produccion> producciones = new ArrayList<>();
         for ( Produccion produccion : findAll() ) {
             if ( produccion.empiezaPor( text ) ) {
                 producciones.add( produccion );
             }
         }
 
+        return producciones;*/
+    }
+
+    @Override
+    public ArrayList<Produccion> findAll(Genero genero) throws DatabaseErrorException {
+        String sql = String.format( "SELECT * FROM %s WHERE FIND_IN_SET(?,genero) > 0", TABLE_NAME );
+
+        ArrayList<Produccion> producciones = new ArrayList<>();
+        connection = new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
+
+        try {
+            PreparedStatement preparedStatementStatement = connection.prepareStatement( sql, PreparedStatement.RETURN_GENERATED_KEYS );
+            preparedStatementStatement.setString(1, genero.toString());
+            ResultSet resultSet = preparedStatementStatement.executeQuery();
+            while ( resultSet.next() ) {
+                Produccion produccion = getProduccionFromResultset(resultSet);
+                producciones.add(produccion);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DatabaseErrorException( "Ha ocurrido un error en el acceso o conexión a la base de datos (select)" );
+        }
+        return producciones;
+    }
+
+    @Override
+    public ArrayList<Produccion> findAll(String texto, Genero genero) throws DatabaseErrorException {
+        String sql = String.format( "SELECT * FROM %s WHERE FIND_IN_SET(?,genero) > 0 AND INSTR(titulo, ?)", TABLE_NAME );
+
+        ArrayList<Produccion> producciones = new ArrayList<>();
+        connection = new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
+
+        try {
+            PreparedStatement preparedStatementStatement = connection.prepareStatement( sql, PreparedStatement.RETURN_GENERATED_KEYS );
+            preparedStatementStatement.setString(1, genero.toString());
+            preparedStatementStatement.setString(2, texto);
+            ResultSet resultSet = preparedStatementStatement.executeQuery();
+            while ( resultSet.next() ) {
+                Produccion produccion = getProduccionFromResultset(resultSet);
+                producciones.add(produccion);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DatabaseErrorException( "Ha ocurrido un error en el acceso o conexión a la base de datos (select)" );
+        }
         return producciones;
     }
 
     @Override
     public Produccion getById(int id) throws NotFoundException, DatabaseErrorException {
         String sql = String.format( "SELECT * FROM %s WHERE id = ?", TABLE_NAME );
-        connection = new MySqlConnection( IP, DATABASE, USERNAME, PASSWORD ).getConnection();
+        connection = new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
 
         try (
                 PreparedStatement statement = connection.prepareStatement( sql, PreparedStatement.RETURN_GENERATED_KEYS );
@@ -123,7 +184,7 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
 
     private Produccion insert(Produccion produccion) throws DatabaseErrorException {
         String sql = String.format( "INSERT INTO %s (id, duracion, actores, titulo, genero, director, urlTrailer, productor, tipo, calificacion, poster, guion, plataforma, fechaLanzamiento, visualizaciones) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", TABLE_NAME );
-        connection = new MySqlConnection( IP, DATABASE, USERNAME, PASSWORD ).getConnection();
+        connection = new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
 
         try (
                 PreparedStatement preparedStatement = connection.prepareStatement( sql, PreparedStatement.RETURN_GENERATED_KEYS )
@@ -154,7 +215,7 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
 
     private Produccion update(Produccion produccion) throws DatabaseErrorException {
         String sql = String.format( "UPDATE %s SET duracion = ?, actores = ?, titulo = ?, genero = ?, director = ?, urlTrailer = ?, productor = ?, tipo = ?, calificacion = ?, poster = ?, guion = ?, plataforma = ?, fechaLanzamiento = ?, visualizaciones = ? WHERE id = ?", TABLE_NAME );
-        connection = new MySqlConnection( IP, DATABASE, USERNAME, PASSWORD ).getConnection();
+        connection = new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
 
         try (
                 PreparedStatement statement = connection.prepareStatement( sql, PreparedStatement.RETURN_GENERATED_KEYS )
@@ -184,10 +245,31 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
         return produccion;
     }
 
+    public String getPoster(int id) throws DatabaseErrorException {
+        String sql = String.format("SELECT poster FROM %s WHERE id LIKE %d", TABLE_NAME, id);
+        connection =  new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
+
+        try (
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(sql);
+        ) {
+
+            if (resultSet.next()) {
+                return resultSet.getString("poster");
+            }
+            return null;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DatabaseErrorException("Ha ocurrido un error en la conexión o acceso a la base de datos (select)");
+        }
+    }
+
+
     @Override
     public void remove(Produccion produccion) throws DatabaseErrorException, NotFoundException {
         String sql = String.format( "DELETE FROM %s WHERE id = ?", TABLE_NAME );
-        connection = new MySqlConnection( IP, DATABASE, USERNAME, PASSWORD ).getConnection();
+        connection = new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
         try (
                 PreparedStatement statement = connection.prepareStatement( sql, PreparedStatement.RETURN_GENERATED_KEYS )
         ) {
@@ -210,8 +292,8 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
         String          director         = rs.getString( "director" );
         String          urlTrailer       = rs.getString( "urlTrailer" );
         String          productor        = rs.getString( "productor" );
-        Tipo            tipo             = (Tipo) rs.getObject( "tipo" );
-        Calificacion    calificacion     = (Calificacion) rs.getObject( "calificacion" );
+        Tipo            tipo             = Tipo.valueOf(rs.getString("tipo"));
+        Calificacion    calificacion     = Calificacion.valueOf(rs.getString("calificacion"));
         String          poster           = rs.getString( "poster" );
         String          guion            = rs.getString( "guion" );
         String          plataforma       = rs.getString( "plataforma" );

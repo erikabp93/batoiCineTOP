@@ -1,10 +1,12 @@
 package es.progcipfpbatoi;
 
-import es.progcipfpbatoi.modelo.dao.SQLpeliculaSerieDAO;
-import es.progcipfpbatoi.modelo.dao.SQLtemporadaDAO;
-import es.progcipfpbatoi.modelo.repositorios.PeliculaSerieRepository;
-import es.progcipfpbatoi.modelo.repositorios.TemporadaRepository;
+import es.progcipfpbatoi.controlador.ChangeScene;
+import es.progcipfpbatoi.controlador.LoginController;
+import es.progcipfpbatoi.controlador.PrincipalController;
+import es.progcipfpbatoi.modelo.dao.*;
+import es.progcipfpbatoi.modelo.repositorios.*;
 import es.progcipfpbatoi.services.MySqlConnection;
+import es.progcipfpbatoi.util.DatosBD;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -22,18 +24,23 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         SQLtemporadaDAO     sqLtemporadaDAO     = new SQLtemporadaDAO();
         SQLpeliculaSerieDAO sqLpeliculaSerieDAO = new SQLpeliculaSerieDAO();
+        SQLUsuarioDAO sqLusuarioDAO  = new SQLUsuarioDAO();
+        SQLvalorarDAO sqLvalorarDAO = new SQLvalorarDAO();
+        SQLfavoritoDAO sqLfavoritoDAO = new SQLfavoritoDAO();
 
         // Creación del repositorio que será el que interactuará con el controlador.
         PeliculaSerieRepository peliculaSerieRepository = new PeliculaSerieRepository( sqLpeliculaSerieDAO, sqLtemporadaDAO );
-
         TemporadaRepository temporadaRepository = new TemporadaRepository( sqLtemporadaDAO );
+        UsuarioRepository usuarioRepository = new UsuarioRepository(sqLusuarioDAO);
+        ValoracionesRepository valoracionesRepository = new ValoracionesRepository(sqLvalorarDAO, peliculaSerieRepository);
+        FavoritosRepository favoritosRepository = new FavoritosRepository(sqLfavoritoDAO);
         // Se crea al controlador proporcionando el/los repositorio/s que necesita
-        //TareaController tareaController = new TareaController( peliculaSerieRepository );
-
+        LoginController loginController = new LoginController(peliculaSerieRepository, temporadaRepository, usuarioRepository, favoritosRepository, valoracionesRepository);
+        ChangeScene.change(stage, loginController, "/vistas/login_vista.fxml");
 
         stage.setOnCloseRequest( event -> {
             System.out.println( "App closed" );
-            new MySqlConnection( SQLtemporadaDAO.IP, SQLtemporadaDAO.DATABASE, SQLtemporadaDAO.USERNAME, SQLtemporadaDAO.PASSWORD ).closeConnection();
+            new MySqlConnection( DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD ).closeConnection();
         } );
 
     }

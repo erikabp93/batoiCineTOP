@@ -75,6 +75,10 @@ public class Produccion {
         this.visualizaciones  = 0;
     }
 
+    public Produccion(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }
@@ -154,6 +158,14 @@ public class Produccion {
                 ", fechaLanzamiento=" + fechaLanzamiento +
                 ", visualizaciones=" + visualizaciones +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Produccion produccion) {
+            return this.id == produccion.id;
+        }
+        return false;
     }
 
     public boolean empiezaPor(String text) {

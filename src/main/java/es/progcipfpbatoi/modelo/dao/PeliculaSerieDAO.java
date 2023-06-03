@@ -2,6 +2,7 @@ package es.progcipfpbatoi.modelo.dao;
 
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
 import es.progcipfpbatoi.exceptions.NotFoundException;
+import es.progcipfpbatoi.modelo.dto.Genero;
 import es.progcipfpbatoi.modelo.dto.Produccion;
 
 import java.util.ArrayList;
@@ -18,6 +19,10 @@ public interface PeliculaSerieDAO {
      * @return
      */
     ArrayList<Produccion> findAll(String text) throws DatabaseErrorException;
+
+    ArrayList<Produccion> findAll(String text, Genero genero) throws DatabaseErrorException;
+
+    ArrayList<Produccion> findAll(Genero genero) throws DatabaseErrorException;
 
     /**
      * Obtiene la produccion cuyo id sea @id
@@ -43,4 +48,6 @@ public interface PeliculaSerieDAO {
     Produccion save(Produccion produccion) throws DatabaseErrorException;
 
     void remove(Produccion produccion) throws DatabaseErrorException, NotFoundException;
+
+    String getPoster(int id) throws DatabaseErrorException;
 }

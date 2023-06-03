@@ -3,6 +3,7 @@ package es.progcipfpbatoi.modelo.dao;
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
 import es.progcipfpbatoi.modelo.dto.Temporada;
 import es.progcipfpbatoi.services.MySqlConnection;
+import es.progcipfpbatoi.util.DatosBD;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -24,7 +25,7 @@ public class SQLtemporadaDAO implements TemporadaDAO {
         String sql = String.format("SELECT * FROM %s", TABLE_NAME);
 
         ArrayList<Temporada> temporadas = new ArrayList<>();
-        connection =  new MySqlConnection(IP, DATABASE, USERNAME, PASSWORD).getConnection();
+        connection =  new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
 
         try (
                 Statement statement = connection.createStatement();
@@ -47,7 +48,7 @@ public class SQLtemporadaDAO implements TemporadaDAO {
     @Override
     public Temporada findById(int id) throws DatabaseErrorException {
         String sql = String.format("SELECT * FROM %s WHERE id = ?",TABLE_NAME);
-        connection =  new MySqlConnection(IP, DATABASE, USERNAME, PASSWORD).getConnection();
+        connection =  new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
 
         try (PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             statement.setInt(1, id);
@@ -80,7 +81,7 @@ public class SQLtemporadaDAO implements TemporadaDAO {
     private Temporada insert(Temporada temporada) throws DatabaseErrorException {
         String sql = String.format("INSERT INTO %s (id, id_serie, plot, fechaLanzamiento, numCapitulos) VALUES (?,?,?,?,?)",
                 TABLE_NAME);
-        connection =  new MySqlConnection(IP, DATABASE, USERNAME, PASSWORD).getConnection();
+        connection =  new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
 
         try (
                 PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)
@@ -104,7 +105,7 @@ public class SQLtemporadaDAO implements TemporadaDAO {
     private Temporada update(Temporada temporada) throws DatabaseErrorException{
         String sql = String.format("UPDATE %s SET id_serie = ?, plot = ?, fechaLanzamiento = ?, numCapitulos = ? WHERE id = ?",
                 TABLE_NAME);
-        connection =  new MySqlConnection(IP, DATABASE, USERNAME, PASSWORD).getConnection();
+        connection =  new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
 
         try (
                 PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)
