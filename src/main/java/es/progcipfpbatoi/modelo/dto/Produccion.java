@@ -107,9 +107,18 @@ public class Produccion {
                 genero ) {
             generosDatabaseFormat.append( generoItem.toString() ).append( ", " );
         }
-        generosDatabaseFormat.deleteCharAt( generosDatabaseFormat.length() - 1 );
-        generosDatabaseFormat.deleteCharAt( generosDatabaseFormat.length() - 1 );
-        return generosDatabaseFormat.toString().replaceAll( " ","" );
+        String allGeneros = generosDatabaseFormat.toString();
+        allGeneros = deleteAllSpaces( allGeneros );
+        allGeneros = deleteLastComma( allGeneros );
+        return allGeneros;
+    }
+
+    private static String deleteAllSpaces(String generosDatabaseFormat) {
+        return generosDatabaseFormat.replaceAll( " ", "" );
+    }
+
+    private static String deleteLastComma(String generosDatabaseFormat) {
+        return generosDatabaseFormat.substring( 0, generosDatabaseFormat.length() - 1 );
     }
 
     public String getGenerosWithDataBaseFormat(HashSet<Genero> genero) {
