@@ -14,6 +14,12 @@ public enum Tipo {
         public String toString() {
             return "SERIE";
         }
+    },
+    tv_show {
+        @Override
+        public String toString() {
+            return "tv_show";
+        }
     };
 
     public static Tipo parse(String tipoStr) throws CategoryTypeErrorException {

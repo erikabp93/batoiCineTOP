@@ -14,7 +14,7 @@ public class SQLUsuarioDAO implements UsuarioDAO {
 
     private Connection connection;
     private static final String TABLE_NAME = "usuarios";
-    private static final String IP = "172.16.226.108";
+    private static final String IP = "192.168.1.137";
     private static final String DATABASE = "batoiCine_bd";
     private static final String USERNAME = "batoi";
     private static final String PASSWORD = "1234";

@@ -115,7 +115,7 @@ public enum Genero {
     public static Genero parse(String categoriaStr) throws CategoryTypeErrorException {
 
         for ( Genero genero : Genero.values() ) {
-            if ( genero.toString().equals( categoriaStr ) ) {
+            if ( genero.toString().equalsIgnoreCase( categoriaStr ) ) {
                 return genero;
             }
         }

@@ -2,6 +2,7 @@ package es.progcipfpbatoi.modelo.dto;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Set;
 
 public class Produccion {
 
@@ -13,7 +14,7 @@ public class Produccion {
 
     private String titulo;
 
-    private HashSet<Genero> genero;
+    private Set<Genero> genero;
 
     private String director;
 
@@ -35,7 +36,7 @@ public class Produccion {
 
     private int visualizaciones;
 
-    public Produccion(int id, int duracion, String actores, String titulo, HashSet<Genero> genero, String director,
+    public Produccion(int id, int duracion, String actores, String titulo, Set<Genero> genero, String director,
                       String urlTrailer, String productor, Tipo tipo, Calificacion calificacion, String poster,
                       String guion, String plataforma, LocalDate fechaLanzamiento, int visualizaciones) {
         this.id               = id;
@@ -55,7 +56,7 @@ public class Produccion {
         this.visualizaciones  = visualizaciones;
     }
 
-    public Produccion(int id, int duracion, String actores, String titulo, HashSet<Genero> genero, String director,
+    public Produccion(int id, int duracion, String actores, String titulo, Set<Genero> genero, String director,
                       String urlTrailer, String productor, Tipo tipo, Calificacion calificacion, String poster,
                       String guion, String plataforma, LocalDate fechaLanzamiento) {
         this.id               = id;
@@ -75,6 +76,11 @@ public class Produccion {
         this.visualizaciones  = 0;
     }
 
+    public Produccion(int id) {
+        this.id     = id;
+        this.genero = new HashSet<>();
+    }
+
     public int getId() {
         return id;
     }
@@ -91,8 +97,38 @@ public class Produccion {
         return titulo;
     }
 
-    public HashSet<Genero> getGenero() {
+    public Set<Genero> getGenero() {
         return genero;
+    }
+
+    public String getGenerosWithDataBaseFormat() {
+        StringBuilder generosDatabaseFormat = new StringBuilder();
+        for ( Genero generoItem :
+                genero ) {
+            generosDatabaseFormat.append( generoItem.toString() ).append( ", " );
+        }
+        generosDatabaseFormat.deleteCharAt( generosDatabaseFormat.length() - 1 );
+        generosDatabaseFormat.deleteCharAt( generosDatabaseFormat.length() - 1 );
+        return generosDatabaseFormat.toString().replaceAll( " ","" );
+    }
+
+    public String getGenerosWithDataBaseFormat(HashSet<Genero> genero) {
+        StringBuilder generosDatabaseFormat = new StringBuilder();
+        for ( Genero generoItem :
+                genero ) {
+            generosDatabaseFormat.append( "'" ).append( generoItem.toString() ).append( "'" ).append( "," );
+        }
+        generosDatabaseFormat.deleteCharAt( generosDatabaseFormat.length() - 1 );
+        return generosDatabaseFormat.toString();
+    }
+
+    public static void main(String[] args) {
+        Produccion      produccion = new Produccion( 1 );
+        HashSet<Genero> genero     = new HashSet<>();
+        genero.add( Genero.DRAMA );
+        genero.add( Genero.HISTORY );
+        genero.add( Genero.BIOGRAPHY );
+        System.out.println( produccion.getGenerosWithDataBaseFormat( genero ) );
     }
 
     public String getDirector() {
@@ -157,7 +193,7 @@ public class Produccion {
     }
 
     public boolean empiezaPor(String text) {
-        return this.titulo.startsWith(text);
+        return this.titulo.startsWith( text );
     }
 
 

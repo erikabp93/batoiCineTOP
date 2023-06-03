@@ -11,9 +11,7 @@ import es.progcipfpbatoi.modelo.dto.Tipo;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Locale;
+import java.util.*;
 
 public class CsvToProducciones {
 
@@ -48,20 +46,20 @@ public class CsvToProducciones {
     }
 
     private Produccion getProduccionFromRegister(String register) {
-        String[]        fields       = register.split( FIELD_SEPARATOR );
-        int             id           = Integer.parseInt( fields[ ID ] );
-        int             duracion     = Integer.parseInt( fields[ DURACION ].replaceAll( "[^0-9]", "" ) );
-        String          actores      = fields[ ACTORES ];
-        String          titulo       = fields[ TITULO ];
-        HashSet<Genero> generos      = parseGeneros( fields );
-        String          director     = fields[ DIRECTOR ];
-        String          urlTrailer   = fields[ WEB ];
-        String          productor    = fields[ PRODUCTORA ];
-        Tipo            tipo         = Tipo.parse( fields[ TIPO ] );
-        Calificacion    calificacion = Calificacion.parse( fields[ CALIFICACION ] );
-        String          poster       = fields[ PORTADA ];
-        String          guion        = fields[ GUION ];
-        String          plataforma   = fields[ PLATAFORMA ];
+        String[]     fields       = register.split( FIELD_SEPARATOR );
+        int          id           = Integer.parseInt( fields[ ID ] );
+        int          duracion     = Integer.parseInt( fields[ DURACION ].replaceAll( "[^0-9]", "" ) );
+        String       actores      = fields[ ACTORES ];
+        String       titulo       = fields[ TITULO ];
+        Set<Genero>  generos      = parseGeneros( fields[ GENERO ] );
+        String       director     = fields[ DIRECTOR ];
+        String       urlTrailer   = fields[ WEB ];
+        String       productor    = fields[ PRODUCTORA ];
+        Tipo         tipo         = Tipo.parse( fields[ TIPO ] );
+        Calificacion calificacion = Calificacion.parse( fields[ CALIFICACION ] );
+        String       poster       = fields[ PORTADA ];
+        String       guion        = fields[ GUION ];
+        String       plataforma   = fields[ PLATAFORMA ];
         fields[ FECHA_LANZAMIENTO ] = fields[ FECHA_LANZAMIENTO ].replaceAll( " ", "-" );
         String[]  fechaDesmenuzada = fields[ FECHA_LANZAMIENTO ].split( "-" );
         LocalDate fechaLanzamiento = LocalDate.of( Integer.parseInt( fechaDesmenuzada[ ANYO ] ), Month.getMonthByThreeInitials( fechaDesmenuzada[ MES ] ), Integer.parseInt( fechaDesmenuzada[ DIA ] ) );
@@ -73,12 +71,13 @@ public class CsvToProducciones {
         return generStr.replaceAll( " ", "" );
     }
 
-    public static HashSet<Genero> parseGeneros(String[] fields) throws CategoryTypeErrorException {
-        HashSet<Genero> generoHashSet = new HashSet<>();
-        for ( String generoItem :
-                fields[ GENERO ].split( "," ) ) {
-            generoItem = cleanWhiteSpaces( generoItem );
-            generoHashSet.add( Genero.parse( generoItem ) );
+    public static Set<Genero> parseGeneros(String generosStr) throws CategoryTypeErrorException {
+        Set<Genero> generoHashSet = new HashSet<>();
+        String[]      words         = generosStr.split( "," );
+        for ( String generoStringItem :
+                words ) {
+            generoStringItem = cleanWhiteSpaces( generoStringItem );
+            generoHashSet.add( Genero.parse( generoStringItem ) );
         }
         return generoHashSet;
     }
