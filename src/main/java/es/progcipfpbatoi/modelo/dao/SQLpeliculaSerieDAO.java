@@ -25,6 +25,8 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
     private static final String     USERNAME   = "batoi";
     private static final String     PASSWORD   = "1234";
 
+    /**
+     * Pasar de csv a la bd
     public static void main(String[] args) {
         CsvToProducciones csvToProducciones = new CsvToProducciones();
         try {
@@ -38,6 +40,7 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
             throw new RuntimeException( e );
         }
     }
+     **/
 
     @Override
     public ArrayList<Produccion> findAll() throws DatabaseErrorException {

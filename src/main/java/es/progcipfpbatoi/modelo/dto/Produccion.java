@@ -131,15 +131,6 @@ public class Produccion {
         return generosDatabaseFormat.toString();
     }
 
-    public static void main(String[] args) {
-        Produccion      produccion = new Produccion( 1 );
-        HashSet<Genero> genero     = new HashSet<>();
-        genero.add( Genero.DRAMA );
-        genero.add( Genero.HISTORY );
-        genero.add( Genero.BIOGRAPHY );
-        System.out.println( produccion.getGenerosWithDataBaseFormat( genero ) );
-    }
-
     public String getDirector() {
         return director;
     }
