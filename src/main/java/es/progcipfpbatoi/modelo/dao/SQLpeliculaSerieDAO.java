@@ -133,11 +133,11 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
             preparedStatement.setInt( 2, produccion.getDuracion() );
             preparedStatement.setString( 3, produccion.getActores() );
             preparedStatement.setString( 4, produccion.getTitulo() );
-            preparedStatement.setString( 5, Genero.ACTION.toString() );
+            preparedStatement.setString( 5, produccion.getGenerosWithDataBaseFormat() );
             preparedStatement.setString( 6, produccion.getDirector() );
             preparedStatement.setString( 7, produccion.getUrlTrailer() );
             preparedStatement.setString( 8, produccion.getProductor() );
-            preparedStatement.setString( 9, Tipo.SERIE.toString() );
+            preparedStatement.setString( 9, produccion.getTipo().toString() );
             preparedStatement.setString( 10, produccion.getCalificacion().toString() );
             preparedStatement.setString( 11, produccion.getPoster() );
             preparedStatement.setString( 12, produccion.getGuion() );
