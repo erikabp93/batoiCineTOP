@@ -2,20 +2,16 @@ package es.progcipfpbatoi.modelo.dao;
 
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
 import es.progcipfpbatoi.exceptions.NotFoundException;
-import es.progcipfpbatoi.modelo.dao.PeliculaSerieDAO;
 import es.progcipfpbatoi.modelo.dto.Calificacion;
 import es.progcipfpbatoi.modelo.dto.Genero;
 import es.progcipfpbatoi.modelo.dto.Produccion;
 import es.progcipfpbatoi.modelo.dto.Tipo;
 import es.progcipfpbatoi.services.MySqlConnection;
 import es.progcipfpbatoi.util.CsvToProducciones;
-import es.progcipfpbatoi.util.CsvToTemporadas;
 
 import java.sql.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Set;
 
 public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
