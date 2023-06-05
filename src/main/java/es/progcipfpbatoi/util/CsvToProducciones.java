@@ -60,10 +60,15 @@ public class CsvToProducciones {
         String       poster       = fields[ PORTADA ];
         String       guion        = fields[ GUION ];
         String       plataforma   = fields[ PLATAFORMA ];
+        int anyo;
         fields[ FECHA_LANZAMIENTO ] = fields[ FECHA_LANZAMIENTO ].replaceAll( " ", "-" );
-        String[]  fechaDesmenuzada = fields[ FECHA_LANZAMIENTO ].split( "-" );
-        LocalDate fechaLanzamiento = LocalDate.of( Integer.parseInt( fechaDesmenuzada[ ANYO ] ), Month.getMonthByThreeInitials( fechaDesmenuzada[ MES ] ), Integer.parseInt( fechaDesmenuzada[ DIA ] ) );
-        //orden del .of creo que primeor va el año
+        String[]  fechaDesmenuzada  = fields[ FECHA_LANZAMIENTO ].split( "-" );
+        if (fechaDesmenuzada[ANYO].length() <= 2) {
+            anyo = anyo4digitos(Integer.parseInt(fechaDesmenuzada[ANYO]));
+        } else {
+            anyo = Integer.parseInt(fechaDesmenuzada[ANYO]);
+        }
+        LocalDate fechaLanzamiento  = LocalDate.of( anyo, Month.getMonthByThreeInitials( fechaDesmenuzada[ MES ] ), Integer.parseInt( fechaDesmenuzada[ DIA ] ) );
         return new Produccion( id, duracion, actores, titulo, generos, director, urlTrailer, productor, tipo, calificacion, poster, guion, plataforma, fechaLanzamiento );
     }
 
@@ -82,6 +87,17 @@ public class CsvToProducciones {
         return generoHashSet;
     }
 
+    private int anyo4digitos(int anyo) {
+        int anyoActual = LocalDate.now().getYear();
+        if (Integer.parseInt("20"+anyo) >= anyoActual) {
+            return Integer.parseInt("19"+anyo);
+        } else {
+            if (anyo < 10) {
+                return Integer.parseInt("200"+anyo);
+            }
+            return Integer.parseInt("20"+anyo);
+        }
+    }
 
     private String getRegisterFromProduccion(Produccion produccion) {
         String[] fields = new String[ 14 ];
