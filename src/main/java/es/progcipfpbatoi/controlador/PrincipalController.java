@@ -74,7 +74,7 @@ public class PrincipalController implements Initializable {
     private ObservableList<Produccion> getDataPeliculas() {
         try {
             ArrayList<Produccion> temp = valoracionesRepository.findAllPeliculas();
-            if (temp.size() == 0) {
+            if (temp == null || temp.size() == 0) {
                 return FXCollections.observableArrayList(peliculaSerieRepository.findAllPeliculas());
             } else
                 return FXCollections.observableArrayList(temp);
@@ -95,7 +95,7 @@ public class PrincipalController implements Initializable {
     private ObservableList<Produccion> getDataSeries() {
         try {
             ArrayList<Produccion> temp = valoracionesRepository.findAllSeries();
-            if (temp.size() == 0) {
+            if (temp == null || temp.size() == 0) {
                 return FXCollections.observableArrayList(peliculaSerieRepository.findAllSeries());
             } else
                 return FXCollections.observableArrayList(temp);

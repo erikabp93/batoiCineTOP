@@ -29,7 +29,7 @@ public class ValoracionesRepository {
     public ArrayList<Produccion> findAllPeliculas() throws DatabaseErrorException {
         ArrayList<Produccion> peliculas = new ArrayList<>();
         for (Produccion produccion : findAll()) {
-            if (produccion.getTipo().toString().equals("PELICULA")) {
+            if (produccion.getTipo().toString().equals("MOVIE")) {
                 peliculas.add(produccion);
             }
         }
@@ -39,7 +39,7 @@ public class ValoracionesRepository {
     public ArrayList<Produccion> findAllSeries() throws DatabaseErrorException {
         ArrayList<Produccion> series = new ArrayList<>();
         for (Produccion produccion : findAll()) {
-            if (produccion.getTipo().toString().equals("SERIE")) {
+            if (produccion.getTipo().toString().equals("SERIE") || produccion.getTipo().toString().equals("tv_show")) {
                 series.add(produccion);
             }
         }
