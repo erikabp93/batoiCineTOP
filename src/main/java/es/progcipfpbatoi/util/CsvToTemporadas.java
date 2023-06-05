@@ -31,22 +31,22 @@ public class CsvToTemporadas {
     }
 
     private Temporada getTemporadaFromRegister(String register) {
-        String[]  fields           = register.split( FIELD_SEPARATOR );
-        int       idPelicula       = Integer.parseInt( fields[ ID_PELICULA ] );
-        int       idTemporada      = Integer.parseInt( fields[ ID_TEMPORADA ] );
-        String    guion            = fields[ GUION ];
-        LocalDate fechaLanzamiento = LocalDate.parse( fields[ FECHA_LANZAMIENTO ], DateTimeFormatter.ofPattern( "yyyy" ) );
-        int       capitulos        = Integer.parseInt( fields[ CAPITULOS ] );
+        String[] fields           = register.split( FIELD_SEPARATOR );
+        int      idPelicula       = Integer.parseInt( fields[ID_PELICULA] );
+        int      idTemporada      = Integer.parseInt( fields[ID_TEMPORADA] );
+        String   guion            = fields[GUION];
+        int      fechaLanzamiento = Integer.parseInt( fields[FECHA_LANZAMIENTO] );
+        int      capitulos        = Integer.parseInt( fields[CAPITULOS] );
         return new Temporada( idPelicula, idTemporada, guion, fechaLanzamiento, capitulos );
     }
 
     private String getRegisterFromTemporada(Temporada temporada) {
-        String[] fields = new String[ 5 ];
-        fields[ ID_PELICULA ]       = String.valueOf( temporada.getId() );
-        fields[ ID_TEMPORADA ]      = String.valueOf( temporada.getId_serie() );
-        fields[ GUION ]             = String.valueOf( temporada.getPlot() );
-        fields[ FECHA_LANZAMIENTO ] = temporada.getFechaLanzamiento().format( DateTimeFormatter.ofPattern( "yyyy" ) );
-        fields[ CAPITULOS ]         = String.valueOf( temporada.getNumCapitulos() );
+        String[] fields = new String[5];
+        fields[ID_PELICULA]       = String.valueOf( temporada.getId() );
+        fields[ID_TEMPORADA]      = String.valueOf( temporada.getId_serie() );
+        fields[GUION]             = String.valueOf( temporada.getPlot() );
+        fields[FECHA_LANZAMIENTO] = String.valueOf( temporada.getFechaLanzamiento() );
+        fields[CAPITULOS]         = String.valueOf( temporada.getNumCapitulos() );
         return String.join( FIELD_SEPARATOR, fields );
     }
 
@@ -54,6 +54,7 @@ public class CsvToTemporadas {
         try {
             ArrayList<Temporada> temporadaArrayList = new ArrayList<>();
             try ( BufferedReader bufferedReader = getReader() ) {
+                bufferedReader.readLine();
                 do {
                     String register = bufferedReader.readLine();
                     if ( register == null ) {
@@ -69,7 +70,7 @@ public class CsvToTemporadas {
     }
 
     public Temporada getById(int id) throws NotFoundException, DatabaseErrorException {
-        try ( FileReader fileReader = new FileReader( this.file );
+        try ( FileReader fileReader = new FileReader( this.file ) ;
               BufferedReader bufferedReader = new BufferedReader( fileReader ) ) {
 
             do {
