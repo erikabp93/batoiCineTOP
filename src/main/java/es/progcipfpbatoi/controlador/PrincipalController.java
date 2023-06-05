@@ -107,9 +107,9 @@ public class PrincipalController implements Initializable {
     @FXML
     public void cerrar(ActionEvent event) {
         Alert alert = new Alert( Alert.AlertType.CONFIRMATION);
-        alert.setTitle( "Salir" );
-        alert.setHeaderText( "" );
-        alert.setContentText( "¿Estás seguro que quieres cerrar de la aplicación?" );
+        alert.setTitle("Salir");
+        alert.setHeaderText("");
+        alert.setContentText("¿Estás seguro que quieres cerrar de la aplicación?");
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK ) {
@@ -119,16 +119,20 @@ public class PrincipalController implements Initializable {
     }
 
     @FXML
-    public void cambiarUsuario(ActionEvent event) throws IOException {
+    public void cambiarUsuario(ActionEvent event){
         Alert alert = new Alert( Alert.AlertType.CONFIRMATION);
-        alert.setTitle( "Cambiar de usuario" );
-        alert.setHeaderText( "" );
-        alert.setContentText( "¿Estás seguro que quieres cambiar a otro usuario?" );
+        alert.setTitle("Cambiar de usuario");
+        alert.setHeaderText("");
+        alert.setContentText("¿Estás seguro que quieres cambiar a otro usuario?");
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK ) {
-            LoginController loginController = new LoginController(peliculaSerieRepository, temporadaRepository, usuarioRepository, favoritosRepository, valoracionesRepository);
-            ChangeScene.change(event, loginController, "/vistas/login_vista.fxml");
+            try {
+                LoginController loginController = new LoginController(peliculaSerieRepository, temporadaRepository, usuarioRepository, favoritosRepository, valoracionesRepository);
+                ChangeScene.change(event, loginController, "/vistas/login_vista.fxml");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
         alert.close();
     }
