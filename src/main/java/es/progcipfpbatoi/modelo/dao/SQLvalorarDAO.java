@@ -145,10 +145,13 @@ public class SQLvalorarDAO implements ValorarDAO {
         int duracion = rs.getInt("duracion");
         String actores = rs.getString("actores");
         String nombre = rs.getString("titulo");
-        String[] generos = rs.getString("genero").split(",");
-        HashSet<Genero> genero = new HashSet<>();
-        for (String actual : generos) {
-            genero.add(Genero.valueOf(actual.toUpperCase()));
+        HashSet<Genero> genero = null;
+        if (rs.getString("genero") != null) {
+            String[] generos = rs.getString("genero").split(",");
+            genero = new HashSet<>();
+            for (String actual : generos) {
+                genero.add(Genero.valueOf(actual.toUpperCase()));
+            }
         }
 
         String director = rs.getString("director");
