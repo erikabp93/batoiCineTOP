@@ -62,7 +62,7 @@ public class BusquedaController implements Initializable {
 
         resultadosListView.setItems(getData());
         resultadosListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        resultadosListView.setCellFactory((ListView<Produccion> l) -> new ProduccionListCellController(favoritosRepository, usuario));
+        resultadosListView.setCellFactory((ListView<Produccion> l) -> new ProduccionListCellController(favoritosRepository, valoracionesRepository,usuario, this));
     }
 
     private ObservableList<Produccion> getData() {
