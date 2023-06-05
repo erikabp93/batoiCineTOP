@@ -66,7 +66,7 @@ public class DetallesController implements Initializable {
             dialog.setTitle("Comentario valoración");
             dialog.setHeaderText("Por favor, escriba un comentario para la valoración de la produccion");
             dialog.setContentText("Comentario:");
-            Optional<String> result = dialog.showAndWait();
+            String result = String.valueOf(dialog.showAndWait());
             int valoracion;
             if (valoracion1.isSelected()) {
                 valoracion = 1;
@@ -79,7 +79,12 @@ public class DetallesController implements Initializable {
             } else {
                 valoracion = 5;
             }
-            valoracionesRepository.save(produccion, usuario, valoracion, String.valueOf(result));
+            valoracionesRepository.save(produccion, usuario, valoracion, result.substring(9, result.length()-1));
+            valoracion1.setSelected(false);
+            valoracion2.setSelected(false);
+            valoracion3.setSelected(false);
+            valoracion4.setSelected(false);
+            valoracion5.setSelected(false);
         } catch (DatabaseErrorException | SQLException e) {
             throw new RuntimeException(e);
         }

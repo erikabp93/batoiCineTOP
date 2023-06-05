@@ -4,11 +4,14 @@ import es.progcipfpbatoi.exceptions.DatabaseErrorException;
 import es.progcipfpbatoi.modelo.dto.*;
 import es.progcipfpbatoi.services.MySqlConnection;
 import es.progcipfpbatoi.util.DatosBD;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Optional;
 
 public class SQLvalorarDAO implements ValorarDAO {
 
@@ -43,7 +46,7 @@ public class SQLvalorarDAO implements ValorarDAO {
     }
 
     private ArrayList<Produccion> valoradasPorUsuario(Usuario usuario) throws DatabaseErrorException {
-        String sql = String.format("SELECT * FROM produccion P INNER JOIN %s V ON (P.id = V.id_produccion) WHERE V.username LIKE %s ORDER BY V.valoracion DESC;", TABLE_NAME, usuario.getUsername());
+        String sql = String.format("SELECT * FROM produccion P INNER JOIN %s V ON (P.id = V.id_produccion) WHERE V.username LIKE \"%s\" ORDER BY V.valoracion DESC;", TABLE_NAME, usuario.getUsername());
         ArrayList<Produccion> producciones = new ArrayList<>();
         connection =  new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
 
@@ -71,7 +74,28 @@ public class SQLvalorarDAO implements ValorarDAO {
         connection =  new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
 
         if (yaValorado(produccion, usuario)) {
-            return false;
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            if (produccion.getTipo().equals(Tipo.MOVIE)) {
+                alert.setTitle("Película ya valorada");
+                alert.setHeaderText(usuario.getUsername() + " ya has valorado esta película");
+            } else if (produccion.getTipo().equals(Tipo.SERIE)) {
+                alert.setTitle("Serie ya valorada");
+                alert.setHeaderText(usuario.getUsername() + " ya has valorado esta serie");
+            } else {
+                alert.setTitle("Producción ya valorada");
+                alert.setHeaderText(usuario.getUsername() + " ya has valorado esta producción");
+            }
+            alert.setContentText("Quieres cambiar la valoración?");
+            ButtonType botonSi = new ButtonType("Si");
+            ButtonType botonNo = new ButtonType("No");
+
+            alert.getButtonTypes().setAll(botonSi, botonNo);
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == botonSi){
+                borrarValoracion(produccion, usuario);
+            } else if (result.get() == botonNo) {
+                return false;
+            }
         }
         try (
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -97,6 +121,23 @@ public class SQLvalorarDAO implements ValorarDAO {
             }
         }
         return false;
+    }
+
+    private void borrarValoracion(Produccion produccion, Usuario usuario) throws DatabaseErrorException {
+        String sql = String.format("DELETE FROM %s WHERE username LIKE ? AND id_produccion = ?", TABLE_NAME);
+        connection =  new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
+
+        try (
+                PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)
+        ) {
+            statement.setString(1, usuario.getUsername());
+            statement.setInt(2, produccion.getId());
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DatabaseErrorException("Ha ocurrido un error en el acceso o conexión a la base de datos (delete)");
+        }
     }
 
     private Produccion getProduccionFromResultset(ResultSet rs) throws SQLException {
