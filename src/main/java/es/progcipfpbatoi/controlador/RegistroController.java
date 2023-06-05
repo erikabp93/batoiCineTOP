@@ -59,6 +59,16 @@ public class RegistroController implements Initializable {
                     usuarioRepository.save(usuarioNuevo);
                     PrincipalController principalController = new PrincipalController(usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, controladorPadre, vistaPadre, usuarioNuevo);
                     ChangeScene.change(event, principalController, "/vistas/principal_vista.fxml");
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Error usuario");
+                    alert.setHeaderText("Este usuario ya esta ocupado");
+                    alert.setContentText("Escribe otro nombre por favor");
+                    alert.showAndWait();
+                    email.setText("");
+                    usuario.setText("");
+                    password.setText("");
+                    passwordRepeat.setText("");
                 }
             } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
