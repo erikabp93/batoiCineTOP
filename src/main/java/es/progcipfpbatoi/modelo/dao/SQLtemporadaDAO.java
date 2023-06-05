@@ -3,6 +3,7 @@ package es.progcipfpbatoi.modelo.dao;
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
 import es.progcipfpbatoi.modelo.dto.Temporada;
 import es.progcipfpbatoi.services.MySqlConnection;
+import es.progcipfpbatoi.util.CsvToTemporadas;
 import es.progcipfpbatoi.util.DatosBD;
 
 import java.sql.*;
@@ -15,10 +16,19 @@ public class SQLtemporadaDAO implements TemporadaDAO {
 
     private Connection connection;
     private static final String TABLE_NAME = "temporadas";
-    public static final String IP = "172.16.226.108";
-    public static final String DATABASE = "batoiCine_bd";
-    public static final String USERNAME = "admin";
-    public static final String PASSWORD = "1234";
+    public static void main(String[] args) {
+        CsvToTemporadas csvToProducciones = new CsvToTemporadas();
+        try {
+            ArrayList<Temporada> arrayList           = csvToProducciones.findAll();
+            SQLtemporadaDAO   sqLPeliculaTemporadaDAO = new SQLtemporadaDAO();
+            for ( Temporada temporadaItem :
+                    arrayList ) {
+                sqLPeliculaTemporadaDAO.save( temporadaItem );
+            }
+        } catch ( DatabaseErrorException e ) {
+            throw new RuntimeException( e );
+        }
+    }
 
     @Override
     public ArrayList<Temporada> findAll() throws DatabaseErrorException {

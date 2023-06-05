@@ -35,7 +35,7 @@ public class CsvToTemporadas {
         int       idPelicula       = Integer.parseInt( fields[ ID_PELICULA ] );
         int       idTemporada      = Integer.parseInt( fields[ ID_TEMPORADA ] );
         String    guion            = fields[ GUION ];
-        LocalDate fechaLanzamiento = LocalDate.parse( fields[ FECHA_LANZAMIENTO ], DateTimeFormatter.ofPattern( "yyyy" ) );
+        LocalDate fechaLanzamiento = LocalDate.parse( fields[ FECHA_LANZAMIENTO ], DateTimeFormatter.ofPattern( "yy" ) );
         int       capitulos        = Integer.parseInt( fields[ CAPITULOS ] );
         return new Temporada( idPelicula, idTemporada, guion, fechaLanzamiento, capitulos );
     }
@@ -54,6 +54,7 @@ public class CsvToTemporadas {
         try {
             ArrayList<Temporada> temporadaArrayList = new ArrayList<>();
             try ( BufferedReader bufferedReader = getReader() ) {
+                bufferedReader.readLine();
                 do {
                     String register = bufferedReader.readLine();
                     if ( register == null ) {

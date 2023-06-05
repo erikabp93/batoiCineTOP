@@ -20,10 +20,6 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
 
     private              Connection connection;
     private static final String     TABLE_NAME = "produccion";
-    private static final String     IP         = "192.168.1.137";
-    private static final String     DATABASE   = "batoiCine_bd";
-    private static final String     USERNAME   = "batoi";
-    private static final String     PASSWORD   = "1234";
 
     /**
      * Pasar de csv a la bd
