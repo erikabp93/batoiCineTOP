@@ -21,6 +21,7 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
     private              Connection connection;
     private static final String     TABLE_NAME = "produccion";
 
+    /*
     //Pasar de csv a la bd
     public static void main(String[] args) {
         CsvToProducciones csvToProducciones = new CsvToProducciones();
@@ -35,6 +36,7 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
             throw new RuntimeException( e );
         }
     }
+     */
 
     @Override
     public ArrayList<Produccion> findAll() throws DatabaseErrorException {

@@ -7,9 +7,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="240.0" prefWidth="440.0" style="-fx-border-width: 1px; -fx-border-color: black;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="root" prefHeight="225.0" prefWidth="440.0" style="-fx-border-width: 1px; -fx-border-color: black;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="imagen" fitHeight="240.0" fitWidth="170.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <ImageView fx:id="imagen" fitHeight="225.0" fitWidth="170.0" layoutX="-2.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../images/Image_not_available.png" />
+         </image></ImageView>
       <Label fx:id="titulo" contentDisplay="CENTER" layoutX="182.0" layoutY="68.0" prefHeight="50.0" prefWidth="249.0" text="Título" wrapText="true" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <font>
             <Font name="System Bold" size="15.0" />

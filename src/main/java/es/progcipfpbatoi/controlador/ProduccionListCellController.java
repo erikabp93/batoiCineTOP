@@ -121,7 +121,15 @@ public class ProduccionListCellController extends ListCell<Produccion> {
             }
 
             Image image = new Image(ValoracionesRepository.getPoster(produccion.getId()));
-            imagen.setImage(image);
+            if (image.isError()) {
+                try {
+                    imagen.setImage(new Image(getPathImage("/images/Image_not_available.png")));
+                } catch (URISyntaxException e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                imagen.setImage(image);
+            }
             int valoracionInt = ValoracionesRepository.getValoracion(produccion.getId());
             valoracion.setText("Valoración: " + valoracionInt);
             titulo.setText(produccion.getTitulo());
