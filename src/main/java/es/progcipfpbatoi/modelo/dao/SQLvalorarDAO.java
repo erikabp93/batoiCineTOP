@@ -160,28 +160,9 @@ public class SQLvalorarDAO implements ValorarDAO {
         String guion = rs.getString("guion");
         String plataforma = rs.getString("plataforma");
         LocalDate fechaLanzamiento = LocalDate.from(rs.getTimestamp("fechaLanzamiento").toLocalDateTime());
+        float valoracionTotal = rs.getFloat("valoracion_total");
         int visualizaciones = rs.getInt("visualizaciones");
-        return new Produccion(id, duracion, actores, nombre, genero, director, urlTrailer, productor, tipo, calificacion, poster, guion, plataforma, fechaLanzamiento, visualizaciones);
-    }
-
-    public int getValoracion(int id) throws DatabaseErrorException {
-        String sql = String.format("SELECT ROUND(AVG(valoracion), 2) AS Valoracion_Media FROM %s WHERE id_produccion LIKE %d GROUP BY id_produccion", TABLE_NAME, id);
-        connection =  new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
-
-        try (
-                Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery(sql);
-        ) {
-
-            if (resultSet.next()) {
-                return resultSet.getInt("Valoracion_Media");
-            }
-            return 0;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new DatabaseErrorException("Ha ocurrido un error en la conexión o acceso a la base de datos (select)");
-        }
+        return new Produccion(id, duracion, actores, nombre, genero, director, urlTrailer, productor, tipo, calificacion, poster, guion, plataforma, fechaLanzamiento, visualizaciones, valoracionTotal);
     }
 
     public String getPoster(int id) throws DatabaseErrorException {

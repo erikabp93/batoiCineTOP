@@ -290,6 +290,7 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
         String       plataforma       = rs.getString( "plataforma" );
         LocalDate    fechaLanzamiento = LocalDate.from( rs.getTimestamp( "fechaLanzamiento" ).toLocalDateTime() );
         int          visualizaciones  = rs.getInt( "visualizaciones" );
-        return new Produccion( id, duracion, actores, nombre, generoHashSet, director, urlTrailer, productor, tipo, calificacion, poster, guion, plataforma, fechaLanzamiento, visualizaciones );
+        float valoracionTotal = rs.getFloat("valoracion_total");
+        return new Produccion( id, duracion, actores, nombre, generoHashSet, director, urlTrailer, productor, tipo, calificacion, poster, guion, plataforma, fechaLanzamiento, visualizaciones, valoracionTotal);
     }
 }
