@@ -163,7 +163,11 @@ public class SQLvalorarDAO implements ValorarDAO {
         }
         Calificacion calificacion = null;
         if (rs.getString("calificacion") != null) {
-            calificacion = Calificacion.valueOf(rs.getString("calificacion"));
+            if (rs.getString("calificacion").equals("PG-13")) {
+                calificacion = Calificacion.PG_13;
+            } else {
+                calificacion = Calificacion.valueOf(rs.getString("calificacion"));
+            }
         }
         String poster = rs.getString("poster");
         String guion = rs.getString("guion");
