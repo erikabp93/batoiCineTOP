@@ -111,12 +111,12 @@ public class SQLtemporadaDAO implements TemporadaDAO {
 
         } catch ( SQLException e ) {
             e.printStackTrace();
-            throw new DatabaseErrorException( "Ha ocurrido un error en el acceso o conexión a la base de datos (insert)" );
+            throw new DatabaseErrorException("Ha ocurrido un error en el acceso o conexión a la base de datos (insert)" );
         }
     }
 
     private Temporada update(Temporada temporada) throws DatabaseErrorException {
-        String sql = String.format( "UPDATE %s SET id_serie = ?, plot = ?, fechaLanzamiento = ?, numCapitulos = ? WHERE id = ?",
+        String sql = String.format("UPDATE %s SET id_serie = ?, plot = ?, fechaLanzamiento = ?, numCapitulos = ? WHERE id = ?",
                 TABLE_NAME );
         connection = new MySqlConnection( DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD ).getConnection();
 

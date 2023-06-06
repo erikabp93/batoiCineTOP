@@ -119,7 +119,7 @@ public class PrincipalController implements Initializable {
     }
 
     @FXML
-    public void cambiarUsuario(ActionEvent event){
+    public void cambiarUsuario(ActionEvent event) throws IOException {
         Alert alert = new Alert( Alert.AlertType.CONFIRMATION);
         alert.setTitle("Cambiar de usuario");
         alert.setHeaderText("");
@@ -127,12 +127,8 @@ public class PrincipalController implements Initializable {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK ) {
-            try {
-                LoginController loginController = new LoginController(peliculaSerieRepository, temporadaRepository, usuarioRepository, favoritosRepository, valoracionesRepository);
-                ChangeScene.change(event, loginController, "/vistas/login_vista.fxml");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            LoginController loginController = new LoginController(peliculaSerieRepository, temporadaRepository, usuarioRepository, favoritosRepository, valoracionesRepository);
+            ChangeScene.change(event, loginController, "/vistas/login_vista.fxml");
         }
         alert.close();
     }

@@ -93,9 +93,9 @@ public class LoginController implements Initializable {
     @FXML
     public void cerrar(ActionEvent event) {
         Alert alert = new Alert( Alert.AlertType.CONFIRMATION );
-        alert.setTitle( "Salir" );
-        alert.setHeaderText( "" );
-        alert.setContentText( "¿Estás seguro que quieres cerrar de la aplicación?" );
+        alert.setTitle("Salir");
+        alert.setHeaderText("");
+        alert.setContentText("¿Estás seguro que quieres cerrar de la aplicación?");
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK ) {
