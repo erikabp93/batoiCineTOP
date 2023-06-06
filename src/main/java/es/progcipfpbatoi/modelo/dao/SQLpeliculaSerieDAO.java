@@ -40,7 +40,7 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
 
     @Override
     public ArrayList<Produccion> findAll() throws DatabaseErrorException {
-        String sql = String.format( "SELECT * FROM %s", TABLE_NAME );
+        String sql = String.format( "SELECT * FROM %s ORDER BY valoracion_total DESC", TABLE_NAME );
 
         ArrayList<Produccion> producciones = new ArrayList<>();
         connection = new MySqlConnection( DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD ).getConnection();
