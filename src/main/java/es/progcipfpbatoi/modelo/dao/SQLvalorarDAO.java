@@ -145,22 +145,34 @@ public class SQLvalorarDAO implements ValorarDAO {
         int duracion = rs.getInt("duracion");
         String actores = rs.getString("actores");
         String nombre = rs.getString("titulo");
-        String[] generos = rs.getString("genero").split(",");
-        HashSet<Genero> genero = new HashSet<>();
-        for (String actual : generos) {
-            genero.add(Genero.valueOf(actual.toUpperCase()));
+        HashSet<Genero> genero = null;
+        if (rs.getString("genero") != null) {
+            String[] generos = rs.getString("genero").split(",");
+            genero = new HashSet<>();
+            for (String actual : generos) {
+                genero.add(Genero.valueOf(actual.toUpperCase()));
+            }
         }
 
         String director = rs.getString("director");
         String urlTrailer = rs.getString("urlTrailer");
         String productor = rs.getString("productor");
-        Tipo tipo = Tipo.valueOf(rs.getString("tipo"));
-        Calificacion calificacion = Calificacion.valueOf(rs.getString("calificacion"));
+        Tipo tipo = null;
+        if (rs.getString("tipo") != null) {
+            tipo = Tipo.valueOf(rs.getString("tipo"));
+        }
+        Calificacion calificacion = null;
+        if (rs.getString("calificacion") != null) {
+            calificacion = Calificacion.valueOf(rs.getString("calificacion"));
+        }
         String poster = rs.getString("poster");
         String guion = rs.getString("guion");
         String plataforma = rs.getString("plataforma");
-        LocalDate fechaLanzamiento = LocalDate.from(rs.getTimestamp("fechaLanzamiento").toLocalDateTime());
         float valoracionTotal = rs.getFloat("valoracion_total");
+        LocalDate fechaLanzamiento = null;
+        if (rs.getTimestamp("fechaLanzamiento") != null) {
+            fechaLanzamiento = LocalDate.from(rs.getTimestamp("fechaLanzamiento").toLocalDateTime());
+        }
         int visualizaciones = rs.getInt("visualizaciones");
         return new Produccion(id, duracion, actores, nombre, genero, director, urlTrailer, productor, tipo, calificacion, poster, guion, plataforma, fechaLanzamiento, visualizaciones, valoracionTotal);
     }
