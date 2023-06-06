@@ -130,8 +130,7 @@ public class ProduccionListCellController extends ListCell<Produccion> {
             } else {
                 imagen.setImage(image);
             }
-            int valoracionInt = ValoracionesRepository.getValoracion(produccion.getId());
-            valoracion.setText("Valoración: " + valoracionInt);
+            valoracion.setText("Valoración: " + produccion.getValoracionTotal());
             titulo.setText(produccion.getTitulo());
             desc.setText(produccion.getGuion());
             setGraphic(root);

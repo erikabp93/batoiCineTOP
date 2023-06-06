@@ -50,14 +50,6 @@ public class ValoracionesRepository {
         return series;
     }
 
-    public static int getValoracion(int id) {
-        try {
-            return sqlValorarDAO.getValoracion(id);
-        } catch (DatabaseErrorException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public static String getPoster(int id) {
         try {
             String url = sqlValorarDAO.getPoster(id);
