@@ -73,7 +73,13 @@ public class PrincipalController implements Initializable {
 
     private ObservableList<Produccion> getDataPeliculas() {
         try {
-            return FXCollections.observableArrayList(peliculaSerieRepository.findAllPeliculas());
+            ArrayList<Produccion> pelis = new ArrayList<>();
+            int iterator = 0;
+            do {
+                pelis.add(peliculaSerieRepository.findAllPeliculas().get(iterator));
+                iterator++;
+            } while (iterator < 10 && iterator < peliculaSerieRepository.findAllPeliculas().size());
+            return FXCollections.observableArrayList(pelis);
         } catch (DatabaseErrorException e) {
             throw new RuntimeException(e);
         }
@@ -90,8 +96,14 @@ public class PrincipalController implements Initializable {
 
     private ObservableList<Produccion> getDataSeries() {
         try {
-            return FXCollections.observableArrayList(peliculaSerieRepository.findAllSeries());
+            ArrayList<Produccion> series = new ArrayList<>();
+            int iterator = 0;
+            do {
+                series.add(peliculaSerieRepository.findAllSeries().get(iterator));
+                iterator++;
+            } while (iterator < peliculaSerieRepository.findAllSeries().size() && iterator < 10);
 
+            return FXCollections.observableArrayList(series);
         } catch (DatabaseErrorException e) {
             throw new RuntimeException(e);
         }

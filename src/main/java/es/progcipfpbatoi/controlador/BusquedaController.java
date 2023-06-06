@@ -8,6 +8,7 @@ import es.progcipfpbatoi.modelo.repositorios.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -78,6 +79,15 @@ public class BusquedaController implements Initializable {
                 return FXCollections.observableArrayList(peliculaSerieRepository.findAll(filtroTexto, genero));
             }
         } catch (DatabaseErrorException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    private void changeToPrincipal(Event event) {
+        try {
+            ChangeScene.change(event, controladorPadre, vistaPadre);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
