@@ -19,7 +19,7 @@ public class SQLvalorarDAO implements ValorarDAO {
     private static final String TABLE_NAME = "valorar";
     @Override
     public ArrayList<Produccion> findAll() throws DatabaseErrorException { //ordenado por mejor valoradas
-        String sql = String.format("SELECT V.id_produccion, P.duracion, P.director, P.urlTrailer, P.tipo, P.titulo," +
+        String sql = String.format("SELECT V.id_produccion, P.duracion, P.director, P.urlTrailer, P.tipo, P.titulo, P.valoracion_total," +
                 "P.productor, P.tipo, P.calificacion, P.poster, P.guion, P.actores, P.genero, P.fechaLanzamiento, P.visualizaciones, P.plataforma, " +
                 "ROUND(AVG(V.valoracion), 2) AS Valoración_Media FROM produccion P INNER JOIN %s V ON " +
                 "(P.id = V.id_produccion) ORDER BY V.valoracion DESC;", TABLE_NAME);
@@ -168,12 +168,12 @@ public class SQLvalorarDAO implements ValorarDAO {
         String poster = rs.getString("poster");
         String guion = rs.getString("guion");
         String plataforma = rs.getString("plataforma");
-        float valoracionTotal = rs.getFloat("valoracion_total");
         LocalDate fechaLanzamiento = null;
         if (rs.getTimestamp("fechaLanzamiento") != null) {
             fechaLanzamiento = LocalDate.from(rs.getTimestamp("fechaLanzamiento").toLocalDateTime());
         }
         int visualizaciones = rs.getInt("visualizaciones");
+        float valoracionTotal = rs.getFloat("valoracion_total");
         return new Produccion(id, duracion, actores, nombre, genero, director, urlTrailer, productor, tipo, calificacion, poster, guion, plataforma, fechaLanzamiento, visualizaciones, valoracionTotal);
     }
 

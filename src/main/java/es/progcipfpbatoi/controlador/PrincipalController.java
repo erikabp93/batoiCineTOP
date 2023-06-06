@@ -73,11 +73,7 @@ public class PrincipalController implements Initializable {
 
     private ObservableList<Produccion> getDataPeliculas() {
         try {
-            ArrayList<Produccion> temp = valoracionesRepository.findAllPeliculas();
-            if (temp == null || temp.size() == 0) {
-                return FXCollections.observableArrayList(peliculaSerieRepository.findAllPeliculas());
-            } else
-                return FXCollections.observableArrayList(temp);
+            return FXCollections.observableArrayList(peliculaSerieRepository.findAllPeliculas());
         } catch (DatabaseErrorException e) {
             throw new RuntimeException(e);
         }
@@ -94,11 +90,8 @@ public class PrincipalController implements Initializable {
 
     private ObservableList<Produccion> getDataSeries() {
         try {
-            ArrayList<Produccion> temp = valoracionesRepository.findAllSeries();
-            if (temp == null || temp.size() == 0) {
-                return FXCollections.observableArrayList(peliculaSerieRepository.findAllSeries());
-            } else
-                return FXCollections.observableArrayList(temp);
+            return FXCollections.observableArrayList(peliculaSerieRepository.findAllSeries());
+
         } catch (DatabaseErrorException e) {
             throw new RuntimeException(e);
         }
