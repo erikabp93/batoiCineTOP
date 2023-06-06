@@ -22,14 +22,33 @@ public class CsvToTemporadas {
 
     private File file;
 
+    /**
+     * Constructor de la clase, obligatorio ponerlo, ya que si no se pone nos da warning
+     */
     public CsvToTemporadas() {
         this.file = new File( DATABASE_FILE );
     }
 
+    /**
+     * Gracias al atributo file, creamos el FileReader y gracias al FileReader creamos el BufferReader y
+     * lo retornamos
+     *
+     * @return BufferReader
+     * @throws IOException
+     */
     private BufferedReader getReader() throws IOException {
         return new BufferedReader( new FileReader( file ) );
     }
 
+    /**
+     * Gracias al String pasado como parámetro, lo desmenuzamos en un array de String. Lo desmenuzamos por el separador
+     * del csv, en este caso ";".
+     * Luego guardamos cada tipo de dato desmenuzado en su respecto tipo de dato.
+     * Por ultimo creamos el objeto Temporada y lo retornamos
+     *
+     * @param register
+     * @return Temporada
+     */
     private Temporada getTemporadaFromRegister(String register) {
         String[] fields           = register.split( FIELD_SEPARATOR );
         int      idPelicula       = Integer.parseInt( fields[ID_PELICULA] );
@@ -40,6 +59,16 @@ public class CsvToTemporadas {
         return new Temporada( idPelicula, idTemporada, guion, fechaLanzamiento, capitulos );
     }
 
+
+    /**
+     * Gracias a la temporada pasada como parametro, lo que vamos a hacer es pasar de Temporada(objeto) a csv(String)
+     * Para ello, creamos un array de size 5 y obtenemos gracias a la temporada por parametro y sus respectivos
+     * getter y lo guardamos en cada posicion del array de String
+     * Y por último, unimos todos los datos para devolverlos
+     *
+     * @param temporada
+     * @return String
+     */
     private String getRegisterFromTemporada(Temporada temporada) {
         String[] fields = new String[5];
         fields[ID_PELICULA]       = String.valueOf( temporada.getId() );
@@ -50,6 +79,17 @@ public class CsvToTemporadas {
         return String.join( FIELD_SEPARATOR, fields );
     }
 
+
+    /**
+     * Creamos un ArrayList de temporadas, creamos un bufferReader para poder leer todas las Temporadas del fichero csv
+     * Leemos la primera linea, ya que la primera linea es la cabecera de que tipo de dato es
+     * La primera comprobacion es que comprueba si ya no hay más líneas por leer, en caso de que no, devuele el arrayList
+     * con todas las temporadas
+     * En caso de que no, lo que hace es pasar de linea de csv a objeto Temporada
+     *
+     * @return ArrayList<Temporda> retorna todas las temporadas
+     * @throws DatabaseErrorException en caso de no poder acceder a la base de datos
+     */
     public ArrayList<Temporada> findAll() throws DatabaseErrorException {
         try {
             ArrayList<Temporada> temporadaArrayList = new ArrayList<>();
@@ -69,6 +109,19 @@ public class CsvToTemporadas {
         }
     }
 
+    /**
+     * Creamos un FileReader y un BufferReader para poder leer el .csv
+     * Empezamos a leer linea por linea.
+     * Primero comprobamos que la linea que leemos no sea null o que ya no hayan lineas por leer, en caso de
+     * que no hayan lineas noz lanza la exception
+     * Sugunda comprobación, nos aseguramos que la linea no este en blanco, y apartir de la linea creamos
+     * la Temporada. De esa temporada extraemos el id y lo comparamos con el del parametro.
+     * En caso de coincidir, nos devuelve la temporada, sino sigue iterando hasta que no hayan mas líneas
+     *
+     * @param id id de la temporada que queremos encontrar
+     * @return Temporada que se ha añadio/actualizado
+     * @throws DatabaseErrorException en caso de no poder acceder a la base de datos
+     */
     public Temporada getById(int id) throws NotFoundException, DatabaseErrorException {
         try ( FileReader fileReader = new FileReader( this.file ) ;
               BufferedReader bufferedReader = new BufferedReader( fileReader ) ) {
@@ -90,6 +143,14 @@ public class CsvToTemporadas {
         }
     }
 
+    /**
+     * Gracias al id como parametro busca la temporada gracias al metodo, en caso de que no exista,
+     * lanza la exception y nos retorna null
+     *
+     * @param id id de la temporada que queremos encontrar
+     * @return Temporada que se ha añadio/actualizado
+     * @throws DatabaseErrorException en caso de no poder acceder a la base de datos
+     */
     public Temporada findById(int id) throws DatabaseErrorException {
         try {
             return getById( id );
@@ -98,6 +159,14 @@ public class CsvToTemporadas {
         }
     }
 
+    /**
+     * Guarda la temporada, para ello comprueba que la temporada no exista, en caso de no exsitir, lo que hace
+     * es añadirla como una nueva.
+     * En caso de que exista, lo que hace es actualizarla por la Temporada pasada por parámetro
+     * @param temporada temporada que pasemos por parametro
+     * @return Temporada que se ha añadio/actualizado
+     * @throws DatabaseErrorException en caso de no poder acceder a la base de datos
+     */
     public Temporada save(Temporada temporada) throws DatabaseErrorException {
         try {
             if ( findById( temporada.getId() ) == null ) {
@@ -112,6 +181,12 @@ public class CsvToTemporadas {
         }
     }
 
+    /**
+     * Añade la temporada pasada como parámetro al csv y crea una nueva línea
+     * @param temporada temporada que pasemos por parametro
+     * @return void
+     * @throws IOException
+     */
     private void append(Temporada temporada) throws IOException {
         try ( BufferedWriter bufferedWriter = getWriter( true ) ) {
             bufferedWriter.write( getRegisterFromTemporada( temporada ) );
@@ -119,14 +194,41 @@ public class CsvToTemporadas {
         }
     }
 
+    /**
+     * Actualiza la Temporada pasa por parámetro
+     * @param temporada temporada que pasemos por parametro
+     * @return void
+     * @throws DatabaseErrorException en caso de no poder acceder a la base de datos
+     */
+
     private void update(Temporada temporada) throws DatabaseErrorException {
         updateOrRemove( temporada, true );
     }
 
+
+    /**
+     * Elimina la Temporada pasada por parametro
+     * @param temporada temporada que pasemos por parametro
+     * @return void
+     * @throws DatabaseErrorException en caso de no poder acceder a la base de datos
+     */
     public void remove(Temporada temporada) throws DatabaseErrorException {
         updateOrRemove( temporada, false );
     }
 
+    /**
+     * En caso de querer actualizar la Temporada pasa por parámetro, al update se le debería pasar un true,
+     * y lo que hara es escribir tarea por tarea y cuando llegue a la tarea a actualizar,
+     * simplemente escribirá la temporada pasada por parámetro. Luego seguirá con el resto de Temporadas
+     *
+     * En caso de querer eliminar, al update se le debería pasar un false, y lo que hara es escribir tarea
+     * por tarea y cuando llegue a la tarea a eliminar, simplemente no la escribe y de esa forma la elimina
+     *
+     * @param temporada temporada que pasemos por parametro
+     * @param update si queremos actualizar la temporada pasamos true, si queremos eliminarla pasamos false
+     * @return void
+     * @throws DatabaseErrorException en caso de no poder acceder a la base de datos
+     */
     private void updateOrRemove(Temporada temporada, boolean update) throws DatabaseErrorException {
         ArrayList<Temporada> temporadaArrayList = findAll();
         try ( BufferedWriter bufferedWriter = getWriter( false ) ) {
@@ -145,6 +247,15 @@ public class CsvToTemporadas {
         }
     }
 
+    /**
+     * Si le pasas por parametro un true, el bufferWriter lo que hace es crearte un buffer que añade
+     * al fichero la nueva información
+     * Si le pasas un false por parametro, lo que hace crearte un BufferWriter que borra los datos del fichero y escribirlo
+     * con lo nuevo del bufferWriter
+     *
+     * @param append de tipo booleano
+     * @return Devuelve el tipo de BufferWriter
+     */
     private BufferedWriter getWriter(boolean append) throws IOException {
         return new BufferedWriter( new FileWriter( file, append ) );
     }
