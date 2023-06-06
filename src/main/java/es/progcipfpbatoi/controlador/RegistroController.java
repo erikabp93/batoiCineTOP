@@ -1,5 +1,7 @@
 package es.progcipfpbatoi.controlador;
 
+import es.progcipfpbatoi.Validator.Validador;
+import es.progcipfpbatoi.Validator.Validator;
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
 import es.progcipfpbatoi.modelo.dto.Usuario;
 import es.progcipfpbatoi.modelo.repositorios.*;
@@ -55,7 +57,30 @@ public class RegistroController implements Initializable {
             Usuario usuarioNuevo = new Usuario(user, contrasenya, correo);
             boolean usuarioExiste = usuarioRepository.existeUsuario(usuarioNuevo);
             if (contrasenya.equals(contrasenya2)) {
-                if (!usuarioExiste) {
+                Validador validador = new Validador();
+                if (!validador.correoCorrecto(correo)) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("El correo no es correcto");
+                    alert.setHeaderText("El correo no puede tener caracteres especiales y ha de ser gmail.com o hotmail.com");
+                    alert.setContentText("Escribe un correo correcto por favor");
+                    alert.showAndWait();
+                    email.setText("");
+                } else if (!validador.nombreUsuarioCorrecto(user)) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("El nombre del usuario no es correcto");
+                    alert.setHeaderText("El usuario no puede contener caracteres especiales");
+                    alert.setContentText("Escribe otro usuario por favor");
+                    alert.showAndWait();
+                    usuario.setText("");
+                } else if (!validador.validarContrasenya(contrasenya)) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("La contraseña que has escrito no es correcta");
+                    alert.setHeaderText("Debe contener entre 8 y 15 caracteres, una mayúscula, un número y un carácter especial");
+                    alert.setContentText("Escribe otra contraseña por favor");
+                    alert.showAndWait();
+                    password.setText("");
+                    passwordRepeat.setText("");
+                } else if (!usuarioExiste) {
                     usuarioRepository.save(usuarioNuevo);
                     PrincipalController principalController = new PrincipalController(usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, controladorPadre, vistaPadre, usuarioNuevo);
                     ChangeScene.change(event, principalController, "/vistas/principal_vista.fxml");
