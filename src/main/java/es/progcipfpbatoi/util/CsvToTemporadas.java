@@ -5,8 +5,6 @@ import es.progcipfpbatoi.exceptions.NotFoundException;
 import es.progcipfpbatoi.modelo.dto.Temporada;
 
 import java.io.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class CsvToTemporadas {
@@ -200,7 +198,6 @@ public class CsvToTemporadas {
      * @return void
      * @throws DatabaseErrorException en caso de no poder acceder a la base de datos
      */
-
     private void update(Temporada temporada) throws DatabaseErrorException {
         updateOrRemove( temporada, true );
     }
