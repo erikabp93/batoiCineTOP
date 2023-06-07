@@ -50,4 +50,14 @@ public interface PeliculaSerieDAO {
     void remove(Produccion produccion) throws DatabaseErrorException, NotFoundException;
 
     String getPoster(int id) throws DatabaseErrorException;
+
+    /**
+     *Ordena la lista de producciones de la base de datos filtrando por peliculas o series.
+     * @param pelicula define si se desea ordenar por peliculas o series.
+     * @param filtro el filtro que se aplicará. default muestra el filtro por valoración.
+     * @param ascendente elige si se ordena de forma ascendente o descentente.
+     * @return el arrayList de producciones ordenadas.
+     * @throws DatabaseErrorException
+     */
+    ArrayList<Produccion> ordenar(boolean pelicula, String filtro, boolean ascendente) throws DatabaseErrorException;
 }
