@@ -46,7 +46,7 @@ public class ProduccionListCellController extends ListCell<Produccion> {
         this.controladorPadre = controladorPadre;
 
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/vistas/prduccion_listCell.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/vistas/produccion_listCell.fxml"));
         fxmlLoader.setController(this);
 
         try {

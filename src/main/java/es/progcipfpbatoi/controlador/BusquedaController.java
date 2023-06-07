@@ -83,6 +83,11 @@ public class BusquedaController implements Initializable {
         }
     }
 
+    /**
+     * Método para cambiar de vista cuando se acciona el botón (texto) del título de la página.
+     * @param event define el evento de pulsar el botón.
+     * @param event
+     */
     @FXML
     private void changeToPrincipal(Event event) {
         try {

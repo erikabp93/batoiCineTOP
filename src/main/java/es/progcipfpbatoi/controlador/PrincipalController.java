@@ -89,7 +89,7 @@ public class PrincipalController implements Initializable {
     @FXML
     private void changeToMovies(Event event) {
         try {
-            ChangeScene.change(event, new PeliculasController(controladorPadre, vistaPadre, usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, usuario), "/vistas/peliculas_vista.fxml");
+            ChangeScene.change(event, new PeliculasController(this, "/vistas/principal_vista.fxml", usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, usuario), "/vistas/peliculas_vista.fxml");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

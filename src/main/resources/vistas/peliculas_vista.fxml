@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -33,12 +34,12 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <Label text="Peliculas" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="35.0">
+            <Label text="Peliculas" textFill="#656464" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="35.0">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
                <cursor>
-                  <Cursor fx:constant="HAND" />
+                  <Cursor fx:constant="DEFAULT" />
                </cursor>
             </Label>
             <Label text="Series" AnchorPane.leftAnchor="420.0" AnchorPane.topAnchor="35.0">
@@ -84,11 +85,19 @@
             </Button>
          </children>
       </AnchorPane>
-      <Label layoutX="81.0" layoutY="101.0" prefHeight="21.0" text="Resultados de la búsqueda" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="100.0">
+      <Label layoutX="81.0" layoutY="101.0" prefHeight="21.0" text="Todas nuestras películas" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="100.0">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <ListView fx:id="resultadosListView" layoutX="50.0" layoutY="179.0" orientation="HORIZONTAL" prefHeight="250.0" prefWidth="200.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="180.0" />
+      <ListView fx:id="peliculasListView" layoutX="50.0" layoutY="179.0" orientation="HORIZONTAL" prefHeight="250.0" prefWidth="200.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="180.0" />
+      <ListView fx:id="favoritosListView" layoutX="60.0" layoutY="457.0" orientation="HORIZONTAL" prefHeight="250.0" prefWidth="200.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="480.0" />
+      <Label layoutX="50.0" layoutY="445.0" prefHeight="21.0" text="Tus favoritas" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="445.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="filtro" layoutX="50.0" layoutY="149.0" onAction="#filtrar" prefWidth="150.0" promptText="Ordenar por" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="150.0" />
+      <RadioButton fx:id="ordenAsc" disable="true" layoutX="210.0" layoutY="154.0" mnemonicParsing="false" onAction="#filtrar" selected="true" text="Orden ascendente" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="155.0" />
    </children>
 </AnchorPane>
