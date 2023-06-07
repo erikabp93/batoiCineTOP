@@ -38,10 +38,13 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <Label text="Series" AnchorPane.leftAnchor="420.0" AnchorPane.topAnchor="35.0">
+            <Label onMouseClicked="#changeToTvShows" text="Series" AnchorPane.leftAnchor="420.0" AnchorPane.topAnchor="35.0">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Label>
             <TextField fx:id="filtroBusqueda" prefHeight="30.0" prefWidth="150.0" promptText="Buscar" AnchorPane.leftAnchor="550.0" AnchorPane.topAnchor="30.0" />
             <ComboBox fx:id="generoDesplegable" prefHeight="30.0" prefWidth="150.0" promptText="Seleccionar" AnchorPane.leftAnchor="720.0" AnchorPane.topAnchor="30.0" />

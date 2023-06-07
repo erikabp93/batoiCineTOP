@@ -15,12 +15,11 @@ import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class PeliculasController implements Initializable {
+public class SeriesController implements Initializable {
 
     private Initializable controladorPadre;
     private String vistaPadre;
@@ -44,7 +43,7 @@ public class PeliculasController implements Initializable {
     private TextField filtroBusqueda;
 
     @FXML
-    private ListView<Produccion> peliculasListView;
+    private ListView<Produccion> seriesListView;
 
     @FXML
     private ListView<Produccion> favoritosListView;
@@ -63,7 +62,7 @@ public class PeliculasController implements Initializable {
      * @param valoracionesRepository repositorio de valoraciones para dejar o no valorar de nuevo.
      * @param usuario usuario logueado actualmente.
      */
-    public PeliculasController(Initializable controladorPadre, String vistaPadre, UsuarioRepository usuarioRepository, PeliculaSerieRepository peliculaSerieRepository, TemporadaRepository temporadaRepository, FavoritosRepository favoritosRepository, ValoracionesRepository valoracionesRepository, Usuario usuario) {
+    public SeriesController(Initializable controladorPadre, String vistaPadre, UsuarioRepository usuarioRepository, PeliculaSerieRepository peliculaSerieRepository, TemporadaRepository temporadaRepository, FavoritosRepository favoritosRepository, ValoracionesRepository valoracionesRepository, Usuario usuario) {
         this.controladorPadre = controladorPadre;
         this.vistaPadre = vistaPadre;
         this.usuarioRepository = usuarioRepository;
@@ -127,19 +126,6 @@ public class PeliculasController implements Initializable {
     }
 
     /**
-     * Cambia a la vista de series.
-     * @param event
-     */
-    @FXML
-    private void changeToTvShows(Event event) {
-        try {
-            ChangeScene.change(event, new SeriesController(this, "/vistas/principal_vista.fxml", usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, usuario), "/vistas/series_vista.fxml");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
      * Método para cambiar de vista cuando se acciona el botón de buscar.
      * @param event define el evento de pulsar el botón.
      * @throws IOException
@@ -161,7 +147,7 @@ public class PeliculasController implements Initializable {
      */
     private ObservableList<Produccion> getData() {
         try {
-            return FXCollections.observableArrayList(peliculaSerieRepository.findAllPeliculas());
+            return FXCollections.observableArrayList(peliculaSerieRepository.findAllSeries());
         } catch (DatabaseErrorException e) {
             throw new RuntimeException(e);
         }
@@ -176,13 +162,22 @@ public class PeliculasController implements Initializable {
     private ObservableList<Produccion> getDataFavoritos() {
         try {
             ArrayList<Produccion> favoritos = new ArrayList<>();
-            for (Produccion produccion : peliculaSerieRepository.findAllPeliculas()) {
+            for (Produccion produccion : peliculaSerieRepository.findAllSeries()) {
                 if (favoritosRepository.yaFavorito(usuario, produccion)) {
                     favoritos.add(produccion);
                 }
             }
             return FXCollections.observableArrayList(favoritos);
         } catch (DatabaseErrorException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    private void changeToMovies(Event event) {
+        try {
+            ChangeScene.change(event, new PeliculasController(this, "/vistas/principal_vista.fxml", usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, usuario), "/vistas/peliculas_vista.fxml");
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -198,9 +193,9 @@ public class PeliculasController implements Initializable {
             ordenAsc.setDisable(false);
         }
         try {
-            peliculasListView.setItems(FXCollections.observableArrayList(peliculaSerieRepository.filtrar(true, filtro.getValue(), !ordenAsc.isSelected())));
-            peliculasListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-            peliculasListView.setCellFactory((ListView<Produccion> l) -> new ProduccionListCellController(favoritosRepository,  valoracionesRepository, usuario, this));
+            seriesListView.setItems(FXCollections.observableArrayList(peliculaSerieRepository.filtrar(false, filtro.getValue(), !ordenAsc.isSelected())));
+            seriesListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+            seriesListView.setCellFactory((ListView<Produccion> l) -> new ProduccionListCellController(favoritosRepository,  valoracionesRepository, usuario, this));
         } catch (DatabaseErrorException e) {
             throw new RuntimeException(e);
         }
@@ -215,9 +210,9 @@ public class PeliculasController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         usuarioLabel.setText("Bienvenido " + usuario.getUsername());
 
-        peliculasListView.setItems(getData());
-        peliculasListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        peliculasListView.setCellFactory((ListView<Produccion> l) -> new ProduccionListCellController(favoritosRepository,  valoracionesRepository, usuario, this));
+        seriesListView.setItems(getData());
+        seriesListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        seriesListView.setCellFactory((ListView<Produccion> l) -> new ProduccionListCellController(favoritosRepository,  valoracionesRepository, usuario, this));
 
         favoritosListView.setItems(getDataFavoritos());
         favoritosListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
