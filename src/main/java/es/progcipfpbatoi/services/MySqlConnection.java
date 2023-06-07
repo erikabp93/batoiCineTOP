@@ -13,12 +13,28 @@ public class MySqlConnection {
     private String password;
 
 
+    /**
+     * Constructor de la clase, obligatorio ponerlo, ya que si no se pone nos da warning
+     * Tenemos 4 parámetros:
+     * ip -> de la conexión
+     * database -> el nombre de la base de datos
+     * username -> el nombre de usuario con el que acceder a la base de datos
+     * password -> contraseña del user que accede a la base de datos
+     */
     public MySqlConnection(String ip, String database, String userName, String password) {
         this.ip = ip;
         this.database = database;
         this.userName = userName;
         this.password = password;
     }
+
+    /**
+     * Si la conexión es nula, lo que hace es crear una conexión con los atributos establecidos
+     * en el constructor. Nos muestra mensaje de que la conexión ha sido válida y nos devuelve
+     * el atributo connection
+     *
+     * @return Connection
+     */
     public Connection getConnection() {
 
         if (connection == null){
@@ -35,6 +51,13 @@ public class MySqlConnection {
         return this.connection;
     }
 
+    /**
+     * Se encarga de cerrar la conexión sobre la base de datos
+     * Siempre y cuando la conexion sea diferente de null
+     *
+     * @return void
+     * @throws SQLException
+     */
     public void closeConnection() {
         if (connection!= null) {
             try {
