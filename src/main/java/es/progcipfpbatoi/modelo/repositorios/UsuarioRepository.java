@@ -11,8 +11,8 @@ public class UsuarioRepository {
     private UsuarioDAO usuarioDAO;
 
     /**
-     * Constructor de la clase, obligatorio ponerlo. Posee 2 parametros
-     * las peliculas y las series
+     * Constructor de la clase, obligatorio ponerlo. Posee 1 parametro
+     * el UsuarioDAO
      */
     public UsuarioRepository(UsuarioDAO usuarioDAO) {
         this.usuarioDAO = usuarioDAO;
