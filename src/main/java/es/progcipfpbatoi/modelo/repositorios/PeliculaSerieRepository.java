@@ -147,4 +147,16 @@ public class PeliculaSerieRepository {
     public String getPoster(int id) throws DatabaseErrorException {
         return peliculaSerieDAO.getPoster(id);
     }
+
+    /**
+     *Ordena la lista de producciones de la base de datos filtrando por peliculas o series.
+     * @param pelicula define si se desea ordenar por peliculas o series.
+     * @param filtro el filtro que se aplicará. default muestra el filtro por valoración.
+     * @param ascendente elige si se ordena de forma ascendente o descentente.
+     * @return el arrayList de producciones ordenadas.
+     * @throws DatabaseErrorException
+     */
+    public ArrayList<Produccion> filtrar(boolean pelicula, String filtro, boolean ascendente) throws DatabaseErrorException {
+        return peliculaSerieDAO.ordenar(pelicula, filtro, ascendente);
+    }
 }

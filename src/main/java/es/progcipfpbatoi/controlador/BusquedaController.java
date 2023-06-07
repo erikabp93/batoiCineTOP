@@ -83,10 +83,24 @@ public class BusquedaController implements Initializable {
         }
     }
 
+    /**
+     * Método para cambiar de vista cuando se acciona el botón (texto) del título de la página.
+     * @param event define el evento de pulsar el botón.
+     * @param event
+     */
     @FXML
     private void changeToPrincipal(Event event) {
         try {
             ChangeScene.change(event, controladorPadre, vistaPadre);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    private void changeToMovies(Event event) {
+        try {
+            ChangeScene.change(event, new PeliculasController(controladorPadre, vistaPadre, usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, usuario), "/vistas/peliculas_vista.fxml");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

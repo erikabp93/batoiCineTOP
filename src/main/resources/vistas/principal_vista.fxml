@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -24,17 +25,20 @@
                   <Image url="@../images/logo.png" />
                </image>
             </ImageView>
-            <Label prefHeight="90.0" text="BatoiCine TOP" AnchorPane.leftAnchor="100.0">
+            <Label text="BatoiCine TOP" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="35.0">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Label prefHeight="90.0" text="Peliculas" AnchorPane.leftAnchor="300.0">
+            <Label onMouseClicked="#changeToMovies" text="Peliculas" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="35.0">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Label>
-            <Label prefHeight="90.0" text="Series" AnchorPane.leftAnchor="420.0">
+            <Label text="Series" AnchorPane.leftAnchor="420.0" AnchorPane.topAnchor="35.0">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>

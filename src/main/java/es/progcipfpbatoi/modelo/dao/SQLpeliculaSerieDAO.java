@@ -257,6 +257,54 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
         }
     }
 
+    /**
+     *Ordena la lista de producciones de la base de datos filtrando por peliculas o series.
+     * @param pelicula define si se desea ordenar por peliculas o series.
+     * @param filtro el filtro que se aplicará. default muestra el filtro por valoración.
+     * @param ascendente elige si se ordena de forma ascendente o descentente.
+     * @return el arrayList de producciones ordenadas.
+     * @throws DatabaseErrorException
+     */
+    @Override
+    public ArrayList<Produccion> ordenar(boolean pelicula, String filtro, boolean ascendente) throws DatabaseErrorException {
+        ArrayList<Produccion> producciones = new ArrayList<>();
+        String sql = String.format( "SELECT * FROM %s WHERE tipo LIKE ? ORDER BY ", TABLE_NAME );
+
+
+        try {
+            switch (filtro) {
+                case "Valoración" -> sql += "valoracion_total";
+                case "Titulo" -> sql += "titulo";
+                case "Año" -> sql += "fechaLanzamiento";
+                case "Duración" -> sql += "duracion";
+            }
+
+            if (ascendente) {
+                sql = sql + " ASC";
+            } else {
+                sql = sql + " DESC";
+            }
+
+            PreparedStatement statement = connection.prepareStatement( sql, PreparedStatement.RETURN_GENERATED_KEYS );
+
+            if (pelicula) {
+                statement.setString( 1, "MOVIE");
+            } else {
+                statement.setString(1, "tv_show");
+            }
+
+            ResultSet resultSet = statement.executeQuery();
+            while ( resultSet.next() ) {
+                Produccion produccion = getProduccionFromResultset( resultSet );
+                producciones.add( produccion );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DatabaseErrorException( "Ha ocurrido un error en la conexión o acceso a la base de datos (select)" );
+        }
+        return producciones;
+    }
+
 
     @Override
     public void remove(Produccion produccion) throws DatabaseErrorException, NotFoundException {
