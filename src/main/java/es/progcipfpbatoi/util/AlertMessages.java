@@ -3,6 +3,13 @@ package es.progcipfpbatoi.util;
 import javafx.scene.control.Alert;
 
 public class AlertMessages {
+    /**
+     * Muestra una alerta sonre el mensaje pasado por parámetro
+     * Esta alerta es de tipo error.
+     *
+     * @param msg de tipo String
+     * @return void
+     */
     public static void mostrarAlertError(String msg) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText(null);
@@ -11,6 +18,13 @@ public class AlertMessages {
         alert.showAndWait();
     }
 
+    /**
+     * Muestra una alerta sonre el mensaje pasado por parámetro
+     * Esta alerta es de tipo warning.
+     *
+     * @param msg de tipo String
+     * @return void
+     */
     public static void mostrarAlertWarning(String msg) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setHeaderText(null);
@@ -19,6 +33,14 @@ public class AlertMessages {
         alert.showAndWait();
     }
 
+    /**
+     * Muestra una alerta con su cabecera, mensaje y tipo de alerta pasada por parámetro.
+     *
+     * @param title tipo String
+     * @param msg tipo String
+     * @param alertType tipo AlertType
+     * @return void
+     */
     private static void mostrarAlert(String title, String msg, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setHeaderText(null);
