@@ -33,7 +33,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <Label onMouseClicked="#changeToMovies" text="Peliculas" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="35.0">
+            <Label text="Peliculas" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="35.0">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -73,7 +73,7 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <Button mnemonicParsing="false" onAction="#buscar" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="660.0" AnchorPane.topAnchor="29.0">
+            <Button mnemonicParsing="false" onAction="#irBuscar" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="660.0" AnchorPane.topAnchor="29.0">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>

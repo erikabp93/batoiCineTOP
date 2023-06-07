@@ -93,6 +93,15 @@ public class BusquedaController implements Initializable {
     }
 
     @FXML
+    private void changeToMovies(Event event) {
+        try {
+            ChangeScene.change(event, new PeliculasController(controladorPadre, vistaPadre, usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, usuario), "/vistas/peliculas_vista.fxml");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
     private void buscar(ActionEvent event) throws IOException {
         this.genero = generoDesplegable.getValue();
         this.filtroTexto = filtroBusqueda.getText();
