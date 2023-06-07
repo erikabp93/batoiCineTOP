@@ -13,8 +13,8 @@ public class TemporadaRepository {
     private TemporadaDAO temporadaDAO;
 
     /**
-     * Constructor de la clase, obligatorio ponerlo. Posee 2 parametros
-     * las peliculas y las series
+     * Constructor de la clase, obligatorio ponerlo. Posee 1 parámetro
+     * las temporadas
      */
     public TemporadaRepository(TemporadaDAO temporadaDAO) {
         this.temporadaDAO = temporadaDAO;
