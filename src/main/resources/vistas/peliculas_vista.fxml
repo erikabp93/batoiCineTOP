@@ -42,7 +42,7 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </Label>
-            <Label text="Series" AnchorPane.leftAnchor="420.0" AnchorPane.topAnchor="35.0">
+            <Label onMouseClicked="#changeToTvShows" text="Series" AnchorPane.leftAnchor="420.0" AnchorPane.topAnchor="35.0">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>

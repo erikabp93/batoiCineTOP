@@ -95,6 +95,19 @@ public class PrincipalController implements Initializable {
         }
     }
 
+    /**
+     * Cambia a la vista de series.
+     * @param event
+     */
+    @FXML
+    private void changeToTvShows(Event event) {
+        try {
+            ChangeScene.change(event, new SeriesController(this, "/vistas/principal_vista.fxml", usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, usuario), "/vistas/series_vista.fxml");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @FXML
     private void irBuscar(ActionEvent event) throws IOException {
         Genero genero = generoDesplegable.getValue();

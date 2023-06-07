@@ -84,6 +84,19 @@ public class BusquedaController implements Initializable {
     }
 
     /**
+     * Cambia a la vista de series.
+     * @param event
+     */
+    @FXML
+    private void changeToTvShows(Event event) {
+        try {
+            ChangeScene.change(event, new SeriesController(this, "/vistas/principal_vista.fxml", usuarioRepository, peliculaSerieRepository, temporadaRepository, favoritosRepository, valoracionesRepository, usuario), "/vistas/series_vista.fxml");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
      * Método para cambiar de vista cuando se acciona el botón (texto) del título de la página.
      * @param event define el evento de pulsar el botón.
      * @param event
