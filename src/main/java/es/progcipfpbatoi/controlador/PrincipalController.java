@@ -12,7 +12,10 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -46,7 +49,14 @@ public class PrincipalController implements Initializable {
     @FXML
     private TextField filtroBusqueda;
 
-    /**
+    @FXML
+    private Button botonCambiarUsuario;
+
+    private Image imagenCambiarUsuario;
+
+    private URL rutaCambiarUsuario;
+
+  /**
      * Constructor de la clase.
      * @param controladorPadre define qué cpmtrolador usará al volver a la vista anterior.
      * @param vistaPadre define la vista anterior.
@@ -76,6 +86,10 @@ public class PrincipalController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         usuarioLabel.setText("Bienvenido " + usuario.getUsername());
+
+        rutaCambiarUsuario = getClass().getResource("/images/perfil.png");
+        imagenCambiarUsuario = new Image(rutaCambiarUsuario.toString(), 15, 15, false, true);
+        botonCambiarUsuario.setGraphic(new ImageView(imagenCambiarUsuario));
 
         generoDesplegable.setItems(FXCollections.observableArrayList(Genero.values()));
 

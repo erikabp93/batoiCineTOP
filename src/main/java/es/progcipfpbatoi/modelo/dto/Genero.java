@@ -112,6 +112,15 @@ public enum Genero {
         }
     };
 
+    /**
+     * Recorre todos los valores del Enum Genero, comprobando uno por uno por si es igual al String pasado por
+     * parámetro. En caso de que coincida, devuelve el Genero con el que coincida
+     * En caso de no encontrar ninguna coincidencia, devuelve una expcetion
+     *
+     * @param categoriaStr
+     * @return Calificacion
+     * @throws CategoryTypeErrorException
+     */
     public static Genero parse(String categoriaStr) throws CategoryTypeErrorException {
 
         for ( Genero genero : Genero.values() ) {

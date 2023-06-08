@@ -8,10 +8,14 @@ import es.progcipfpbatoi.modelo.repositorios.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.Node;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
@@ -25,6 +29,8 @@ public class LoginController implements Initializable {
     private TextField usuario;
     @FXML
     private PasswordField password;
+    @FXML
+    private Hyperlink registro;
     private PeliculaSerieRepository peliculaSerieRepository;
     private TemporadaRepository temporadaRepository;
     private UsuarioRepository usuarioRepository;
