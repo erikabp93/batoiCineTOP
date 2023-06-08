@@ -105,7 +105,7 @@ public class BusquedaController implements Initializable {
      * @return La lista observable de producciones.
      * @throws RuntimeException si ocurre un DatabaseErrorException durante la búsqueda de datos.
      */
-    private ObservableList<Produccion> getData() {
+    public ObservableList<Produccion> getData() {
         try {
             if (genero == null) {
                 System.out.println(filtroTexto);
@@ -171,7 +171,6 @@ public class BusquedaController implements Initializable {
         this.genero = generoDesplegable.getValue();
         this.filtroTexto = filtroBusqueda.getText();
         ChangeScene.change(event, this, "/vistas/busqueda_vista.fxml");
-        System.out.println("hello world");
     }
 
     /**
