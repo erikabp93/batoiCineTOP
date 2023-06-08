@@ -1,7 +1,6 @@
 package es.progcipfpbatoi.controlador;
 
 import es.progcipfpbatoi.Validator.Validador;
-import es.progcipfpbatoi.Validator.Validator;
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
 import es.progcipfpbatoi.modelo.dto.Usuario;
 import es.progcipfpbatoi.modelo.repositorios.*;
@@ -12,7 +11,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -37,6 +35,16 @@ public class RegistroController implements Initializable {
     private Initializable controladorPadre;
     private String vistaPadre;
 
+    /**
+     * Constructor de la clase.
+     * @param controladorPadre define qué cpmtrolador usará al volver a la vista anterior.
+     * @param vistaPadre define la vista anterior.
+     * @param usuarioRepository repositorio de usuarios que se encuentran en la base de datos.
+     * @param peliculaSerieRepository repositorio de producciones para las listViews.
+     * @param temporadaRepository repositorio de temporadas.
+     * @param favoritosRepository repositorio de favoritos para ver si una pelicula está o no en favoritos.
+     * @param valoracionesRepository repositorio de valoraciones para dejar o no valorar de nuevo.
+     */
     public RegistroController(UsuarioRepository usuarioRepository, PeliculaSerieRepository peliculaSerieRepository, TemporadaRepository temporadaRepository, FavoritosRepository favoritosRepository, ValoracionesRepository valoracionesRepository, Initializable controladorPadre, String vistaPadre) {
         this.usuarioRepository = usuarioRepository;
         this.peliculaSerieRepository = peliculaSerieRepository;
@@ -47,6 +55,10 @@ public class RegistroController implements Initializable {
         this.vistaPadre = vistaPadre;
     }
 
+    /**
+     * Registra al nuevo usuario en la base de datos si este no existe anteriormente y la contraseña coincide
+     * @param event
+     */
     @FXML
     private void registro(ActionEvent event) {
         try {
@@ -107,6 +119,10 @@ public class RegistroController implements Initializable {
         }
     }
 
+    /**
+     * Cierra la aplicación
+     * @param event
+     */
     @FXML
     public void cerrar(ActionEvent event) {
         Alert alert = new Alert( Alert.AlertType.CONFIRMATION);
@@ -121,6 +137,11 @@ public class RegistroController implements Initializable {
         alert.close();
     }
 
+    /**
+     * Inicializa la vista con unos valores para cada elemento.
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

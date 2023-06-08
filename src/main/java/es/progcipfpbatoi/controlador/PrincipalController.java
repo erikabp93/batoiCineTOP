@@ -56,6 +56,17 @@ public class PrincipalController implements Initializable {
 
     private URL rutaCambiarUsuario;
 
+  /**
+     * Constructor de la clase.
+     * @param controladorPadre define qué cpmtrolador usará al volver a la vista anterior.
+     * @param vistaPadre define la vista anterior.
+     * @param usuarioRepository repositorio de usuarios que se encuentran en la base de datos.
+     * @param peliculaSerieRepository repositorio de producciones para las listViews.
+     * @param temporadaRepository repositorio de temporadas.
+     * @param favoritosRepository repositorio de favoritos para ver si una pelicula está o no en favoritos.
+     * @param valoracionesRepository repositorio de valoraciones para dejar o no valorar de nuevo.
+     * @param usuario usuario logueado actualmente.
+     */
     public PrincipalController(UsuarioRepository usuarioRepository, PeliculaSerieRepository peliculaSerieRepository, TemporadaRepository temporadaRepository, FavoritosRepository favoritosRepository, ValoracionesRepository valoracionesRepository, Initializable controladorPadre, String vistaPadre, Usuario usuario) {
         this.controladorPadre = controladorPadre;
         this.vistaPadre = vistaPadre;
@@ -67,6 +78,11 @@ public class PrincipalController implements Initializable {
         this.usuario = usuario;
     }
 
+    /**
+     * Inicializa la vista con unos valores para cada elemento.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         usuarioLabel.setText("Bienvenido " + usuario.getUsername());
@@ -86,6 +102,12 @@ public class PrincipalController implements Initializable {
         seriesListView.setCellFactory((ListView<Produccion> l) -> new ProduccionListCellController(favoritosRepository, valoracionesRepository, usuario, this));
     }
 
+    /**
+     * Obtiene los datos para la lista observable de peliculas.
+     *
+     * @return La lista observable de peliculas.
+     * @throws RuntimeException si ocurre un DatabaseErrorException durante la búsqueda de datos.
+     */
     private ObservableList<Produccion> getDataPeliculas() {
         try {
             ArrayList<Produccion> pelis = new ArrayList<>();
@@ -100,6 +122,10 @@ public class PrincipalController implements Initializable {
         }
     }
 
+    /**
+     * Cambia a la vista de peliculas.
+     * @param event
+     */
     @FXML
     private void changeToMovies(Event event) {
         try {
@@ -122,6 +148,11 @@ public class PrincipalController implements Initializable {
         }
     }
 
+    /**
+     * Método para cambiar de vista cuando se acciona el botón de buscar.
+     * @param event define el evento de pulsar el botón.
+     * @throws IOException
+     */
     @FXML
     private void irBuscar(ActionEvent event) throws IOException {
         Genero genero = generoDesplegable.getValue();
@@ -131,6 +162,12 @@ public class PrincipalController implements Initializable {
         System.out.println("hello world");
     }
 
+    /**
+     * Obtiene los datos para la lista observable de series.
+     *
+     * @return La lista observable de series.
+     * @throws RuntimeException si ocurre un DatabaseErrorException durante la búsqueda de datos.
+     */
     private ObservableList<Produccion> getDataSeries() {
         try {
             ArrayList<Produccion> series = new ArrayList<>();
@@ -146,6 +183,10 @@ public class PrincipalController implements Initializable {
         }
     }
 
+    /**
+     * Cierra la aplicación cuando se pulsa el botón.
+     * @param event define el evento de pulsar el botón.
+     */
     @FXML
     public void cerrar(ActionEvent event) {
         Alert alert = new Alert( Alert.AlertType.CONFIRMATION);
@@ -160,6 +201,11 @@ public class PrincipalController implements Initializable {
         alert.close();
     }
 
+    /**
+     * Vuelve a la vista de login para iniciar sesión con otro usuario o con el mismo.
+     * @param event define el evento de pulsar el botón.
+     * @throws IOException
+     */
     @FXML
     public void cambiarUsuario(ActionEvent event) throws IOException {
         Alert alert = new Alert( Alert.AlertType.CONFIRMATION);

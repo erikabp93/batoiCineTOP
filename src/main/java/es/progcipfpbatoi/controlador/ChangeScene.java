@@ -12,6 +12,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ChangeScene {
+
+    /**
+     * Constructor de la clase.
+     * @param stage
+     * @param controller
+     * @param path_to_view_file
+     * @throws IOException
+     */
     public static void change(Stage stage, Initializable controller, String path_to_view_file) throws IOException{
 
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -26,6 +34,13 @@ public class ChangeScene {
             stage.show();
     }
 
+    /**
+     * Constructor de la clase con event en vez de stage
+     * @param event
+     * @param controller
+     * @param path_to_view_file
+     * @throws IOException
+     */
     public static void change(Event event, Initializable controller, String path_to_view_file) throws IOException{
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         change(stage, controller, path_to_view_file);

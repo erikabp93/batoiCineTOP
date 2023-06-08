@@ -39,6 +39,13 @@ public class ProduccionListCellController extends ListCell<Produccion> {
     private Produccion produccion;
     private Initializable controladorPadre;
 
+    /**
+     * Constructor de la clase
+     * @param favoritosRepository
+     * @param valoracionesRepository
+     * @param usuario
+     * @param controladorPadre
+     */
     public ProduccionListCellController(FavoritosRepository favoritosRepository, ValoracionesRepository valoracionesRepository, Usuario usuario, Initializable controladorPadre) {
         this.favoritosRepository = favoritosRepository;
         this.valoracionesRepository = valoracionesRepository;
@@ -56,6 +63,9 @@ public class ProduccionListCellController extends ListCell<Produccion> {
         }
     }
 
+    /**
+     * Cambia el color del corazón cuando pasa el ratón por encima.
+     */
     @FXML
     private void cambiaColorHover() {
         try {
@@ -67,6 +77,9 @@ public class ProduccionListCellController extends ListCell<Produccion> {
         }
     }
 
+    /**
+     * Cambia el color del corazón a su color por defecto dependiendo de si és favorito o no
+     */
     @FXML
     private void cambiaColorDefault() {
         try {
@@ -78,6 +91,9 @@ public class ProduccionListCellController extends ListCell<Produccion> {
         }
     }
 
+    /**
+     * Añade o elimina una producción del repositorio de favoritos para el usuario actual
+     */
     @FXML
     private void gestionFavorito() {
         try {
@@ -93,6 +109,10 @@ public class ProduccionListCellController extends ListCell<Produccion> {
         }
     }
 
+    /**
+     * Cambia a la vista de detalles se la producción seleccionada.
+     * @param event
+     */
     @FXML
     private void verDetalles(ActionEvent event) {
         try {
@@ -103,6 +123,11 @@ public class ProduccionListCellController extends ListCell<Produccion> {
         }
     }
 
+    /**
+     * Inicializa la vista con ls valores y textos adecuados para la producción dada.
+     * @param produccion producción de la que se muestran los detalles
+     * @param empty
+     */
     @Override
     protected void updateItem(Produccion produccion, boolean empty) {
 
@@ -137,6 +162,12 @@ public class ProduccionListCellController extends ListCell<Produccion> {
         }
     }
 
+    /**
+     * Obtiene la ruta de la imagen
+     * @param fileName la imágen que queremos
+     * @return la imágen con la ruta
+     * @throws URISyntaxException
+     */
     private String getPathImage(String fileName) throws URISyntaxException {
 
         return getClass().getResource(fileName).toURI().toString();

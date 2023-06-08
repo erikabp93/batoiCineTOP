@@ -37,6 +37,14 @@ public class LoginController implements Initializable {
     private FavoritosRepository favoritosRepository;
     private ValoracionesRepository valoracionesRepository;
 
+    /**
+     * Constructor de la clase
+     * @param peliculaSerieRepository repositorio de producciones
+     * @param temporadaRepository repositorio de temporadas de las series
+     * @param usuarioRepository repositorio de usuarios
+     * @param favoritosRepository repositorio de producciones favoritas
+     * @param valoracionesRepository repositorio de valoraciones de las producciones
+     */
     public LoginController(PeliculaSerieRepository peliculaSerieRepository, TemporadaRepository temporadaRepository, UsuarioRepository usuarioRepository, FavoritosRepository favoritosRepository, ValoracionesRepository valoracionesRepository) {
         this.peliculaSerieRepository = peliculaSerieRepository;
         this.temporadaRepository = temporadaRepository;
@@ -45,6 +53,10 @@ public class LoginController implements Initializable {
         this.valoracionesRepository = valoracionesRepository;
     }
 
+    /**
+     * Inicia sesión si el usuario y la contraseña existen y concuerdan y cambia a la vista principal. En caso contrario, te sugiere crear una cuenta
+     * @param event
+     */
     @FXML
     private void iniciarSesion(ActionEvent event) {
         try {
@@ -81,6 +93,10 @@ public class LoginController implements Initializable {
         }
     }
 
+    /**
+     * Crea un nuevo usuario con el nombre , email y contraseña que le proporciones.
+     * @param event
+     */
     @FXML
     private void registrarNuevoUsuario(ActionEvent event) {
         try {
@@ -96,6 +112,10 @@ public class LoginController implements Initializable {
         }
     }
 
+    /**
+     * Cierra la aplicación cuando se pulsa el botón.
+     * @param event define el evento de pulsar el botón.
+     */
     @FXML
     public void cerrar(ActionEvent event) {
         Alert alert = new Alert( Alert.AlertType.CONFIRMATION );
@@ -110,6 +130,11 @@ public class LoginController implements Initializable {
         alert.close();
     }
 
+    /**
+     * Inicializa la vista.
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
