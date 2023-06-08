@@ -19,6 +19,8 @@ public class PeliculaSerieRepository {
     /**
      * Constructor de la clase, obligatorio ponerlo. Posee 2 parametros
      * las peliculas y las series
+     * @param peliculaSerieDAO Dao de la pelicula serie
+     * @param temporadaDAO Dao de la temporada
      */
     public PeliculaSerieRepository(PeliculaSerieDAO peliculaSerieDAO, TemporadaDAO temporadaDAO) {
         this.peliculaSerieDAO = peliculaSerieDAO;
@@ -113,6 +115,7 @@ public class PeliculaSerieRepository {
      * @param id de la produccion a buscar
      * @return ArrayList de Produccion
      * @throws DatabaseErrorException al no poder acceder a la base de datos
+     * @throws NotFoundException al no encontrar ningun producto
      */
     public Produccion getById(int id) throws DatabaseErrorException, NotFoundException {
         return peliculaSerieDAO.getById(id);
@@ -122,6 +125,7 @@ public class PeliculaSerieRepository {
      * LLama al método save del atributo PeliculaSerieDAO que guardará la produccion pasada por
      * parámetro
      *
+     * @param produccion con la que trabajar
      * @throws DatabaseErrorException al no poder acceder a la base de datos
      */
     public void save(Produccion produccion) throws DatabaseErrorException {
@@ -132,6 +136,7 @@ public class PeliculaSerieRepository {
      * LLama al método remove del atributo PeliculaSerieDAO que eliminará la produccion pasada por
      * parámetro
      *
+     * @param produccion produccion con la que trabajar
      * @throws DatabaseErrorException al no poder acceder a la base de datos
      * @throws NotFoundException al no encontrar la produccion a eliminar
      */
@@ -145,6 +150,7 @@ public class PeliculaSerieRepository {
      *
      * @param id poster a obtener gracias al id de la produccion
      * @throws DatabaseErrorException al no poder acceder a la base de datos
+     * @return String devuelve el posrter de la peliculaSerie
      */
     public String getPoster(int id) throws DatabaseErrorException {
         return peliculaSerieDAO.getPoster(id);

@@ -19,6 +19,9 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador que nos muestra los detalles
+ */
 public class DetallesController implements Initializable {
 
     private Usuario usuario;
@@ -59,7 +62,7 @@ public class DetallesController implements Initializable {
 
     /**
      * Vuelve hacia atrás
-     * @param event
+     * @param event evento que nos lleva a la vista
      */
     @FXML
     private void verMasTarde(ActionEvent event) {
@@ -73,7 +76,7 @@ public class DetallesController implements Initializable {
 
     /**
      * Valora la producción con una puntuación del 1-5 y dejando un comentario meidante una ventana emergente
-     * @param event
+     * @param event evento de la app
      */
     @FXML
     private void valorar(ActionEvent event) {
@@ -126,8 +129,8 @@ public class DetallesController implements Initializable {
 
     /**
      * Inicializa la vista con unos valores para cada elemento.
-     * @param url
-     * @param resourceBundle
+     * @param location parametro por defecto
+     * @param resources parametro por defecto
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
