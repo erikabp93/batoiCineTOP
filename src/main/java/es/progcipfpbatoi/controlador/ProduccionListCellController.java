@@ -18,6 +18,9 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+/**
+ * Controlador que muestra las celdas de la produccion
+ */
 public class ProduccionListCellController extends ListCell<Produccion> {
 
     @FXML
@@ -126,7 +129,7 @@ public class ProduccionListCellController extends ListCell<Produccion> {
     /**
      * Inicializa la vista con ls valores y textos adecuados para la producción dada.
      * @param produccion producción de la que se muestran los detalles
-     * @param empty
+     * @param empty de tipo booleano
      */
     @Override
     protected void updateItem(Produccion produccion, boolean empty) {

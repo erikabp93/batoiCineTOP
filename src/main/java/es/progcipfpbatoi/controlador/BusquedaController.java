@@ -20,6 +20,9 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador de la busqueda
+ */
 public class BusquedaController implements Initializable {
 
     private Initializable controladorPadre;
@@ -124,7 +127,7 @@ public class BusquedaController implements Initializable {
 
     /**
      * Cambia a la vista de series.
-     * @param event
+     * @param event evento que realiza la accion
      */
     @FXML
     private void changeToTvShows(Event event) {
@@ -150,7 +153,7 @@ public class BusquedaController implements Initializable {
 
     /**
      * Cambia a la vista de peliculas.
-     * @param event
+     * @param event evento que realiza la accion
      */
     @FXML
     private void changeToMovies(Event event) {
@@ -163,8 +166,8 @@ public class BusquedaController implements Initializable {
 
     /**
      * Vuelve a la vista de búsqueda con los nuevos filtros.
-     * @param event
-     * @throws IOException
+     * @param event evento de la accion
+     * @throws IOException exception por defecto
      */
     @FXML
     private void buscar(ActionEvent event) throws IOException {
@@ -194,7 +197,7 @@ public class BusquedaController implements Initializable {
     /**
      * Vuelve a la vista de login para iniciar sesión con otro usuario o con el mismo.
      * @param event define el evento de pulsar el botón.
-     * @throws IOException
+     * @throws IOException exception por defecto
      */
     @FXML
     public void cambiarUsuario(ActionEvent event) throws IOException {

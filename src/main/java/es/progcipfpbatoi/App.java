@@ -22,6 +22,11 @@ import java.io.IOException;
  * JavaFX App
  */
 public class App extends Application {
+    /**
+     * Constructor por defecto, obligatorio ponerlo
+     */
+    public App() {
+    }
 
     /**
      * Metodo que inicia la aplicacion con sus respectivos DAO, repositorios y controlador

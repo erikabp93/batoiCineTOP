@@ -17,6 +17,9 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador que se encargar de que el user se registra en la app
+ */
 public class RegistroController implements Initializable {
 
     @FXML
@@ -121,7 +124,7 @@ public class RegistroController implements Initializable {
 
     /**
      * Cierra la aplicación
-     * @param event
+     * @param event evento de la alerta
      */
     @FXML
     public void cerrar(ActionEvent event) {
@@ -139,8 +142,8 @@ public class RegistroController implements Initializable {
 
     /**
      * Inicializa la vista con unos valores para cada elemento.
-     * @param location
-     * @param resources
+     * @param location parametro por defecto
+     * @param resources parametro por defecto
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {

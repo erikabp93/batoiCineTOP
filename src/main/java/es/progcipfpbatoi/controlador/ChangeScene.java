@@ -11,14 +11,22 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Clase que nos permite cambiar de vista
+ */
 public class ChangeScene {
+    /**
+     * Constructor por defecto
+     */
+    public ChangeScene() {
+    }
 
     /**
      * Constructor de la clase.
-     * @param stage
-     * @param controller
-     * @param path_to_view_file
-     * @throws IOException
+     * @param stage evento
+     * @param controller controlador a usar
+     * @param path_to_view_file ruta de la vista
+     * @throws IOException exception por defecto
      */
     public static void change(Stage stage, Initializable controller, String path_to_view_file) throws IOException{
 
@@ -36,10 +44,10 @@ public class ChangeScene {
 
     /**
      * Constructor de la clase con event en vez de stage
-     * @param event
-     * @param controller
-     * @param path_to_view_file
-     * @throws IOException
+     * @param event evento de la accion
+     * @param controller controlador a usar
+     * @param path_to_view_file ruta de la vista
+     * @throws IOException exception por defecto
      */
     public static void change(Event event, Initializable controller, String path_to_view_file) throws IOException{
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

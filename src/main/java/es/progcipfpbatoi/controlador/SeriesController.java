@@ -117,7 +117,7 @@ public class SeriesController implements Initializable {
     /**
      * Vuelve a la vista de login para iniciar sesión con otro usuario o con el mismo.
      * @param event define el evento de pulsar el botón.
-     * @throws IOException
+     * @throws IOException exception por defecto
      */
     @FXML
     public void cambiarUsuario(ActionEvent event) throws IOException {

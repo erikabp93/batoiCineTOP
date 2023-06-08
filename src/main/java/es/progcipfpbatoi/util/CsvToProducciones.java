@@ -95,8 +95,8 @@ public class CsvToProducciones {
      * Se encarga de eliminar todos los espacios del String pasado por parámetro, y nos devuelve
      * este string limpiado de espacios en blanco
      *
-     * @param generStr
-     * @return String
+     * @param generStr cadena a limpiar
+     * @return String cadena devuelta
      */
     public static String cleanWhiteSpaces(String generStr) {
         return generStr.replaceAll( " ", "" );
@@ -109,9 +109,9 @@ public class CsvToProducciones {
      * Y por último añade esa palabra al Set de Genero
      * Finalmente, al acabar el bucle devuelve el set de genero
      *
-     * @param generosStr
-     * @return Set<Genero>
-     * @throws CategoryTypeErrorException
+     * @param generosStr cadena a trabajar
+     * @return Set de Genero
+     * @throws CategoryTypeErrorException exception que lanza si no encuentra
      */
     public static Set<Genero> parseGeneros(String generosStr) throws CategoryTypeErrorException {
         Set<Genero> generoHashSet = new HashSet<>();
@@ -133,8 +133,8 @@ public class CsvToProducciones {
      *
      * Y si no, junta 20 con el año pasado por parámetro
      *
-     * @param anyo
-     * @return int
+     * @param anyo de tipo entero
+     * @return int anyo devuelto
      */
     private int anyo4digitos(int anyo) {
         int anyoActual = LocalDate.now().getYear();
@@ -155,8 +155,8 @@ public class CsvToProducciones {
      * Por último juntamos toda la información y ponemos el separador
      * Finalmente devolvemos toda esa cadena juntada
      *
-     * @param produccion
-     * @return String
+     * @param produccion produccion a desmenuzar
+     * @return String cadena devuelta
      */
     private String getRegisterFromProduccion(Produccion produccion) {
         String[] fields = new String[ 14 ];
@@ -181,8 +181,8 @@ public class CsvToProducciones {
      * Cada objeto produccion es almacenado en un ArrayList de Produccion que cuando ya no hayan
      * mas producciones, será devuelto.
      *
-     * @return ArrayList<Produccion>
-     * @throws DatabaseErrorException
+     * @return ArrayList de Produccion
+     * @throws DatabaseErrorException al no poder acceder a la base de datos
      */
     public ArrayList<Produccion> findAll() throws DatabaseErrorException {
         try {
@@ -214,8 +214,8 @@ public class CsvToProducciones {
      *
      * @param id id de la produccion que queremos encontrar
      * @return Produccion que se ha encontrado
-     * @throws DatabaseErrorException
-     * @throws NotFoundException
+     * @throws DatabaseErrorException al no poder acceder a la base de datos
+     * @throws NotFoundException al no encontrar ninguna produccion
      */
     public Produccion getById(int id) throws NotFoundException, DatabaseErrorException {
         try ( FileReader fileReader = new FileReader( this.file );
@@ -279,8 +279,7 @@ public class CsvToProducciones {
     /**
      * Añade la produccion pasada como parámetro al csv y crea una nueva línea
      * @param produccion produccion que pasemos por parametro
-     * @return void
-     * @throws IOException
+     * @throws IOException exception por defecto
      */
     private void append(Produccion produccion) throws IOException {
         try ( BufferedWriter bufferedWriter = getWriter( true ) ) {
@@ -292,7 +291,6 @@ public class CsvToProducciones {
     /**
      * Actualiza la Producion pasa por parámetro
      * @param produccion produccion que pasemos por parametro
-     * @return void
      * @throws DatabaseErrorException en caso de no poder acceder a la base de datos
      */
     private void update(Produccion produccion) throws DatabaseErrorException {
@@ -303,7 +301,6 @@ public class CsvToProducciones {
     /**
      * Elimina la Produccion pasada por parametro
      * @param produccion produccion que pasemos por parametro
-     * @return void
      * @throws DatabaseErrorException en caso de no poder acceder a la base de datos
      */
     public void remove(Produccion produccion) throws DatabaseErrorException {
@@ -320,7 +317,6 @@ public class CsvToProducciones {
      *
      * @param produccion produccion que pasemos por parametro
      * @param update si queremos actualizar la produccion pasamos true, si queremos eliminarla pasamos false
-     * @return void
      * @throws DatabaseErrorException en caso de no poder acceder a la base de datos
      */
     private void updateOrRemove(Produccion produccion, boolean update) throws DatabaseErrorException {
