@@ -2,13 +2,21 @@ package es.progcipfpbatoi.util;
 
 import javafx.scene.control.Alert;
 
+/**
+ * Clase que trabaja con las alertas
+ */
 public class AlertMessages {
+    /**
+     * Comentario obligatorio del constructor
+     */
+    public AlertMessages() {
+    }
+
     /**
      * Muestra una alerta sonre el mensaje pasado por parámetro
      * Esta alerta es de tipo error.
      *
      * @param msg de tipo String
-     * @return void
      */
     public static void mostrarAlertError(String msg) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -23,7 +31,6 @@ public class AlertMessages {
      * Esta alerta es de tipo warning.
      *
      * @param msg de tipo String
-     * @return void
      */
     public static void mostrarAlertWarning(String msg) {
         Alert alert = new Alert(Alert.AlertType.WARNING);

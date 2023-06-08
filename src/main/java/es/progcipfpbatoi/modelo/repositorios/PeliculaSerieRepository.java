@@ -9,6 +9,9 @@ import es.progcipfpbatoi.modelo.dto.Produccion;
 
 import java.util.ArrayList;
 
+/**
+ * Repositorio de las Series
+ */
 public class PeliculaSerieRepository {
 
     private PeliculaSerieDAO peliculaSerieDAO;
@@ -25,9 +28,9 @@ public class PeliculaSerieRepository {
      * LLama al método findAll(text) del atributo PeliculaSerieDAO que nos devolverá todas las
      * producciones que coincidan con el texto pasado por parámetro
      *
-     * @param text
-     * @return ArrayList<Produccion>
-     * @throws DatabaseErrorException
+     * @param text texto usado para filtrar
+     * @return ArrayList de Produccion
+     * @throws DatabaseErrorException al no poder acceder a la base de datos
      */
     public ArrayList<Produccion> findAll(String text) throws DatabaseErrorException{
         return peliculaSerieDAO.findAll(text);
@@ -37,9 +40,9 @@ public class PeliculaSerieRepository {
      * LLama al método findAll(text) del atributo PeliculaSerieDAO que nos devolverá todas las
      * producciones que coincidan con el genero pasado por parámetro
      *
-     * @param genero
-     * @return ArrayList<Produccion>
-     * @throws DatabaseErrorException
+     * @param genero usado para filtrar
+     * @return ArrayList de Produccion
+     * @throws DatabaseErrorException al no poder acceder a la base de datos
      */
     public ArrayList<Produccion> findAll(Genero genero) throws DatabaseErrorException {
         return peliculaSerieDAO.findAll(genero);
@@ -49,9 +52,10 @@ public class PeliculaSerieRepository {
      * LLama al método findAll(text) del atributo PeliculaSerieDAO que nos devolverá todas las
      * producciones que coincidan en texto y género pasado por parámetro
      *
-     * @param text
-     * @return ArrayList<Produccion>
-     * @throws DatabaseErrorException
+     * @param text cadena usada para filtrar
+     * @param genero genero usado para filtrar
+     * @return ArrayList de Produccion
+     * @throws DatabaseErrorException al no poder acceder a la base de datos
      */
     public ArrayList<Produccion> findAll(String text, Genero genero) throws DatabaseErrorException {
         return peliculaSerieDAO.findAll(text, genero);
@@ -61,8 +65,8 @@ public class PeliculaSerieRepository {
      * LLama al método findAll del atributo PeliculaSerieDAO que nos devolverá todas las
      * producciones
      *
-     * @return ArrayList<Produccion>
-     * @throws DatabaseErrorException
+     * @return ArrayList de Produccion
+     * @throws DatabaseErrorException al no poder acceder a la base de datos
      */
     public ArrayList<Produccion> findAll() throws DatabaseErrorException {
         return peliculaSerieDAO.findAll();
@@ -72,8 +76,8 @@ public class PeliculaSerieRepository {
      * LLama al método findAll del atributo PeliculaSerieDAO que nos devolverá todas las
      * producciones, en este caso peliculas
      *
-     * @return ArrayList<Produccion>
-     * @throws DatabaseErrorException
+     * @return ArrayList de Produccion
+     * @throws DatabaseErrorException al no poder acceder a la base de datos
      */
     public ArrayList<Produccion> findAllPeliculas() throws DatabaseErrorException {
         ArrayList<Produccion> peliculas = new ArrayList<>();
@@ -89,8 +93,8 @@ public class PeliculaSerieRepository {
      * LLama al método findAll del atributo PeliculaSerieDAO que nos devolverá todas las
      * producciones, en este caso series o tv_show
      *
-     * @return ArrayList<Produccion>
-     * @throws DatabaseErrorException
+     * @return ArrayList de Produccion
+     * @throws DatabaseErrorException al no poder acceder a la base de datos
      */
     public ArrayList<Produccion> findAllSeries() throws DatabaseErrorException {
         ArrayList<Produccion> series = new ArrayList<>();
@@ -107,8 +111,8 @@ public class PeliculaSerieRepository {
      * que coincida con el id pasado por parámetro
      *
      * @param id de la produccion a buscar
-     * @return ArrayList<Produccion>
-     * @throws DatabaseErrorException
+     * @return ArrayList de Produccion
+     * @throws DatabaseErrorException al no poder acceder a la base de datos
      */
     public Produccion getById(int id) throws DatabaseErrorException, NotFoundException {
         return peliculaSerieDAO.getById(id);
@@ -118,8 +122,7 @@ public class PeliculaSerieRepository {
      * LLama al método save del atributo PeliculaSerieDAO que guardará la produccion pasada por
      * parámetro
      *
-     * @return void
-     * @throws DatabaseErrorException
+     * @throws DatabaseErrorException al no poder acceder a la base de datos
      */
     public void save(Produccion produccion) throws DatabaseErrorException {
         peliculaSerieDAO.save(produccion);
@@ -129,9 +132,8 @@ public class PeliculaSerieRepository {
      * LLama al método remove del atributo PeliculaSerieDAO que eliminará la produccion pasada por
      * parámetro
      *
-     * @return void
-     * @throws DatabaseErrorException
-     * @throws NotFoundException
+     * @throws DatabaseErrorException al no poder acceder a la base de datos
+     * @throws NotFoundException al no encontrar la produccion a eliminar
      */
     public void remove(Produccion produccion) throws NotFoundException, DatabaseErrorException {
         peliculaSerieDAO.remove(produccion);
@@ -141,8 +143,8 @@ public class PeliculaSerieRepository {
      * LLama al método getPoster del atributo PeliculaSerieDAO que nos devolverá el poster de la
      * del id que pasemos por parámetro.
      *
-     * @return void
-     * @throws DatabaseErrorException
+     * @param id poster a obtener gracias al id de la produccion
+     * @throws DatabaseErrorException al no poder acceder a la base de datos
      */
     public String getPoster(int id) throws DatabaseErrorException {
         return peliculaSerieDAO.getPoster(id);
@@ -154,7 +156,7 @@ public class PeliculaSerieRepository {
      * @param filtro el filtro que se aplicará. default muestra el filtro por valoración.
      * @param ascendente elige si se ordena de forma ascendente o descentente.
      * @return el arrayList de producciones ordenadas.
-     * @throws DatabaseErrorException
+     * @throws DatabaseErrorException al no poder acceder a la base de datos
      */
     public ArrayList<Produccion> filtrar(boolean pelicula, String filtro, boolean ascendente) throws DatabaseErrorException {
         return peliculaSerieDAO.ordenar(pelicula, filtro, ascendente);

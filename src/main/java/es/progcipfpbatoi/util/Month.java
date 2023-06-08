@@ -2,6 +2,9 @@ package es.progcipfpbatoi.util;
 
 import es.progcipfpbatoi.exceptions.NotExistMonth;
 
+/**
+ * Clase que trabaja con el tipo de dato Month, ojo no es una instancia
+ */
 public class Month {
 
     /**

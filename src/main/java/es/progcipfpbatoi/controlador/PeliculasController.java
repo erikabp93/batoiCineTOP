@@ -22,6 +22,9 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador usado para manejar las peliculas
+ */
 public class PeliculasController implements Initializable {
 
     private Initializable controladorPadre;
@@ -118,7 +121,7 @@ public class PeliculasController implements Initializable {
     /**
      * Vuelve a la vista de login para iniciar sesión con otro usuario o con el mismo.
      * @param event define el evento de pulsar el botón.
-     * @throws IOException
+     * @throws IOException exception que lanza por defecto
      */
     @FXML
     public void cambiarUsuario(ActionEvent event) throws IOException {
@@ -217,8 +220,8 @@ public class PeliculasController implements Initializable {
 
     /**
      * Inicializa la vista con unos valores para cada elemento.
-     * @param url
-     * @param resourceBundle
+     * @param url parametro por defecto
+     * @param resourceBundle parametro por defecto
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

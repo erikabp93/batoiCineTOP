@@ -27,7 +27,7 @@ public class ValoracionesRepository {
      * LLama al método findAll del atributo SQLvalorarDAO que encuentra todas las
      * producciones que han sido valoradas
      *
-     * @return ArrayList<Produccion>
+     * @return ArrayList de Produccion
      * @throws DatabaseErrorException
      */
     public ArrayList<Produccion> findAll() throws DatabaseErrorException {
@@ -57,8 +57,8 @@ public class ValoracionesRepository {
      * y las añade al ArrayList de Produccion
      * Por último las devuelve
      *
-     * @return ArrayList<Produccion>
-     * @throws DatabaseErrorException
+     * @return ArrayList de Produccion
+     * @throws DatabaseErrorException al no poder acceder a la base de datos
      */
     public ArrayList<Produccion> findAllPeliculas() throws DatabaseErrorException {
         ArrayList<Produccion> peliculas = new ArrayList<>();
@@ -77,8 +77,8 @@ public class ValoracionesRepository {
      * y las añade al ArrayList de Produccion
      * Por último las devuelve
      *
-     * @return ArrayList<Produccion>
-     * @throws DatabaseErrorException
+     * @return ArrayList de Produccion
+     * @throws DatabaseErrorException al no poder acceder a la base de datos
      */
     public ArrayList<Produccion> findAllSeries() throws DatabaseErrorException {
         ArrayList<Produccion> series = new ArrayList<>();
@@ -95,8 +95,8 @@ public class ValoracionesRepository {
     /**
      * Obtiene la url del id pasado por parámetro.
      *
-     * @return ArrayList<Produccion>
-     * @throws DatabaseErrorException
+     * @param id id usado para obetener su poster
+     * @return ArrayList de Produccion
      */
     public static String getPoster(int id) {
         try {

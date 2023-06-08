@@ -22,6 +22,12 @@ import java.io.IOException;
  * JavaFX App
  */
 public class App extends Application {
+
+    /**
+     * Metodo que inicia la aplicacion con sus respectivos DAO, repositorios y controlador
+     * @param stage parametro por defecto
+     * @throws IOException exception al no acceder a la base de datos
+     */
     public void start(Stage stage) throws IOException {
         SQLtemporadaDAO     sqLtemporadaDAO     = new SQLtemporadaDAO();
         SQLpeliculaSerieDAO sqLpeliculaSerieDAO = new SQLpeliculaSerieDAO();
@@ -46,6 +52,10 @@ public class App extends Application {
 
     }
 
+    /**
+     * Metodo que lanza la aplicacion
+     * @param args argumento por defecto
+     */
     public static void main(String[] args) {
         launch();
     }

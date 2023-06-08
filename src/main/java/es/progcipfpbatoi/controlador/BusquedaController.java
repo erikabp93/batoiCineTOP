@@ -80,8 +80,8 @@ public class BusquedaController implements Initializable {
 
     /**
      * Inicializa la vista con unos valores para cada elemento.
-     * @param url
-     * @param resourceBundle
+     * @param url parametro por defecto
+     * @param resourceBundle parametro por defecto
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

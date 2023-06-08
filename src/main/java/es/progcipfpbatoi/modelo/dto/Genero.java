@@ -117,9 +117,9 @@ public enum Genero {
      * parámetro. En caso de que coincida, devuelve el Genero con el que coincida
      * En caso de no encontrar ninguna coincidencia, devuelve una expcetion
      *
-     * @param categoriaStr
-     * @return Calificacion
-     * @throws CategoryTypeErrorException
+     * @param categoriaStr cadena con la que compara
+     * @return Calificacion que devuelve
+     * @throws CategoryTypeErrorException al no encontrar nigun genero
      */
     public static Genero parse(String categoriaStr) throws CategoryTypeErrorException {
 
