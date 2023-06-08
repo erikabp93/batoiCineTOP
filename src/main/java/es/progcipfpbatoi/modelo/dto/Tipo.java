@@ -22,6 +22,15 @@ public enum Tipo {
         }
     };
 
+    /**
+     * Recorre todos los valores del Enum Tipo, comprobando uno por uno por si es igual al String pasado por
+     * parámetro. En caso de que coincida, devuelve el Tipo con el que coincida
+     * En caso de no encontrar ninguna coincidencia, devuelve una expcetion
+     *
+     * @param tipoStr
+     * @return Calificacion
+     * @throws CategoryTypeErrorException
+     */
     public static Tipo parse(String tipoStr) throws CategoryTypeErrorException {
 
         for ( Tipo genero : Tipo.values() ) {
