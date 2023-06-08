@@ -41,6 +41,14 @@ public class DetallesController implements Initializable {
     @FXML
     private ImageView imagen;
 
+    /**
+     * Constructor de la clase
+     * @param usuario usuario logueado
+     * @param produccion producción de la que se verán los detalles
+     * @param valoracionesRepository repositorio de valoraciones para ver si ya se ha valorado o no
+     * @param controladorPadre controlador desde el que se accede a la vista
+     * @param vistaPadre vista desde la que se accede al controlador
+     */
     public DetallesController(Usuario usuario, Produccion produccion, ValoracionesRepository valoracionesRepository, Initializable controladorPadre, String vistaPadre) {
         this.usuario = usuario;
         this.produccion = produccion;
@@ -49,6 +57,10 @@ public class DetallesController implements Initializable {
         this.valoracionesRepository = valoracionesRepository;
     }
 
+    /**
+     * Vuelve hacia atrás
+     * @param event
+     */
     @FXML
     private void verMasTarde(ActionEvent event) {
         try {
@@ -59,6 +71,10 @@ public class DetallesController implements Initializable {
         }
     }
 
+    /**
+     * Valora la producción con una puntuación del 1-5 y dejando un comentario meidante una ventana emergente
+     * @param event
+     */
     @FXML
     private void valorar(ActionEvent event) {
         try {
@@ -90,6 +106,10 @@ public class DetallesController implements Initializable {
         }
     }
 
+    /**
+     * Cierra la aplicación cuando se pulsa el botón.
+     * @param event define el evento de pulsar el botón.
+     */
     @FXML
     public void cerrar(ActionEvent event) {
         Alert alert = new Alert( Alert.AlertType.CONFIRMATION );
@@ -104,6 +124,11 @@ public class DetallesController implements Initializable {
         alert.close();
     }
 
+    /**
+     * Inicializa la vista con unos valores para cada elemento.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         descripcion.setText(produccion.getGuion());
