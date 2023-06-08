@@ -12,6 +12,8 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 import java.net.URL;
@@ -50,6 +52,13 @@ public class SeriesController implements Initializable {
 
     @FXML
     private RadioButton ordenAsc;
+
+    @FXML
+    private Button botonCambiarUsuario;
+
+    private Image imagenCambiarUsuario;
+
+    private URL rutaCambiarUsuario;
 
     /**
      * Constructor de la clase.
@@ -209,6 +218,10 @@ public class SeriesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         usuarioLabel.setText("Bienvenido " + usuario.getUsername());
+
+        rutaCambiarUsuario = getClass().getResource("/images/perfil.png");
+        imagenCambiarUsuario = new Image(rutaCambiarUsuario.toString(), 15, 15, false, true);
+        botonCambiarUsuario.setGraphic(new ImageView(imagenCambiarUsuario));
 
         seriesListView.setItems(getData());
         seriesListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
