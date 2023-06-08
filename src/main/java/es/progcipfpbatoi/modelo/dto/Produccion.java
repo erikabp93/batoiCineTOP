@@ -1,11 +1,12 @@
 package es.progcipfpbatoi.modelo.dto;
 
-import es.progcipfpbatoi.exceptions.CategoryTypeErrorException;
-
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Clase producccion
+ */
 public class Produccion {
 
     private int id;
@@ -44,22 +45,22 @@ public class Produccion {
      * Constructor de la clase, obligatorio ponerlo, ya que si no se pone nos da warning
      * Este constructor posee casi todos los atributos como parametros
      *
-     * @param id
-     * @param duracion
-     * @param actores
-     * @param titulo
-     * @param genero
-     * @param director
-     * @param urlTrailer
-     * @param productor
-     * @param tipo
-     * @param calificacion
-     * @param poster
-     * @param guion
-     * @param plataforma
-     * @param fechaLanzamiento
-     * @param visualizaciones
-     * @param valoracionTotal
+     * @param id id de la produccion
+     * @param duracion duracion de la produccion
+     * @param actores actores de la produccion
+     * @param titulo titlo de la produccion
+     * @param genero genero de la produccion
+     * @param director director de la produccion
+     * @param urlTrailer url de la produccion
+     * @param productor productor de la produccion
+     * @param tipo tipo de la produccion
+     * @param calificacion calificacion de la produccion
+     * @param poster poster de la produccion
+     * @param guion guion de la produccion
+     * @param plataforma plataforma de la produccion
+     * @param fechaLanzamiento fecha de la produccion
+     * @param visualizaciones visualizaciones de la produccion
+     * @param valoracionTotal valoracion de la produccion
      */
     public Produccion(int id, int duracion, String actores, String titulo, Set<Genero> genero, String director,
                       String urlTrailer, String productor, Tipo tipo, Calificacion calificacion, String poster,
@@ -85,21 +86,20 @@ public class Produccion {
     /**
      * Constructor de la clase, obligatorio ponerlo, ya que si no se pone nos da warning
      * Este constructor posee casi todos los atributos como parametros, excepto las visualizaciones y la valoracion
-     *
-     * @param id
-     * @param duracion
-     * @param actores
-     * @param titulo
-     * @param genero
-     * @param director
-     * @param urlTrailer
-     * @param productor
-     * @param tipo
-     * @param calificacion
-     * @param poster
-     * @param guion
-     * @param plataforma
-     * @param fechaLanzamiento
+     * @param id id de la produccion
+     * @param duracion duracion de la produccion
+     * @param actores actores de la produccion
+     * @param titulo titlo de la produccion
+     * @param genero genero de la produccion
+     * @param director director de la produccion
+     * @param urlTrailer url de la produccion
+     * @param productor productor de la produccion
+     * @param tipo tipo de la produccion
+     * @param calificacion calificacion de la produccion
+     * @param poster poster de la produccion
+     * @param guion guion de la produccion
+     * @param plataforma plataforma de la produccion
+     * @param fechaLanzamiento fecha de la produccion
      */
     public Produccion(int id, int duracion, String actores, String titulo, Set<Genero> genero, String director,
                       String urlTrailer, String productor, Tipo tipo, Calificacion calificacion, String poster,
@@ -126,7 +126,7 @@ public class Produccion {
      * Constructor de la clase, obligatorio ponerlo, ya que si no se pone nos da warning
      * Este constructor posee un parametro el id, y dentro inicializa el HasSeht de genero
      *
-     * @param id
+     * @param id id de la produccion
      */
     public Produccion(int id) {
         this.id     = id;
@@ -181,7 +181,7 @@ public class Produccion {
     /**
      * Devuelve un set de genero de los generos de la instacia
      *
-     * @return Set<Genero>
+     * @return Set de Genero
      */
     public Set<Genero> getGenero() {
         return genero;
@@ -350,8 +350,8 @@ public class Produccion {
      * En caso afirmativo devuelve si el id de la produccion por parametro es igual al id de la propia produccion
      * Y si este obj pasado por parámetro no pertenece a Produccion, directamente devuelve false.
      *
-     * @param obj
-     * @return boolen
+     * @param obj obj con el que vamos a trabajar
+     * @return boolean devuelve true o false
      */
     @Override
     public boolean equals(Object obj) {
@@ -365,8 +365,8 @@ public class Produccion {
      * En caso de que el texto pasado por parámetro empiece por las mismas letras que el atributo
      * título del objeto, devuelve true. En caso contrario nos devuelve false
      *
-     * @param text
-     * @return boolena
+     * @param text cadena con la que va a trabajr
+     * @return boolean devuelve true si empieza y false si no empieza
      */
     public boolean empiezaPor(String text) {
         return this.titulo.startsWith( text );

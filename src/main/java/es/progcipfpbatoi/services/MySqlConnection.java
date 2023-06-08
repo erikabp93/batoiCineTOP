@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Clase que nos permite realizar la conexion a la base de datos
+ */
 public class MySqlConnection {
 
     private static Connection connection;
@@ -16,10 +19,10 @@ public class MySqlConnection {
     /**
      * Constructor de la clase, obligatorio ponerlo, ya que si no se pone nos da warning
      * Tenemos 4 parámetros:
-     * ip -> de la conexión
-     * database -> el nombre de la base de datos
-     * username -> el nombre de usuario con el que acceder a la base de datos
-     * password -> contraseña del user que accede a la base de datos
+     * @param ip  de la conexión
+     * @param database el nombre de la base de datos
+     * @param userName el nombre de usuario con el que acceder a la base de datos
+     * @param password contraseña del user que accede a la base de datos
      */
     public MySqlConnection(String ip, String database, String userName, String password) {
         this.ip = ip;
@@ -55,8 +58,6 @@ public class MySqlConnection {
      * Se encarga de cerrar la conexión sobre la base de datos
      * Siempre y cuando la conexion sea diferente de null
      *
-     * @return void
-     * @throws SQLException
      */
     public void closeConnection() {
         if (connection!= null) {

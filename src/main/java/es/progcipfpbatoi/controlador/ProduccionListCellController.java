@@ -41,10 +41,10 @@ public class ProduccionListCellController extends ListCell<Produccion> {
 
     /**
      * Constructor de la clase
-     * @param favoritosRepository
-     * @param valoracionesRepository
-     * @param usuario
-     * @param controladorPadre
+     * @param favoritosRepository repositorio de favorito
+     * @param valoracionesRepository repostiroio de las valoreaciones
+     * @param usuario usuario con el que trabaja
+     * @param controladorPadre controlador al que vovler
      */
     public ProduccionListCellController(FavoritosRepository favoritosRepository, ValoracionesRepository valoracionesRepository, Usuario usuario, Initializable controladorPadre) {
         this.favoritosRepository = favoritosRepository;

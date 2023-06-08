@@ -10,40 +10,56 @@ import java.util.ArrayList;
 public interface PeliculaSerieDAO {
     /**
      *  Obtiene todas las producciones
+     * @throws DatabaseErrorException al no poder acceder a la base de datos
      */
     ArrayList<Produccion> findAll() throws DatabaseErrorException;
 
     /**
-     * Obtiene todas las producciones que comiencen por @text
-     * @param text
-     * @return
+     * Obtiene todas las producciones que coincidan con el texto pasado por parametro
+     * @param text cadena por el cual queremos filtrar
+     * @return arrayList de las producciones que coincidan en genero
+     * @throws DatabaseErrorException al no poder acceder a la base de datos
      */
     ArrayList<Produccion> findAll(String text) throws DatabaseErrorException;
 
+    /**
+     * Obtiene todas las producciones que coincidan con el genero pasado por parametro
+     * @param genero genero por el cual queremos filtrar
+     * @return arrayList de las producciones que coincidan en genero
+     * @throws DatabaseErrorException al no poder acceder a la base de datos
+     */
     ArrayList<Produccion> findAll(String text, Genero genero) throws DatabaseErrorException;
 
+    /**
+     * Obtiene todas las producciones que coincidan con el genero pasado por parametro
+     * @param genero genero por el cual queremos filtrar
+     * @return arrayList de las producciones que coincidan en genero
+     * @throws DatabaseErrorException al no poder acceder a la base de datos
+     */
     ArrayList<Produccion> findAll(Genero genero) throws DatabaseErrorException;
 
     /**
      * Obtiene la produccion cuyo id sea @id
-     * @param id
-     * @return
-     * @throws NotFoundException
+     * @param id id de la produccion que queremos obtener
+     * @return Produccion produccion que obtegna
+     * @throws NotFoundException al no encontrar la produccion por el id
+     * @throws DatabaseErrorException al no poder acceder a la base de datos
      */
     Produccion getById(int id) throws NotFoundException, DatabaseErrorException;
 
     /**
      * Obtiene la produccion cuyo id sea @id
-     * @param id
-     * @return null si la produccion no ha sido encontrada
+     * @param id id de la produccion a encontrar
+     * @return Produccion produccion encontrada
+     * @throws DatabaseErrorException al no poder acceder a la base de datos
      */
     Produccion findById(int id) throws DatabaseErrorException;
 
     /**
      * Almacena la produccion o la actualiza en caso de existir
-     * @param produccion
-     * @return
-     * @throws DatabaseErrorException
+     * @param produccion produccion con la vamos a trabajar
+     * @return Produccion la produccion a guardar
+     * @throws DatabaseErrorException al no poder acceder a la base de datos
      */
     Produccion save(Produccion produccion) throws DatabaseErrorException;
 
@@ -57,7 +73,7 @@ public interface PeliculaSerieDAO {
      * @param filtro el filtro que se aplicará. default muestra el filtro por valoración.
      * @param ascendente elige si se ordena de forma ascendente o descentente.
      * @return el arrayList de producciones ordenadas.
-     * @throws DatabaseErrorException
+     * @throws DatabaseErrorException al no poder acceder a la base de datos
      */
     ArrayList<Produccion> ordenar(boolean pelicula, String filtro, boolean ascendente) throws DatabaseErrorException;
 }
