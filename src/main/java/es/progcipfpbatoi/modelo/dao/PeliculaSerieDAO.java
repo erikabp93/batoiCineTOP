@@ -14,6 +14,7 @@ public interface PeliculaSerieDAO {
     /**
      *  Obtiene todas las producciones
      * @throws DatabaseErrorException al no poder acceder a la base de datos
+     * @return arraylist de producciones
      */
     ArrayList<Produccion> findAll() throws DatabaseErrorException;
 
@@ -28,6 +29,7 @@ public interface PeliculaSerieDAO {
     /**
      * Obtiene todas las producciones que coincidan con el genero pasado por parametro
      * @param genero genero por el cual queremos filtrar
+     * @param text texto a buscar
      * @return arrayList de las producciones que coincidan en genero
      * @throws DatabaseErrorException al no poder acceder a la base de datos
      */

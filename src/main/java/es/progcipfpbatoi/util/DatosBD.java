@@ -6,6 +6,12 @@ package es.progcipfpbatoi.util;
 public class DatosBD {
 
     /**
+     * por defecto
+     */
+    public DatosBD() {
+    }
+
+    /**
      * IP de la base
      */
     public static final String IP = "172.16.226.56";

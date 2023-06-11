@@ -1,3 +1,6 @@
+/**
+ * module por defecto
+ */
 module es.progcipfpbatoi {
     requires javafx.controls;
     requires javafx.fxml;

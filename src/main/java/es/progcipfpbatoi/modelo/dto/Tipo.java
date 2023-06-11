@@ -7,21 +7,19 @@ import es.progcipfpbatoi.exceptions.CategoryTypeErrorException;
  */
 public enum Tipo {
 
+    /**
+     * de tipo movie
+     */
     MOVIE {
-        /**
-         * de tipo movie
-         * @return String la cadena
-         */
         @Override
         public String toString() {
             return "MOVIE";
         }
     },
+    /**
+     * de tipo serie
+     */
     SERIE {
-        /**
-         * de tipo serie
-         * @return String la cadena
-         */
         @Override
         public String toString() {
             return "SERIE";

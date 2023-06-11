@@ -21,15 +21,21 @@ import java.util.Set;
  */
 public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
 
+    /**
+     * por defecto
+     */
+    public SQLpeliculaSerieDAO() {
+    }
+
     private              Connection connection;
     private static final String     TABLE_NAME = "produccion";
 
 
     /**
+     * Devuelve todas las producciones
      *
-     *
-     * @return
-     * @throws DatabaseErrorException
+     * @return ArrayList de producciones
+     * @throws DatabaseErrorException lanza la exception
      */
     @Override
     public ArrayList<Produccion> findAll() throws DatabaseErrorException {
@@ -56,6 +62,13 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
         return producciones;
     }
 
+    /**
+     * Devuelve todas las producciones que coincidan con el nombre
+     *
+     * @param texto cadena por el cual queremos filtrar
+     * @return ArrayList de producciones
+     * @throws DatabaseErrorException lanza la exception
+     */
     @Override
     public ArrayList<Produccion> findAll(String texto) throws DatabaseErrorException {
         String sql = String.format( "SELECT * FROM %s WHERE INSTR(titulo, ?)", TABLE_NAME );
@@ -78,6 +91,13 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
         return producciones;
     }
 
+    /**
+     * Devuelve todas las producciones que tengan el mismo genero
+     *
+     * @param genero genero por el cual queremos filtrar
+     * @return arraylist de producciones
+     * @throws DatabaseErrorException lanza la exception
+     */
     @Override
     public ArrayList<Produccion> findAll(Genero genero) throws DatabaseErrorException {
         String sql = String.format( "SELECT * FROM %s WHERE FIND_IN_SET(?,genero) > 0", TABLE_NAME );
@@ -100,6 +120,14 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
         return producciones;
     }
 
+    /**
+     * Devuelve todas las prodduciones que coincidan en texto y genero
+     *
+     * @param texto a buscar
+     * @param genero genero por el cual queremos filtrar
+     * @return lista de producciones
+     * @throws DatabaseErrorException lanza la exception
+     */
     @Override
     public ArrayList<Produccion> findAll(String texto, Genero genero) throws DatabaseErrorException {
         String sql = String.format( "SELECT * FROM %s WHERE FIND_IN_SET(?,genero) > 0 AND INSTR(titulo, ?)", TABLE_NAME );
@@ -123,6 +151,14 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
         return producciones;
     }
 
+    /**
+     * Obtiene la produccion por el id
+     *
+     * @param id id de la produccion que queremos obtener
+     * @return Produccion obtenida
+     * @throws NotFoundException lanza la exception
+     * @throws DatabaseErrorException lanza la exception
+     */
     @Override
     public Produccion getById(int id) throws NotFoundException, DatabaseErrorException {
         String sql = String.format( "SELECT * FROM %s WHERE id = ?", TABLE_NAME );
@@ -149,6 +185,13 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
         }
     }
 
+    /**
+     * Produccion a encontrar
+     *
+     * @param id id de la produccion a encontrar
+     * @return Produccion encontrada
+     * @throws DatabaseErrorException lanza la exception
+     */
     @Override
     public Produccion findById(int id) throws DatabaseErrorException {
         try {
@@ -158,6 +201,13 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
         }
     }
 
+    /**
+     * Guardar la produccion
+     *
+     * @param produccion produccion con la vamos a trabajar
+     * @return Produccion guardada
+     * @throws DatabaseErrorException lanza la exception
+     */
     @Override
     public Produccion save(Produccion produccion) throws DatabaseErrorException {
         if ( findById( produccion.getId() ) == null ) {
@@ -167,6 +217,13 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
         }
     }
 
+    /**
+     * Inserta la produccion
+     *
+     * @param produccion produccion a insertar
+     * @return Produccion insertada
+     * @throws DatabaseErrorException lanza la exception
+     */
     private Produccion insert(Produccion produccion) throws DatabaseErrorException {
         String sql = String.format( "INSERT INTO %s (id, duracion, actores, titulo, genero, director, urlTrailer, productor, tipo, calificacion, poster, guion, plataforma, fechaLanzamiento, visualizaciones) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", TABLE_NAME );
         connection = new MySqlConnection( DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD ).getConnection();
@@ -198,6 +255,13 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
         }
     }
 
+    /**
+     * Actualiza la produccion
+     *
+     * @param produccion a actualizar
+     * @return produccion actualizada
+     * @throws DatabaseErrorException lanza la exception
+     */
     private Produccion update(Produccion produccion) throws DatabaseErrorException {
         String sql = String.format( "UPDATE %s SET duracion = ?, actores = ?, titulo = ?, genero = ?, director = ?, urlTrailer = ?, productor = ?, tipo = ?, calificacion = ?, poster = ?, guion = ?, plataforma = ?, fechaLanzamiento = ?, visualizaciones = ? WHERE id = ?", TABLE_NAME );
         connection = new MySqlConnection( DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD ).getConnection();
@@ -230,6 +294,13 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
         return produccion;
     }
 
+    /**
+     * Obtiene el poster del id de la prodccion
+     *
+     * @param id id de la produccion
+     * @return String cadena
+     * @throws DatabaseErrorException lanza la exception
+     */
     public String getPoster(int id) throws DatabaseErrorException {
         String sql = String.format( "SELECT poster FROM %s WHERE id LIKE %d", TABLE_NAME, id );
         connection = new MySqlConnection( DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD ).getConnection();
@@ -256,7 +327,7 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
      * @param filtro el filtro que se aplicará. default muestra el filtro por valoración.
      * @param ascendente elige si se ordena de forma ascendente o descentente.
      * @return el arrayList de producciones ordenadas.
-     * @throws DatabaseErrorException
+     * @throws DatabaseErrorException lanza la exception
      */
     @Override
     public ArrayList<Produccion> ordenar(boolean pelicula, String filtro, boolean ascendente) throws DatabaseErrorException {
@@ -299,6 +370,13 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
     }
 
 
+    /**
+     * Elimina la produccion
+     *
+     * @param produccion produccion con la vamos a trabajar
+     * @throws DatabaseErrorException lanza la exception
+     * @throws NotFoundException lanza la exception
+     */
     @Override
     public void remove(Produccion produccion) throws DatabaseErrorException, NotFoundException {
         String sql = String.format( "DELETE FROM %s WHERE id = ?", TABLE_NAME );
@@ -315,6 +393,13 @@ public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
         }
     }
 
+    /**
+     * COnvierte de rs a objeto
+     *
+     * @param rs rs parametro
+     * @return objeto produccion
+     * @throws SQLException lanza la exception
+     */
     private Produccion getProduccionFromResultset(ResultSet rs) throws SQLException {
         int          id               = rs.getInt( "id" );
         int          duracion         = rs.getInt( "duracion" );

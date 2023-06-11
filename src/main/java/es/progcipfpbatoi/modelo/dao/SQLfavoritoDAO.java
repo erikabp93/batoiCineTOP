@@ -13,12 +13,18 @@ import java.util.ArrayList;
  */
 public class SQLfavoritoDAO implements FavoritoDAO{
 
-    private Connection connection;
-    private static final String TABLE_NAME = "favoritos";
-    private static final String IP = "172.16.226.93";
-    private static final String DATABASE = "batoiCine_bd";
-    private static final String USERNAME = "batoi";
-    private static final String PASSWORD = "1234";
+    /**
+     * por defecto
+     */
+    public SQLfavoritoDAO() {
+    }
+
+    private              Connection connection;
+    private static final String     TABLE_NAME = "favoritos";
+    private static final String     IP = "172.16.226.93";
+    private static final String     DATABASE = "batoiCine_bd";
+    private static final String     USERNAME = "batoi";
+    private static final String     PASSWORD = "1234";
 
     /**
      * Devuelve todas las producciones que el user tenga en favortios
@@ -118,7 +124,7 @@ public class SQLfavoritoDAO implements FavoritoDAO{
      * @param usuario usuario que comprueba
      * @param produccion produccion a ser comprobada
      * @return boolena
-     * @throws DatabaseErrorException
+     * @throws DatabaseErrorException lanza la exception
      */
     public boolean yaFavorito(Usuario usuario, Produccion produccion) throws DatabaseErrorException {
         for (Produccion production : findAll(usuario)) {

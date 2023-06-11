@@ -6,199 +6,164 @@ import es.progcipfpbatoi.exceptions.CategoryTypeErrorException;
  * enum de Genero
  */
 public enum Genero {
+    /**
+     * action
+     */
     ACTION {
-        /**
-         * action
-         *
-         * @return String cadena
-         */
         @Override
         public String toString() {
             return "Action";
         }
     },
+    /**
+     * fantasy
+     */
     FANTASY {
-        /**
-         * fantasy
-         *
-         * @return String cadena
-         */
         @Override
         public String toString() {
             return "Fantasy";
         }
     },
+    /**
+     * musical
+     */
     MUSICAL {
-        /**
-         * musical
-         *
-         * @return String cadena
-         */
         @Override
         public String toString() {
             return "Musical";
         }
     },
+    /**
+     * history
+     */
     HISTORY {
-        /**
-         * history
-         *
-         * @return String cadena
-         */
         @Override
         public String toString() {
             return "History";
         }
     },
+    /**
+     * sport
+     */
     SPORT {
-        /**
-         * sport
-         *
-         * @return String cadena
-         */
         @Override
         public String toString() {
             return "Sport";
         }
     },
+    /**
+     * biography
+     */
     BIOGRAPHY {
-        /**
-         * biography
-         *
-         * @return String cadena
-         */
+
         @Override
         public String toString() {
             return "Biography";
         }
     },
+    /**
+     * comedy
+     */
     COMEDY {
-        /**
-         * comedy
-         *
-         * @return String cadena
-         */
         @Override
         public String toString() {
             return "Comedy";
         }
     },
+    /**
+     * sci_fi
+     */
     SCI_FI {
-        /**
-         * sci_fi
-         *
-         * @return String cadena
-         */
         @Override
         public String toString() {
             return "Sci-Fi";
         }
     },
+    /**
+     * mystery
+     */
     MYSTERY {
-        /**
-         * mystery
-         *
-         * @return String cadena
-         */
         @Override
         public String toString() {
             return "Mystery";
         }
     },
+    /**
+     * western
+     */
     WESTERN {
-        /**
-         * western
-         *
-         * @return String cadena
-         */
         @Override
         public String toString() {
             return "Western";
         }
     },
+    /**
+     * horror
+     */
     HORROR {
-        /**
-         * horror
-         *
-         * @return String cadena
-         */
         @Override
         public String toString() {
             return "Horror";
         }
     },
+    /**
+     * family
+     */
     FAMILY {
-        /**
-         * family
-         *
-         * @return String cadena
-         */
         @Override
         public String toString() {
             return "Family";
         }
     },
+    /**
+     * romance
+     */
     ROMANCE {
-        /**
-         * romance
-         *
-         * @return String cadena
-         */
         @Override
         public String toString() {
             return "Romance";
         }
     },
+    /**
+     * thiller
+     */
     THRILLER {
-        /**
-         * thiller
-         *
-         * @return String cadena
-         */
         @Override
         public String toString() {
             return "Thriller";
         }
     },
+    /**
+     * adventure
+     */
     ADVENTURE {
-        /**
-         * adventure
-         *
-         * @return String cadena
-         */
         @Override
         public String toString() {
             return "Adventure";
         }
     },
+    /**
+     * crime
+     */
     CRIME {
-        /**
-         * crime
-         *
-         * @return String cadena
-         */
         @Override
         public String toString() {
             return "Crime";
         }
     },
+    /**
+     * drama
+     */
     DRAMA {
-        /**
-         * drama
-         *
-         * @return String cadena
-         */
         @Override
         public String toString() {
             return "Drama";
         }
     },
+    /**
+     * animation
+     */
     ANIMATION {
-        /**
-         * animation
-         *
-         * @return String cadena
-         */
         @Override
         public String toString() {
             return "Animation";
