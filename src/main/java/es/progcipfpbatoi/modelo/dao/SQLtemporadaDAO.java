@@ -3,35 +3,32 @@ package es.progcipfpbatoi.modelo.dao;
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
 import es.progcipfpbatoi.modelo.dto.Temporada;
 import es.progcipfpbatoi.services.MySqlConnection;
-import es.progcipfpbatoi.util.CsvToTemporadas;
 import es.progcipfpbatoi.util.DatosBD;
 
 import java.sql.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * DAO de temporada
+ */
 public class SQLtemporadaDAO implements TemporadaDAO {
+
+    /**
+     * constructor obligatorio
+     */
+    public SQLtemporadaDAO() {
+    }
 
     private              Connection connection;
     private static final String     TABLE_NAME = "temporadas";
 
-    public static void main(String[] args) {
-        CsvToTemporadas csvToProducciones = new CsvToTemporadas();
-        try {
-            ArrayList<Temporada> arrayList               = csvToProducciones.findAll();
-            SQLtemporadaDAO      sqLPeliculaTemporadaDAO = new SQLtemporadaDAO();
-            for ( Temporada temporadaItem :
-                    arrayList ) {
-                sqLPeliculaTemporadaDAO.save( temporadaItem );
-            }
-        } catch ( DatabaseErrorException e ) {
-            throw new RuntimeException( e );
-        }
-    }
-
+    /**
+     * Devuelve todas las temporadas
+     *
+     * @return arraylist de temporadas
+     * @throws DatabaseErrorException lanza la exception
+     */
     @Override
     public ArrayList<Temporada> findAll() throws DatabaseErrorException {
         String sql = String.format( "SELECT * FROM %s", TABLE_NAME );
@@ -57,6 +54,13 @@ public class SQLtemporadaDAO implements TemporadaDAO {
         return temporadas;
     }
 
+    /**
+     * Busca la temporada por id
+     *
+     * @param id id de la temporada a buscar
+     * @return temporada encontrada
+     * @throws DatabaseErrorException lanza la exception
+     */
     @Override
     public Temporada findById(int id) throws DatabaseErrorException {
         String sql = String.format( "SELECT * FROM %s WHERE id = ?", TABLE_NAME );
@@ -81,6 +85,13 @@ public class SQLtemporadaDAO implements TemporadaDAO {
         }
     }
 
+    /**
+     * Guarda la temporada
+     *
+     * @param temporada temporada a guardar
+     * @return Temporada guardad
+     * @throws DatabaseErrorException lanza la exception
+     */
     @Override
     public Temporada save(Temporada temporada) throws DatabaseErrorException {
         if ( findById( temporada.getId() ) == null ) {
@@ -90,6 +101,13 @@ public class SQLtemporadaDAO implements TemporadaDAO {
         }
     }
 
+    /**
+     * Inserta la temporada
+     *
+     * @param temporada temporada a insertar
+     * @return Temporada insertada
+     * @throws DatabaseErrorException lanza la exception
+     */
     private Temporada insert(Temporada temporada) throws DatabaseErrorException {
         String sql = String.format( "INSERT INTO %s (id, id_serie, plot, fechaLanzamiento, numCapitulos) VALUES (?,?,?,?,?)",
                 TABLE_NAME );
@@ -115,6 +133,13 @@ public class SQLtemporadaDAO implements TemporadaDAO {
         }
     }
 
+    /**
+     * Actualiza la temporada
+     *
+     * @param temporada temporada que se actualiza
+     * @return temporada actualiza
+     * @throws DatabaseErrorException lanza la exception
+     */
     private Temporada update(Temporada temporada) throws DatabaseErrorException {
         String sql = String.format("UPDATE %s SET id_serie = ?, plot = ?, fechaLanzamiento = ?, numCapitulos = ? WHERE id = ?",
                 TABLE_NAME );
@@ -138,6 +163,13 @@ public class SQLtemporadaDAO implements TemporadaDAO {
         return temporada;
     }
 
+    /**
+     * Convierte de rs a temporada
+     *
+     * @param rs rs que se pasa por parametro
+     * @return Temporada como objeto
+     * @throws SQLException lanza la exception
+     */
     private Temporada getTemporadaFromResultset(ResultSet rs) throws SQLException {
         int    id                = rs.getInt( "id" );
         int    id_serie          = rs.getInt( "id_serie" );

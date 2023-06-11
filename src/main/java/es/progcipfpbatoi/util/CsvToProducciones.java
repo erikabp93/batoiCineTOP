@@ -13,6 +13,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+/**
+ * Clase que pasa de txt a producciones
+ */
 public class CsvToProducciones {
 
     private static final String DATABASE_FILE     = "resources/databases/peliculas_series.csv";

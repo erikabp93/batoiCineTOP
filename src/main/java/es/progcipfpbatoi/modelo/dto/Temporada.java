@@ -1,5 +1,8 @@
 package es.progcipfpbatoi.modelo.dto;
 
+/**
+ * Clase temporada
+ */
 public class Temporada {
     private int       id;
     private int       id_serie;
@@ -12,11 +15,11 @@ public class Temporada {
      * Constructor de la clase, obligatorio ponerlo, ya que si no se pone nos da warning
      * Este constructor posee todos atributos de la instancia como parametros
      *
-     * @param id
-     * @param id_serie
-     * @param plot
-     * @param fechaLanzamiento
-     * @param numCapitulos
+     * @param id id de la temporada
+     * @param id_serie id serie de la temporada
+     * @param plot plot de la temporada
+     * @param fechaLanzamiento fecha de la temporada
+     * @param numCapitulos capitulos de la temporada
      */
     public Temporada(int id, int id_serie, String plot, int fechaLanzamiento, int numCapitulos) {
         this.id               = id;

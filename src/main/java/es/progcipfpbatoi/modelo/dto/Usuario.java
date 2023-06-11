@@ -1,5 +1,8 @@
 package es.progcipfpbatoi.modelo.dto;
 
+/**
+ * Clase usuario con la trabaja el programa
+ */
 public class Usuario {
     private String username;
     private String password;
@@ -9,11 +12,10 @@ public class Usuario {
      * Constructor de la clase, obligatorio ponerlo, ya que si no se pone nos da warning
      * Este constructor posee todos atributos de la instancia como parametros
      *
-     * @param username
-     * @param password
-     * @param email
+     * @param username nombre de usuario
+     * @param password contraseña
+     * @param email correo electronico
      */
-
     public Usuario(String username, String password, String email) {
         this.username = username;
         this.password = password;
@@ -24,8 +26,8 @@ public class Usuario {
      * Constructor de la clase, obligatorio ponerlo, ya que si no se pone nos da warning
      * Este constructor los atributos del username del usuario y su contraseña únicamente
      *
-     * @param username
-     * @param password
+     * @param username nombre de usuario
+     * @param password contraseña del user
      */
 
     public Usuario(String username, String password) {

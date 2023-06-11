@@ -7,6 +7,9 @@ import es.progcipfpbatoi.modelo.dto.Temporada;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Clase que comvierte de txt a objeto
+ */
 public class CsvToTemporadas {
 
     private static final String DATABASE_FILE     = "resources/databases/extra_series.csv";
@@ -85,7 +88,7 @@ public class CsvToTemporadas {
      * con todas las temporadas
      * En caso de que no, lo que hace es pasar de linea de csv a objeto Temporada
      *
-     * @return ArrayList<Temporda> retorna todas las temporadas
+     * @return ArrayList de Temporda retorna todas las temporadas
      * @throws DatabaseErrorException en caso de no poder acceder a la base de datos
      */
     public ArrayList<Temporada> findAll() throws DatabaseErrorException {
@@ -119,6 +122,7 @@ public class CsvToTemporadas {
      * @param id id de la temporada que queremos encontrar
      * @return Temporada que se ha añadio/actualizado
      * @throws DatabaseErrorException en caso de no poder acceder a la base de datos
+     * @throws NotFoundException lanza la exception
      */
     public Temporada getById(int id) throws NotFoundException, DatabaseErrorException {
         try ( FileReader fileReader = new FileReader( this.file ) ;
@@ -206,7 +210,6 @@ public class CsvToTemporadas {
     /**
      * Elimina la Temporada pasada por parametro
      * @param temporada temporada que pasemos por parametro
-     * @return void
      * @throws DatabaseErrorException en caso de no poder acceder a la base de datos
      */
     public void remove(Temporada temporada) throws DatabaseErrorException {

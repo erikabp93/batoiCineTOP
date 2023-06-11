@@ -2,19 +2,34 @@ package es.progcipfpbatoi.modelo.dto;
 
 import es.progcipfpbatoi.exceptions.CategoryTypeErrorException;
 
+/**
+ * enum tipo
+ */
 public enum Tipo {
+
     MOVIE {
+        /**
+         * de tipo movie
+         * @return String la cadena
+         */
         @Override
         public String toString() {
             return "MOVIE";
         }
     },
     SERIE {
+        /**
+         * de tipo serie
+         * @return String la cadena
+         */
         @Override
         public String toString() {
             return "SERIE";
         }
     },
+    /**
+     * de tipo tv_show
+     */
     tv_show {
         @Override
         public String toString() {
@@ -27,9 +42,9 @@ public enum Tipo {
      * parámetro. En caso de que coincida, devuelve el Tipo con el que coincida
      * En caso de no encontrar ninguna coincidencia, devuelve una expcetion
      *
-     * @param tipoStr
-     * @return Calificacion
-     * @throws CategoryTypeErrorException
+     * @param tipoStr cadena a parsear
+     * @return Calificacion tipo enum que devuevle
+     * @throws CategoryTypeErrorException exception al no encontrar categoria
      */
     public static Tipo parse(String tipoStr) throws CategoryTypeErrorException {
 

@@ -1,5 +1,8 @@
 package es.progcipfpbatoi.Validator;
 
+/**
+ * Clase validator
+ */
 public class Validador {
 
     private Validator validator;
@@ -16,8 +19,8 @@ public class Validador {
      * al método que está en la clase Validator, esta devuelve true o false dependiendo que
      * lo que el método le devuelva
      *
-     * @param contrasenya
-     * @return
+     * @param contrasenya contraseña que se valida
+     * @return boolean
      */
 
     public boolean validarContrasenya(String contrasenya) {
@@ -29,8 +32,8 @@ public class Validador {
      * le pasa al método que está en la clase Validator, esta devuelve true o false
      * dependiendo que lo que el método le devuelva
      *
-     * @param nombreUsuario
-     * @return
+     * @param nombreUsuario nombre del usuario
+     * @return boolean
      */
 
     public boolean nombreUsuarioCorrecto(String nombreUsuario) {
@@ -42,7 +45,7 @@ public class Validador {
      * al método que está en la clase Validator, esta devuelve true o false dependiendo
      * que lo que el método le devuelva
      *
-     * @param correo
+     * @param correo correo a comprobar
      * @return boolean
      */
 

@@ -13,10 +13,26 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Optional;
 
+/**
+ * DAO de valorar
+ */
 public class SQLvalorarDAO implements ValorarDAO {
 
-    private Connection connection;
-    private static final String TABLE_NAME = "valorar";
+    /**
+     * Constructor por defecto
+     */
+    public SQLvalorarDAO() {
+    }
+
+    private              Connection connection;
+    private static final String     TABLE_NAME = "valorar";
+
+    /**
+     * Devuelve todas las producciones
+     *
+     * @return Arralist de Producciones
+     * @throws DatabaseErrorException lanza la exception
+     */
     @Override
     public ArrayList<Produccion> findAll() throws DatabaseErrorException { //ordenado por mejor valoradas
         String sql = String.format("SELECT V.id_produccion, P.duracion, P.director, P.urlTrailer, P.tipo, P.titulo, P.valoracion_total," +
@@ -45,6 +61,13 @@ public class SQLvalorarDAO implements ValorarDAO {
         return producciones;
     }
 
+    /**
+     * Devuelve todas las producciones que ha valorado el usuario por parametro
+     *
+     * @param usuario usuario que valora
+     * @return Arraylist de producciones
+     * @throws DatabaseErrorException exception que lanza
+     */
     private ArrayList<Produccion> valoradasPorUsuario(Usuario usuario) throws DatabaseErrorException {
         String sql = String.format("SELECT * FROM produccion P INNER JOIN %s V ON (P.id = V.id_produccion) WHERE V.username LIKE \"%s\" ORDER BY V.valoracion DESC;", TABLE_NAME, usuario.getUsername());
         ArrayList<Produccion> producciones = new ArrayList<>();
@@ -68,6 +91,17 @@ public class SQLvalorarDAO implements ValorarDAO {
         return producciones;
     }
 
+    /**
+     * Devuelve true si la produccion que ha valorado el usuario, junto con el comentario ha sido realizada.
+     * En caso contrario devuevle false
+     *
+     * @param produccion produccion de la produccion
+     * @param usuario usuario de la produccion
+     * @param valoracion valoracion de la produccion
+     * @param comentario comentario de la produccion
+     * @return boolean devuevle tru o false
+     * @throws DatabaseErrorException lanza la exception
+     */
     @Override
     public boolean save(Produccion produccion, Usuario usuario, int valoracion, String comentario) throws DatabaseErrorException {
         String sql = String.format("INSERT INTO %s (id_produccion, username, valoracion, comentario) VALUES (?,?,?,?)", TABLE_NAME);
@@ -114,6 +148,14 @@ public class SQLvalorarDAO implements ValorarDAO {
         }
     }
 
+    /**
+     * Devuelve true si el usuario ya ha valorado la produccion. En caso contrario devuelve false
+     *
+     * @param produccion produccion que se comprueba
+     * @param usuario usuario que ha valorado
+     * @return boolean
+     * @throws DatabaseErrorException exception que lanza
+     */
     private boolean yaValorado(Produccion produccion, Usuario usuario) throws DatabaseErrorException {
         for (Produccion production : valoradasPorUsuario(usuario)) {
             if (production.equals(produccion)) {
@@ -123,6 +165,13 @@ public class SQLvalorarDAO implements ValorarDAO {
         return false;
     }
 
+    /**
+     * El usuario borra la valoracion de la produccion
+     *
+     * @param produccion produccion que se comprueba
+     * @param usuario usuario que ha valorado
+     * @throws DatabaseErrorException exception que lanza
+     */
     private void borrarValoracion(Produccion produccion, Usuario usuario) throws DatabaseErrorException {
         String sql = String.format("DELETE FROM %s WHERE username LIKE ? AND id_produccion = ?", TABLE_NAME);
         connection =  new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();
@@ -140,6 +189,13 @@ public class SQLvalorarDAO implements ValorarDAO {
         }
     }
 
+    /**
+     * Transforna de rs a objeto produccion
+     *
+     * @param rs resulset por parametro
+     * @return Produccion gracias al rs
+     * @throws SQLException lanza la exception
+     */
     private Produccion getProduccionFromResultset(ResultSet rs) throws SQLException {
         int id = rs.getInt("id_produccion");
         int duracion = rs.getInt("duracion");
@@ -181,6 +237,13 @@ public class SQLvalorarDAO implements ValorarDAO {
         return new Produccion(id, duracion, actores, nombre, genero, director, urlTrailer, productor, tipo, calificacion, poster, guion, plataforma, fechaLanzamiento, visualizaciones, valoracionTotal);
     }
 
+    /**
+     * Devuelve el poster de la id de la produccion pasada por parametro
+     *
+     * @param id id de la produccion
+     * @return String devuelve el poster
+     * @throws DatabaseErrorException lanza la exception
+     */
     public String getPoster(int id) throws DatabaseErrorException {
         String sql = String.format("SELECT poster FROM %s INNER JOIN produccion ON (id_produccion = id) WHERE id_produccion LIKE %d GROUP BY id_produccion ", TABLE_NAME, id);
         connection =  new MySqlConnection(DatosBD.IP, DatosBD.DATABASE, DatosBD.USERNAME, DatosBD.PASSWORD).getConnection();

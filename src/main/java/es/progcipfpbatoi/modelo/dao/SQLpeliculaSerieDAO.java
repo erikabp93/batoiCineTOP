@@ -16,28 +16,21 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Set;
 
+/**
+ * Dao de pelicula y serie
+ */
 public class SQLpeliculaSerieDAO implements PeliculaSerieDAO {
 
     private              Connection connection;
     private static final String     TABLE_NAME = "produccion";
 
-    /*
-    //Pasar de csv a la bd
-    public static void main(String[] args) {
-        CsvToProducciones csvToProducciones = new CsvToProducciones();
-        try {
-            ArrayList<Produccion> arrayList           = csvToProducciones.findAll();
-            SQLpeliculaSerieDAO   sqLpeliculaSerieDAO = new SQLpeliculaSerieDAO();
-            for ( Produccion produccionItem :
-                    arrayList ) {
-                sqLpeliculaSerieDAO.save( produccionItem );
-            }
-        } catch ( DatabaseErrorException e ) {
-            throw new RuntimeException( e );
-        }
-    }
-     */
 
+    /**
+     *
+     *
+     * @return
+     * @throws DatabaseErrorException
+     */
     @Override
     public ArrayList<Produccion> findAll() throws DatabaseErrorException {
         String sql = String.format( "SELECT * FROM %s ORDER BY valoracion_total DESC", TABLE_NAME );

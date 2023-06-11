@@ -8,6 +8,9 @@ import es.progcipfpbatoi.modelo.dto.Usuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Repositoio de valoraciones
+ */
 public class ValoracionesRepository {
 
     private static SQLvalorarDAO sqlValorarDAO;
@@ -15,8 +18,8 @@ public class ValoracionesRepository {
 
     /**
      * Constructor de la clase, obligatorio ponerlo. Posee 2 parametros,
-     * el SQLValorarDao
-     * el Repositorio de peliculas y serie
+     * @param peliculaSerieRepository repo de peliculas
+     * @param sqlValorarDAO DAO de valorar
      */
     public ValoracionesRepository(SQLvalorarDAO sqlValorarDAO, PeliculaSerieRepository peliculaSerieRepository) {
         this.peliculaSerieRepository = peliculaSerieRepository;
@@ -28,7 +31,7 @@ public class ValoracionesRepository {
      * producciones que han sido valoradas
      *
      * @return ArrayList de Produccion
-     * @throws DatabaseErrorException
+     * @throws DatabaseErrorException lanza la exception
      */
     public ArrayList<Produccion> findAll() throws DatabaseErrorException {
         return sqlValorarDAO.findAll();
@@ -46,7 +49,8 @@ public class ValoracionesRepository {
      * @param valoracion de tipo Int, valorarción que se le asigna a la produccion
      * @param comentario de tipo String, comentario que se le da a la produccion
      * @return boolean
-     * @throws DatabaseErrorException
+     * @throws DatabaseErrorException lanza la execption
+     * @throws SQLException lanza la exception
      */
     public boolean save(Produccion produccion, Usuario usuario, int valoracion, String comentario) throws DatabaseErrorException, SQLException {
         return sqlValorarDAO.save(produccion, usuario, valoracion, comentario);

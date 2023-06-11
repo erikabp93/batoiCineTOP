@@ -6,6 +6,9 @@ import es.progcipfpbatoi.modelo.dto.Usuario;
 
 import java.sql.Connection;
 
+/**
+ * Repositorio del usuario
+ */
 public class UsuarioRepository {
 
     private UsuarioDAO usuarioDAO;
@@ -13,6 +16,7 @@ public class UsuarioRepository {
     /**
      * Constructor de la clase, obligatorio ponerlo. Posee 1 parametro
      * el UsuarioDAO
+     * @param usuarioDAO dao del ususario
      */
     public UsuarioRepository(UsuarioDAO usuarioDAO) {
         this.usuarioDAO = usuarioDAO;
@@ -23,7 +27,7 @@ public class UsuarioRepository {
      *
      * @param usuario que queremos que se guarde
      * @return Usuario que se guarde
-     * @throws DatabaseErrorException
+     * @throws DatabaseErrorException lanza la exception
      */
     public Usuario save(Usuario usuario) throws DatabaseErrorException {
         return usuarioDAO.save(usuario);
@@ -37,7 +41,7 @@ public class UsuarioRepository {
      *
      * @param usuario que queremos saber si existe
      * @return boolean
-     * @throws DatabaseErrorException
+     * @throws DatabaseErrorException lanza la exception
      */
     public boolean existeUsuario(Usuario usuario) throws DatabaseErrorException {
         return usuarioDAO.existeUsuario(usuario);
@@ -49,7 +53,7 @@ public class UsuarioRepository {
      *
      * @param username nombre del usuario a encontrar
      * @return Usuario que se encuentre
-     * @throws DatabaseErrorException
+     * @throws DatabaseErrorException lanza la exception
      */
     public Usuario findByUsername(String username) throws DatabaseErrorException {
         return usuarioDAO.findByUsername(username);

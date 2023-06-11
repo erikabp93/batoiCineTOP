@@ -7,6 +7,9 @@ import es.progcipfpbatoi.modelo.dto.Produccion;
 
 import java.util.ArrayList;
 
+/**
+ * Interfaz de DAO PeliculaSerie
+ */
 public interface PeliculaSerieDAO {
     /**
      *  Obtiene todas las producciones
@@ -63,8 +66,21 @@ public interface PeliculaSerieDAO {
      */
     Produccion save(Produccion produccion) throws DatabaseErrorException;
 
+    /**
+     * Elimina la produccion
+     * @param produccion produccion con la vamos a trabajar
+     * @throws DatabaseErrorException al no poder acceder a la base de datos
+     * @throws NotFoundException lanza la exception
+     */
     void remove(Produccion produccion) throws DatabaseErrorException, NotFoundException;
 
+    /**
+     * Devuelve el poster del id de la produccion
+     *
+     * @param id id de la produccion
+     * @return String devuelto
+     * @throws DatabaseErrorException lanza la exception
+     */
     String getPoster(int id) throws DatabaseErrorException;
 
     /**

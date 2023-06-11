@@ -1,15 +1,13 @@
 package es.progcipfpbatoi;
 
-import es.progcipfpbatoi.controlador.BusquedaController;
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
 import es.progcipfpbatoi.modelo.dao.*;
 import es.progcipfpbatoi.modelo.dto.Genero;
-import es.progcipfpbatoi.modelo.dto.Usuario;
 import es.progcipfpbatoi.modelo.repositorios.*;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AppTest {
 
@@ -39,7 +37,7 @@ class AppTest {
             throw new RuntimeException( e );
         }
         System.out.println( resultadoActual );
-        assertEquals( resultadoEsperado, resultadoActual );
+        Assertions.assertEquals( resultadoEsperado, resultadoActual );
     }
 
     @Test
@@ -52,7 +50,7 @@ class AppTest {
             throw new RuntimeException( e );
         }
         System.out.println( resultadoActual );
-        assertEquals( resultadoEsperado, resultadoActual );
+        Assertions.assertEquals( resultadoEsperado, resultadoActual );
     }
 
     @Test
@@ -65,6 +63,6 @@ class AppTest {
             throw new RuntimeException( e );
         }
         System.out.println( resultadoActual );
-        assertEquals( resultadoEsperado, resultadoActual );
+        Assertions.assertEquals( resultadoEsperado, resultadoActual );
     }
 }

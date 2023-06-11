@@ -6,6 +6,11 @@ import es.progcipfpbatoi.exceptions.NotExistMonth;
  * Clase que trabaja con el tipo de dato Month, ojo no es una instancia
  */
 public class Month {
+    /**
+     * Constructor por defecto
+     */
+    public Month() {
+    }
 
     /**
      * A partir de las 3 primeras letras o 4 en caso de septiembre obtengo el value Moth del mes

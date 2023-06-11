@@ -21,6 +21,9 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador de series
+ */
 public class SeriesController implements Initializable {
 
     private Initializable controladorPadre;
@@ -212,8 +215,8 @@ public class SeriesController implements Initializable {
 
     /**
      * Inicializa la vista con unos valores para cada elemento.
-     * @param url
-     * @param resourceBundle
+     * @param url parametro por defecto
+     * @param resourceBundle parametro por defecto
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

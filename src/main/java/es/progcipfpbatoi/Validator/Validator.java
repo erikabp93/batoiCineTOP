@@ -3,7 +3,16 @@ package es.progcipfpbatoi.Validator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * clase validator
+ */
 public class Validator {
+
+    /**
+     * obligatorio ponerlo
+     */
+    public Validator() {
+    }
 
     private static final String SIMBOLOS_ESPECIALES = "[!@#$%^&*(),.?\":{}|<>]";
 
@@ -15,7 +24,7 @@ public class Validator {
      * un símbolo especial. Si todo esta correcto devuelve true pero si en alguna de
      * estas comprobaciones falla devuelve false
      *
-     * @param contrasenya
+     * @param contrasenya contraseña del user
      * @return boolean
      */
 
@@ -50,7 +59,7 @@ public class Validator {
      * ningún símbolo especial, si la comprobación encuentra un símbolo devuelve false
      * pero si no encuentra ninguno devuelve true
      *
-     * @param nombreUsuario
+     * @param nombreUsuario nombre de usuario
      * @return boolean
      */
 
@@ -69,7 +78,7 @@ public class Validator {
      * gmail o hotmail únicamente y que termine con ".com", si la comprobación falla
      * devuelve false y si el correo pasado como parámetro es correcto devuelve true
      *
-     * @param correo
+     * @param correo email a buscar
      * @return boolean
      */
 

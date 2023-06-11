@@ -8,6 +8,9 @@ import es.progcipfpbatoi.modelo.dto.Temporada;
 
 import java.util.ArrayList;
 
+/**
+ * Repositorio de las temporadas
+ */
 public class TemporadaRepository {
 
     private TemporadaDAO temporadaDAO;
@@ -15,6 +18,7 @@ public class TemporadaRepository {
     /**
      * Constructor de la clase, obligatorio ponerlo. Posee 1 parámetro
      * las temporadas
+     * @param temporadaDAO parametro del dao de temporada
      */
     public TemporadaRepository(TemporadaDAO temporadaDAO) {
         this.temporadaDAO = temporadaDAO;

@@ -23,6 +23,9 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador del Login
+ */
 public class LoginController implements Initializable {
 
     @FXML
@@ -132,8 +135,8 @@ public class LoginController implements Initializable {
 
     /**
      * Inicializa la vista.
-     * @param location
-     * @param resources
+     * @param location parametro por defecto
+     * @param resources parametro por defecto
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
