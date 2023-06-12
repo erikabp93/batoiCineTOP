@@ -89,6 +89,8 @@ public class LoginController implements Initializable {
                     alert2.setHeaderText(null);
                     alert2.setContentText("Por favor, introduce el usuario y la contraseña correcta");
                     alert2.showAndWait();
+                    usuario.setText("");
+                    password.setText("");
                 }
             }
         } catch (DatabaseErrorException | IOException e) {

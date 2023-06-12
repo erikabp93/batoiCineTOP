@@ -14,7 +14,7 @@ public class DatosBD {
     /**
      * IP de la base
      */
-    public static final String IP = "172.16.226.56";
+    public static final String IP = "172.16.226.55";
 
     /**
      * Nombre de la base de datos
