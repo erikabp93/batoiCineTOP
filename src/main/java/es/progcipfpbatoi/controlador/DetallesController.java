@@ -1,9 +1,13 @@
 package es.progcipfpbatoi.controlador;
 
 import es.progcipfpbatoi.exceptions.DatabaseErrorException;
+import es.progcipfpbatoi.modelo.dao.SQLUsuarioDAO;
+import es.progcipfpbatoi.modelo.dao.SQLfavoritoDAO;
+import es.progcipfpbatoi.modelo.dao.SQLpeliculaSerieDAO;
+import es.progcipfpbatoi.modelo.dao.SQLtemporadaDAO;
 import es.progcipfpbatoi.modelo.dto.Produccion;
 import es.progcipfpbatoi.modelo.dto.Usuario;
-import es.progcipfpbatoi.modelo.repositorios.ValoracionesRepository;
+import es.progcipfpbatoi.modelo.repositorios.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -68,7 +72,14 @@ public class DetallesController implements Initializable {
     private void verMasTarde(ActionEvent event) {
         try {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            ChangeScene.change(stage, controladorPadre, vistaPadre);
+            //ChangeScene.change(stage, controladorPadre, vistaPadre);
+            if (controladorPadre instanceof PeliculasController) {
+                ChangeScene.change(event, new PeliculasController(this, "/vistas/principal_vista.fxml", new UsuarioRepository(new SQLUsuarioDAO()), new PeliculaSerieRepository(new SQLpeliculaSerieDAO(), new SQLtemporadaDAO()), new TemporadaRepository(new SQLtemporadaDAO()), new FavoritosRepository(new SQLfavoritoDAO()), valoracionesRepository, usuario), "/vistas/peliculas_vista.fxml");
+            } else if (controladorPadre instanceof SeriesController) {
+                ChangeScene.change(event, new SeriesController(this, "/vistas/principal_vista.fxml", new UsuarioRepository(new SQLUsuarioDAO()), new PeliculaSerieRepository(new SQLpeliculaSerieDAO(), new SQLtemporadaDAO()), new TemporadaRepository(new SQLtemporadaDAO()), new FavoritosRepository(new SQLfavoritoDAO()), valoracionesRepository, usuario), "/vistas/series_vista.fxml");
+            } else {
+                ChangeScene.change(event, controladorPadre, vistaPadre);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
