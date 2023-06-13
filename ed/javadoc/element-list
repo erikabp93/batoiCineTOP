@@ -1,0 +1,10 @@
+module:es.progcipfpbatoi
+es.progcipfpbatoi
+es.progcipfpbatoi.controlador
+es.progcipfpbatoi.exceptions
+es.progcipfpbatoi.modelo.dao
+es.progcipfpbatoi.modelo.dto
+es.progcipfpbatoi.modelo.repositorios
+es.progcipfpbatoi.services
+es.progcipfpbatoi.util
+es.progcipfpbatoi.Validator
